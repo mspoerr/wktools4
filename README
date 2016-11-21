@@ -1,1 +1,19 @@
-This is rather a test to see how this all works together.
+Project Homepage: www.spoerr.org/wktools
+
+Dependencies:
+- Boost 1.59
+- wxWidgets 2.8.12
+- OGDF
+- Lua
+- Luabind
+- sqlite3
+- wxPropertygrid
+- libssh2
+- cryptlib 3.4.3 will be removed once migration to libssh2 is done
+- mysql
+
+Current major initatives:
+- wktools version 5 (will be added to github soon)
+- Replacement of SSH library; At the moment cryptlib is used for SSH but there are many limitations and therefore I need to replace the SSH library.
+
+For the ToDo list please refer to todo.txt in the projects root directory
