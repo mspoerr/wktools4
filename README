@@ -16,4 +16,6 @@ Current major initatives:
 - wktools version 5 (will be added to github soon)
 - Replacement of SSH library; At the moment cryptlib is used for SSH but there are many limitations and therefore I need to replace the SSH library.
 
+Most variable naming and code documentation is in german at the moment but this will be changed in the future.
+
 For the ToDo list please refer to todo.txt in the projects root directory
