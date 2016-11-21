@@ -1,0 +1,423 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{83E1EF0A-CD3B-4D7E-84A5-E2E0ABBE5B03}</ProjectGuid>
+    <RootNamespace>wktools4</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v140</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>NotSet</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v140</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>NotSet</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v140</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <UseOfAtl>false</UseOfAtl>
+    <CharacterSet>NotSet</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <UseOfAtl>false</UseOfAtl>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>11.0.50727.1</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>Debug\</OutDir>
+    <IntDir>Debug\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+    <GenerateManifest>true</GenerateManifest>
+    <EmbedManifest>true</EmbedManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <GenerateManifest>true</GenerateManifest>
+    <EmbedManifest>true</EmbedManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>Release\</OutDir>
+    <IntDir>Release\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+    <GenerateManifest>true</GenerateManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <GenerateManifest>true</GenerateManifest>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>..\..\lib\boost_1_59_0;..\..\lib\wxWidgets-2.8.12\include;..\..\lib\OGDF\OGDF\include;..\..\lib\lua-5.2.1\src;..\..\lib\luabind;..\..\lib\sqlite3\sqlite3;..\..\lib\wxpropertygrid\components\propgrid\include;..\..\lib\libssh2-1.7.0.tar\include;..\..\lib\cryptlib343</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>OGDF_DEBUG;WIN32;_DEBUG;__WXDEBUG__;WXDEBUG=1;__WIN32__;__WXMSW__;WINVER=0x0400;STRICT;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_WIN32_IE=0x0600;USE_COIN;COIN_OSI_CLP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
+      <AdditionalOptions> /J</AdditionalOptions>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <PrecompiledHeader />
+      <PrecompiledHeaderFile />
+      <PrecompiledHeaderOutputFile />
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)vc90.pdb</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <CompileAsWinRT>false</CompileAsWinRT>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;__WXDEBUG__;WXDEBUG=1;WIN32;__WIN32__;__WXMSW__;WINVER=0x0400;STRICT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>luabind.debug.lib;lualib.lib;sqlite3.lib;cl32.lib;wxbase28d.lib;winmm.lib;comctl32.lib;rpcrt4.lib;oleacc.lib;wxmsw28d_core.lib;wxmsw28d_adv.lib;wxbase28d_net.lib;wxzlibd.lib;wxpngd.lib;wxcode_msw28d_propgrid.lib;wxmsw28d_html.lib;wsock32.lib;mysqlcppconn.lib;ogdf.lib;coin.lib;Psapi.lib;libssh2d.lib;libeay32.lib;ssleay32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)wktools4.exe</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <AdditionalLibraryDirectories>..\..\lib\libssh2-1.7.0.tar\win32\Debug_lib;..\..\lib\OpenSSL-Win32\lib;..\..\lib\OGDF\OGDF\Win32\Debug;..\..\lib\boost_1_59_0\lib32-msvc-14.0;..\..\lib\luabind\Build\msvc-2010\bin\x86\Debug;..\..\lib\lua-5.2.1\lualib\Debug;..\..\lib\sqlite3\Debug;..\..\lib\cryptlib343\binaries32_vs10;..\..\lib\wxWidgets-2.8.12\lib\vc_lib;..\..\lib\wxpropertygrid\components\propgrid\lib\vc_lib;$(WXWIN)\lib;$(WXWIN)\lib\vc_lib;$(WXWIN)\contrib\lib;%(AdditionalLibraryDirectories);..\..\lib\mysql\lib\opt</AdditionalLibraryDirectories>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <IgnoreSpecificDefaultLibraries>MSVCRTD.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(OutDir)wktools4.pdb</ProgramDatabaseFile>
+      <SubSystem>Windows</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention />
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <Manifest>
+      <OutputManifestFile>$(TargetPath).manifest</OutputManifestFile>
+    </Manifest>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>D:\Programmieren\OGDF\OGDF;D:\Programmieren\wxWidgets-2.8.12;D:\Programmieren\OpenSSL-Win32\include;D:\doku\programmieren\Visual Studio Projects\sqlite3\sqlite3;D:\Programmieren\mysql\include;D:\Programmieren\cryptlib321;D:\Programmieren\boost\boost_1_52_0;D:\Programmieren\wxpropertygrid\components\propgrid\include;..\..\wktools5Add\wxWidgets-2.8.12\include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>OGDF_DEBUG;WIN32;_DEBUG;__WXDEBUG__;WXDEBUG=1;__WIN32__;__WXMSW__;WINVER=0x0400;STRICT;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_WIN32_IE=0x0600;USE_COIN;COIN_OSI_CLP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
+      <AdditionalOptions> /J</AdditionalOptions>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>
+      </PrecompiledHeaderOutputFile>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <CompileAs>CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;__WXDEBUG__;WXDEBUG=1;WIN32;__WIN32__;__WXMSW__;WINVER=0x0400;STRICT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>sqlite3.lib;cl32.lib;wxbase28d.lib;winmm.lib;comctl32.lib;rpcrt4.lib;oleacc.lib;wxmsw28d_core.lib;wxmsw28d_adv.lib;wxbase28d_net.lib;wxzlibd.lib;wxpngd.lib;wxcode_msw28d_propgrid.lib;wxmsw28d_html.lib;wsock32.lib;mysqlcppconn.lib;ogdf.lib;libOsi.lib;libCoinUtils.lib;libOsiClp.lib;libClp.lib;libeay32MTd.lib;ssleay32MTd.lib;Psapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)wktools4.exe</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <AdditionalLibraryDirectories>D:\Programmieren\OpenSSL-Win32\lib\VC\static;D:\Programmieren\cryptlib321\binaries;D:\doku\programmieren\Visual Studio Projects\wktools4\wktools4\include;D:\Programmieren\boost\boost_1_52_0\lib64;D:\Programmieren\wxWidgets-2.8.12\lib\vc_lib;D:\Programmieren\wxpropertygrid\components\propgrid\lib\vc_lib;D:\doku\programmieren\Visual Studio Projects\sqlite3\Debug;$(WXWIN)\lib;$(WXWIN)\lib\vc_lib;$(WXWIN)\contrib\lib;D:\Programmieren\mysql\lib\debug;D:\Programmieren\osi\Osi-0.102.3\Osi\MSVisualStudio\v9\Debug;D:\Programmieren\OGDF\OGDF\Win32\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <IgnoreSpecificDefaultLibraries>MSVCRTD.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(OutDir)wktools4.pdb</ProgramDatabaseFile>
+      <SubSystem>Windows</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+    </Link>
+    <Manifest>
+      <OutputManifestFile>$(TargetPath).manifest</OutputManifestFile>
+    </Manifest>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>..\..\lib\boost_1_59_0;..\..\lib\wxWidgets-2.8.12\include;..\..\lib\OGDF\OGDF\include;..\..\lib\lua-5.2.1\src;..\..\lib\luabind;..\..\lib\sqlite3\sqlite3;..\..\lib\wxpropertygrid\components\propgrid\include;..\..\lib\cryptlib343;..\..\lib\libssh2-1.7.0.tar\include</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;__WIN32__;__WXMSW__;_WINDOWS;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_WIN32_IE=0x0600;USE_COIN;COIN_OSI_CLP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <MinimalRebuild>false</MinimalRebuild>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
+      <AdditionalOptions> /J</AdditionalOptions>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <PrecompiledHeader />
+      <PrecompiledHeaderFile>stdwx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)vc70.pdb</ProgramDataBaseFileName>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat />
+      <CompileAs>CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;__WXMSW__;_WINDOWS;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>$(WXWIN)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalOptions>/LTCG %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>luabind.release.lib;lualib.lib;cl32.lib;sqlite3.lib;wxbase28.lib;winmm.lib;comctl32.lib;rpcrt4.lib;oleacc.lib;wxmsw28_core.lib;wxmsw28_adv.lib;wxbase28_net.lib;wsock32.lib;wxzlib.lib;wxpng.lib;wxcode_msw28_propgrid.lib;wxmsw28_html.lib;mysqlcppconn.lib;ogdf.lib;coin.lib;Psapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)wktools4.exe</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <AdditionalLibraryDirectories>..\..\lib\OGDF\OGDF\Win32\Release;..\..\lib\boost_1_59_0\lib32-msvc-14.0;..\..\lib\luabind\Build\msvc-2010\bin\x86\Release;..\..\lib\lua-5.2.1\lualib\Release;..\..\lib\sqlite3\Release;..\..\lib\cryptlib343\binaries32_vs10;..\..\lib\wxWidgets-2.8.12\lib\vc_lib;..\..\lib\wxpropertygrid\components\propgrid\lib\vc_lib;$(WXWIN)\lib;$(WXWIN)\lib\vc_lib;$(WXWIN)\contrib\lib;%(AdditionalLibraryDirectories);..\..\lib\mysql\lib\opt</AdditionalLibraryDirectories>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <IgnoreSpecificDefaultLibraries>MSVCRT.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(OutDir)wktools4.pdb</ProgramDatabaseFile>
+      <SubSystem>Windows</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention />
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>$(WXWIN)\include;$(WXWIN)\lib\vc_lib\msw;$(WXWIN)\contrib\include;D:\Programmieren\OGDF\OGDF;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;__WIN32__;__WXMSW__;_WINDOWS;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_WIN32_IE=0x0600;USE_COIN;COIN_OSI_CLP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <MinimalRebuild>false</MinimalRebuild>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
+      <AdditionalOptions> /J</AdditionalOptions>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <PrecompiledHeaderFile>stdwx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)vc70.pdb</ProgramDataBaseFileName>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <CompileAs>CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;__WXMSW__;_WINDOWS;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+      <AdditionalIncludeDirectories>$(WXWIN)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalOptions>/LTCG %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>cl32.lib;sqlite3.lib;wxbase28.lib;winmm.lib;comctl32.lib;rpcrt4.lib;oleacc.lib;wxmsw28_core.lib;wxmsw28_adv.lib;wxbase28_net.lib;wsock32.lib;wxzlib.lib;wxpng.lib;wxcode_msw28_propgrid.lib;wxmsw28_html.lib;mysqlcppconn.lib;ogdf.lib;libOsi.lib;libCoinUtils.lib;libOsiClp.lib;libClp.lib;libeay32MTd.lib;ssleay32MTd.lib;Psapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)wktools4.exe</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <AdditionalLibraryDirectories>D:\doku\programmieren\Visual Studio Projects\sqlite3\Release;$(WXWIN)\lib;$(WXWIN)\lib\vc_lib;$(WXWIN)\contrib\lib;D:\Programmieren\mysql\lib\debug;D:\Programmieren\osi\Osi-0.102.3\Osi\MSVisualStudio\v9\Release;D:\Programmieren\OGDF\OGDF\Win32\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <IgnoreSpecificDefaultLibraries>MSVCRT.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(OutDir)wktools4.pdb</ProgramDatabaseFile>
+      <SubSystem>Windows</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="class_wkmCombiner2.cpp" />
+    <ClCompile Include="class_wkmEnd2End.cpp" />
+    <ClCompile Include="class_wkmParserDB.cpp" />
+    <ClCompile Include="sshlib.cpp" />
+    <ClCompile Include="ssh\ssh\channelhandle.cpp" />
+    <ClCompile Include="ssh\ssh\remotechannelhandle.cpp" />
+    <ClCompile Include="ssh\ssh\remotesessionhandle.cpp" />
+    <ClCompile Include="ssh\ssh\sessionauthenticator.cpp" />
+    <ClCompile Include="ssh\ssh\sessionconnection.cpp" />
+    <ClCompile Include="ssh\ssh\sessionhandle.cpp" />
+    <ClCompile Include="ssh\ssh\sshcommand.cpp" />
+    <ClCompile Include="ssh\ssh\sshsession.cpp" />
+    <ClCompile Include="ssh\utils\asyncloop.cpp" />
+    <ClCompile Include="tinystr.cpp" />
+    <ClCompile Include="tinyxml.cpp" />
+    <ClCompile Include="tinyxmlerror.cpp" />
+    <ClCompile Include="tinyxmlparser.cpp" />
+    <ClCompile Include="base64.cpp" />
+    <ClCompile Include="class_dirMappingData.cpp" />
+    <ClCompile Include="class_settings.cpp" />
+    <ClCompile Include="class_sqlConn.cpp" />
+    <ClCompile Include="class_versionCheck.cpp" />
+    <ClCompile Include="class_wkErrMessages.cpp" />
+    <ClCompile Include="class_wkHilfe.cpp" />
+    <ClCompile Include="class_wkHtml.cpp" />
+    <ClCompile Include="class_wkLog.cpp" />
+    <ClCompile Include="class_wkLogFile.cpp" />
+    <ClCompile Include="htmstrings.cpp" />
+    <ClCompile Include="version.cpp" />
+    <ClCompile Include="wktools4.cpp" />
+    <ClCompile Include="wktools4Frame.cpp" />
+    <ClCompile Include="class_tabelle.cpp" />
+    <ClCompile Include="class_tabellePanel.cpp" />
+    <ClCompile Include="class_wkn.cpp" />
+    <ClCompile Include="class_wknPropGrid.cpp" />
+    <ClCompile Include="class_wzrd.cpp" />
+    <ClCompile Include="class_wzrdPropGrid.cpp" />
+    <ClCompile Include="class_ersetzer.cpp" />
+    <ClCompile Include="class_macSearchDialog.cpp" />
+    <ClCompile Include="class_wkm.cpp" />
+    <ClCompile Include="class_wkmAusgabe.cpp" />
+    <ClCompile Include="class_wkmdb.cpp" />
+    <ClCompile Include="class_wkmImport.cpp" />
+    <ClCompile Include="class_wkmMacUpdate.cpp" />
+    <ClCompile Include="class_wkmParser.cpp" />
+    <ClCompile Include="class_wkmPropGrid.cpp" />
+    <ClCompile Include="class_wkmVisioAusgabe.cpp" />
+    <ClCompile Include="class_ipl.cpp" />
+    <ClCompile Include="class_wkl.cpp" />
+    <ClCompile Include="class_wklPropGrid.cpp" />
+    <ClCompile Include="portscanner.cpp" />
+    <ClCompile Include="class_devGrp.cpp" />
+    <ClCompile Include="class_devGrpPanel.cpp" />
+    <ClCompile Include="class_verbinder.cpp" />
+    <ClCompile Include="class_wke.cpp" />
+    <ClCompile Include="class_wkePropGrid.cpp" />
+    <ClCompile Include="class_schedPanel.cpp" />
+    <ClCompile Include="class_scheduler.cpp" />
+    <ClCompile Include="class_schedulerPropGrid.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="class_wkmEnd2End.h" />
+    <ClInclude Include="class_wkmParserDB.h" />
+    <ClInclude Include="class_wkmCombiner2.h" />
+    <ClInclude Include="sshlib.h" />
+    <ClInclude Include="ssh\base\exception.h" />
+    <ClInclude Include="ssh\ssh\channelhandle.h" />
+    <ClInclude Include="ssh\ssh\misc.h" />
+    <ClInclude Include="ssh\ssh\remotechannelhandle.h" />
+    <ClInclude Include="ssh\ssh\remotesessionhandle.h" />
+    <ClInclude Include="ssh\ssh\sessionauthenticator.h" />
+    <ClInclude Include="ssh\ssh\sessionconnection.h" />
+    <ClInclude Include="ssh\ssh\sessionhandle.h" />
+    <ClInclude Include="ssh\ssh\sshcommand.h" />
+    <ClInclude Include="ssh\ssh\sshexception.h" />
+    <ClInclude Include="ssh\ssh\sshsession.h" />
+    <ClInclude Include="ssh\utils\asyncloop.h" />
+    <ClInclude Include="ssh\utils\exception.h" />
+    <ClInclude Include="ssh\utils\misc.h" />
+    <ClInclude Include="tasks_handler.h" />
+    <ClInclude Include="tinystr.h" />
+    <ClInclude Include="tinyxml.h" />
+    <ClInclude Include="base64.h" />
+    <ClInclude Include="class_dirMappingData.h" />
+    <ClInclude Include="class_logEvent.h" />
+    <ClInclude Include="class_settings.h" />
+    <ClInclude Include="class_sqlConn.h" />
+    <ClInclude Include="class_versionCheck.h" />
+    <ClInclude Include="class_wkErrMessages.h" />
+    <ClInclude Include="class_wkHilfe.h" />
+    <ClInclude Include="class_wkHtml.h" />
+    <ClInclude Include="class_wkLog.h" />
+    <ClInclude Include="class_wkLogFile.h" />
+    <ClInclude Include="htmstrings.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="stdwx.h" />
+    <ClInclude Include="version.h" />
+    <ClInclude Include="wkEvents.h" />
+    <ClInclude Include="wktools4.h" />
+    <ClInclude Include="wktools4Frame.h" />
+    <ClInclude Include="class_tabelle.h" />
+    <ClInclude Include="class_tabellePanel.h" />
+    <ClInclude Include="class_wkn.h" />
+    <ClInclude Include="class_wknPropGrid.h" />
+    <ClInclude Include="class_wzrd.h" />
+    <ClInclude Include="class_wzrdPropGrid.h" />
+    <ClInclude Include="class_ersetzer.h" />
+    <ClInclude Include="class_macSearchDialog.h" />
+    <ClInclude Include="class_wkm.h" />
+    <ClInclude Include="class_wkmAusgabe.h" />
+    <ClInclude Include="class_wkmdb.h" />
+    <ClInclude Include="class_wkmImport.h" />
+    <ClInclude Include="class_wkmMacUpdate.h" />
+    <ClInclude Include="class_wkmParser.h" />
+    <ClInclude Include="class_wkmPropGrid.h" />
+    <ClInclude Include="class_wkmVisioAusgabe.h" />
+    <ClInclude Include="quickref.h" />
+    <ClInclude Include="visio.h" />
+    <ClInclude Include="class_ipl.h" />
+    <ClInclude Include="class_wkl.h" />
+    <ClInclude Include="class_wklPropGrid.h" />
+    <ClInclude Include="icmp_header.hpp" />
+    <ClInclude Include="ipv4_header.hpp" />
+    <ClInclude Include="portscanner.h" />
+    <ClInclude Include="class_devGrp.h" />
+    <ClInclude Include="class_devGrpPanel.h" />
+    <ClInclude Include="class_verbinder.h" />
+    <ClInclude Include="class_wke.h" />
+    <ClInclude Include="class_wkePropGrid.h" />
+    <ClInclude Include="class_enhancedStringProperty.h" />
+    <ClInclude Include="class_schedPanel.h" />
+    <ClInclude Include="class_scheduler.h" />
+    <ClInclude Include="class_schedulerPropGrid.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\wktools4.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="wktools4.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\todo.txt" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+    <Import Project="..\packages\cpprestsdk.v120.winapp.msvcstl.dyn.rt-dyn.2.6.0\build\native\cpprestsdk.v120.winapp.msvcstl.dyn.rt-dyn.targets" Condition="Exists('..\packages\cpprestsdk.v120.winapp.msvcstl.dyn.rt-dyn.2.6.0\build\native\cpprestsdk.v120.winapp.msvcstl.dyn.rt-dyn.targets')" />
+    <Import Project="..\packages\cpprestsdk.v120.windesktop.msvcstl.dyn.rt-dyn.2.6.0\build\native\cpprestsdk.v120.windesktop.msvcstl.dyn.rt-dyn.targets" Condition="Exists('..\packages\cpprestsdk.v120.windesktop.msvcstl.dyn.rt-dyn.2.6.0\build\native\cpprestsdk.v120.windesktop.msvcstl.dyn.rt-dyn.targets')" />
+    <Import Project="..\packages\cpprestsdk.v120.winphone.msvcstl.dyn.rt-dyn.2.6.0\build\native\cpprestsdk.v120.winphone.msvcstl.dyn.rt-dyn.targets" Condition="Exists('..\packages\cpprestsdk.v120.winphone.msvcstl.dyn.rt-dyn.2.6.0\build\native\cpprestsdk.v120.winphone.msvcstl.dyn.rt-dyn.targets')" />
+    <Import Project="..\packages\cpprestsdk.v120.winphonesl.msvcstl.dyn.rt-dyn.2.6.0\build\native\cpprestsdk.v120.winphonesl.msvcstl.dyn.rt-dyn.targets" Condition="Exists('..\packages\cpprestsdk.v120.winphonesl.msvcstl.dyn.rt-dyn.2.6.0\build\native\cpprestsdk.v120.winphonesl.msvcstl.dyn.rt-dyn.targets')" />
+    <Import Project="..\packages\cpprestsdk.v120.winxp.msvcstl.dyn.rt-dyn.2.6.0\build\native\cpprestsdk.v120.winxp.msvcstl.dyn.rt-dyn.targets" Condition="Exists('..\packages\cpprestsdk.v120.winxp.msvcstl.dyn.rt-dyn.2.6.0\build\native\cpprestsdk.v120.winxp.msvcstl.dyn.rt-dyn.targets')" />
+    <Import Project="..\packages\cpprestsdk.v140.winapp.msvcstl.dyn.rt-dyn.2.6.0\build\native\cpprestsdk.v140.winapp.msvcstl.dyn.rt-dyn.targets" Condition="Exists('..\packages\cpprestsdk.v140.winapp.msvcstl.dyn.rt-dyn.2.6.0\build\native\cpprestsdk.v140.winapp.msvcstl.dyn.rt-dyn.targets')" />
+    <Import Project="..\packages\cpprestsdk.v140.windesktop.msvcstl.dyn.rt-dyn.2.6.0\build\native\cpprestsdk.v140.windesktop.msvcstl.dyn.rt-dyn.targets" Condition="Exists('..\packages\cpprestsdk.v140.windesktop.msvcstl.dyn.rt-dyn.2.6.0\build\native\cpprestsdk.v140.windesktop.msvcstl.dyn.rt-dyn.targets')" />
+  </ImportGroup>
+</Project>

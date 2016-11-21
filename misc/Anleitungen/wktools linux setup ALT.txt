@@ -1,0 +1,42 @@
+wktools Linux setup
+===================
+
+1) kdevelop (3!) installieren:
+	- http://www.linuxzasve.com/forum/viewtopic.php?f=42&t=4846
+	- libtool tauschen: 
+	
+2) wxwidgets
+	- Download source (wxgtk)
+	- ligtk-2 (dev) installieren
+	- http://wiki.wxwidgets.org/Compiling_and_getting_started
+	- DEBUG Version: ../configure --disable-shared --disable-unicode --enable-debug
+	- BUILD Version: ../configure --disable-shared --disable-unicode --disable-debug
+	
+3) wxPropertyGrid
+	- Download Source (1.4.x)
+	- BUILD Version: ../configure ; make ; sudo make install
+	- DEBUG Version: ../configure --disable-shared --disable-unicode --enable-debug ; make ; sudo make install
+	
+4) cryptlib
+	- Download source (3.3.x)
+	- unzip -a
+	- make
+	
+5) boost
+	- über Synaptic installieren
+	
+6) MySQL
+	- die ganzen mysql dev Pakete mittels Synaptic installieren
+	- den connector downloaden und laut README installieren; Bei Fehlern die <cstdio> in den Files hinzufügen
+
+7) kdevelop Projekt anlegen
+	- Neues leeres Projekt
+	- kdevelop schließen und CMakeLists.txt ändern
+	- kdevelop wieder öffnene
+	- Projekteinstellungen ändern (erweiterte Einstellungen anzeigen):
+		- Build Type: Release
+		- CXX Flags Release: -funsigned-char -I/usr/local/lib/wx/include/gtk2-ansi-release-static-2.8 -I/usr/local/include/wx-2.8 -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES -D__WXGTK__ -pthread
+		- mysql conn lib und mysql client lib hinzufügen (http://planet.mysql.com/entry?id=18341)
+		- crptlib lib und boost libs (date_time, filesystem, system, thread) hinzufügen
+		- Include Verzeichnisse: mysql connector; asio; cryptlib; wxpropertygrid; boost
+	

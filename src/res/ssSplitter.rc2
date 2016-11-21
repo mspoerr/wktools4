@@ -1,0 +1,27 @@
+//{{NO_DEPENDENCIES}}
+// Microsoft Visual C++ generated include file.
+// ssSplitter.RC2 - resources Microsoft Visual C++ does not edit directly
+//
+
+#ifdef APSTUDIO_INVOKED
+#error this file is not editable by Microsoft Visual C++
+#endif //APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+// Add manually edited resources here...
+
+/////////////////////////////////////////////////////////////////////////////
+
+// set this to 1 if you don't want to use manifest resource (manifest resource
+// is needed to enable visual styles on Windows XP - see docs/msw/winxp.txt
+// for more information)
+#if defined(__VISUALC__) && __VISUALC__ >= 1400
+#define wxUSE_NO_MANIFEST 1
+#else
+#define wxUSE_NO_MANIFEST 0
+#endif
+
+// this is not always needed but doesn't hurt (except making the executable
+// very slightly larger): this file contains the standard icons, cursors, ...
+#include "wx/msw/wx.rc"

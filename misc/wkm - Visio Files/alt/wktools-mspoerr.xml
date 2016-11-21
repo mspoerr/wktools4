@@ -1,0 +1,272 @@
+<?xml version="1.0" ?>
+<wktools>
+    <Settings>
+        <!-- Global Settings for wktools -->
+        <!-- ud: 0 - do not look for Updates // 1 -> look for Updates -->
+        <!-- um: 0 - no Message // 1 -> Message Popup when newer Version is available -->
+        <Updater ud="0" um="1" />
+        <!-- Window Sizing Settings -->
+        <sizing xPos="-8" yPos="-8" width="1394" height="912" AusgabeSplitter="380" MainSplitter="575" />
+        <toolSizing wkn="409" wke="385" wkl="295" wkc="" wkdp="295" wkp="" sets="" glSets="247" sched="295" wkm="289" />
+        <MiscSettings Highlight="1" xmlLoc="" extras="wktools4" />
+        <FontSettings FontFamily="74" FontName="MS Shell Dlg 2" FontSize="10" FontStyle="90" FontWeight="90" FontUnderline="0" />
+        <SQLSettings UseSql="0" sqlSrv="" sqlUsr="" sqlPwd="" />
+    </Settings>
+    <wkn>
+        <!-- Settings for ConfigMaker -->
+        <!-- String Settings: df: "Data File" // lf: "Replace LineFeed" // config: "Config File" // log: "Log file" // output: "Output Directory" // fv: "Filename Variable" // sep: "Seperator" -->
+        <!-- INTSettings: format: "non-standard Format" // flex: "Flexible Data File" // tags: "Use Tags" // cycle: "Cycle Count" // useSep: "Use Seperator as placeholder end" // modus: "Modus" // append: "Append output if..." -->
+        <Profile name="DEFAULT">
+            <StringSettings df="D:\Projekte\Red Bull\wktools files\so_data.csv" lf=" // " config="D:\Projekte\Red Bull\wktools files\template_datacenter_sovpn.txt" log="D:\temp\wktools test\wknLog.txt" output="D:\Projekte\Red Bull\wktools files\configs" fv="$soname;" sep=";" />
+            <INTSettings format="1" flex="0" tags="0" cycle="1" useSep="1" modus="0" append="0" />
+        </Profile>
+        <Profile name="RB-BO-Config">
+            <StringSettings df="D:\Projekte\Red Bull\wktools files\bo_data.csv" lf=" // " config="D:\Projekte\Red Bull\wktools files\template_bo.txt" log="D:\temp\wktools test\wknLog.txt" output="D:\Projekte\Red Bull\wktools files\configs" fv="$hostname;" sep=";" />
+            <INTSettings format="1" flex="0" tags="0" cycle="1" useSep="1" modus="0" append="0" />
+        </Profile>
+        <Profile name="RB-BO-VPN">
+            <StringSettings df="D:\Projekte\Red Bull\wktools files\bo_data.csv" lf=" // " config="D:\Projekte\Red Bull\wktools files\template_subsidary_bovpn.txt" log="D:\temp\wktools test\wknLog.txt" output="D:\Projekte\Red Bull\wktools files\configs" fv="$boname;" sep=";" />
+            <INTSettings format="1" flex="0" tags="0" cycle="1" useSep="1" modus="0" append="0" />
+        </Profile>
+        <Profile name="RB-SO-Config">
+            <StringSettings df="D:\Projekte\Red Bull\wktools files\so_data.csv" lf=" // " config="D:\Projekte\Red Bull\wktools files\template_subsidiary.txt" log="D:\temp\wktools test\wknLog.txt" output="D:\Projekte\Red Bull\wktools files\configs" fv="$hostname;" sep=";" />
+            <INTSettings format="1" flex="0" tags="0" cycle="1" useSep="1" modus="0" append="0" />
+        </Profile>
+        <Profile name="RB-SO-VPN">
+            <StringSettings df="D:\Projekte\Red Bull\wktools files\so_data.csv" lf=" // " config="D:\Projekte\Red Bull\wktools files\template_datacenter_sovpn.txt" log="D:\temp\wktools test\wknLog.txt" output="D:\Projekte\Red Bull\wktools files\configs" fv="$soname;" sep=";" />
+            <INTSettings format="1" flex="0" tags="0" cycle="1" useSep="1" modus="0" append="0" />
+        </Profile>
+        <Profile name="RB-BO-Route">
+            <StringSettings df="D:\Projekte\Red Bull\wktools files\bo_data.csv" lf=" // " config="D:\Projekte\Red Bull\wktools files\template_datacenter_boroute.txt" log="D:\temp\wktools test\wknLog.txt" output="D:\Projekte\Red Bull\wktools files\configs" fv="$dcroute;" sep=";" />
+            <INTSettings format="1" flex="0" tags="0" cycle="1" useSep="1" modus="0" append="0" />
+        </Profile>
+        <Profile name="test">
+            <StringSettings df="D:\temp\wktools tut\tut1\data.csv" config="D:\temp\wktools tut\tut1\config.txt" log="D:\temp\wktools tut\tut1\log.txt" output="D:\temp\wktools tut\tut1" fv="$hostname" sep=";" />
+            <INTSettings useSep="0" modus="0" append="0" />
+        </Profile>
+        <Profile name="flex Test">
+            <StringSettings df="D:\temp\wktools test\flexible configmaker\data.csv" lf="ewerw" config="D:\temp\wktools test\flexible configmaker\conf.txt" log="D:\temp\wktools test\flexible configmaker\log.txt" output="D:\temp\wktools test\flexible configmaker" fv="$filename;" sep=";" />
+            <INTSettings format="1" flex="1" tags="1" cycle="1" useSep="1" modus="0" append="0" />
+        </Profile>
+        <Profile name="sw schwaz produkte">
+            <StringSettings df="D:\Projekte\Stadtwerke Schwaz\produkte.csv" lf=" // " config="D:\Projekte\Stadtwerke Schwaz\template_produkte.txt" log="D:\Projekte\Stadtwerke Schwaz\log.txt" output="D:\Projekte\Stadtwerke Schwaz\wktools configs" fv="$produkt;" sep=";" />
+            <INTSettings format="0" flex="0" tags="0" cycle="1" useSep="1" modus="1" append="0" />
+        </Profile>
+        <Profile name="sw schwaz qos">
+            <StringSettings df="D:\Projekte\Stadtwerke Schwaz\kunden.csv" lf=" // " config="D:\Projekte\Stadtwerke Schwaz\template_qosNeu.txt" log="D:\Projekte\Stadtwerke Schwaz\log.txt" output="D:\Projekte\Stadtwerke Schwaz\wktools configs" fv="$desc1;" sep=";" />
+            <INTSettings format="0" flex="0" tags="0" cycle="1" useSep="1" modus="1" append="0" />
+        </Profile>
+        <Profile name="sw schwaz interface">
+            <StringSettings df="D:\Projekte\Stadtwerke Schwaz\kunden.csv" config="D:\Projekte\Stadtwerke Schwaz\template_interface.txt" log="D:\Projekte\Stadtwerke Schwaz\log.txt" output="D:\Projekte\Stadtwerke Schwaz\wktools configs" fv="$desc1;" sep=";" />
+            <INTSettings format="0" useSep="1" modus="1" append="0" />
+        </Profile>
+        <Profile name="sw schwaz acl">
+            <StringSettings df="D:\Projekte\Stadtwerke Schwaz\kunden.csv" config="D:\Projekte\Stadtwerke Schwaz\template_acl.txt" log="D:\Projekte\Stadtwerke Schwaz\log.txt" output="D:\Projekte\Stadtwerke Schwaz\wktools configs" fv="$desc1;" sep=";" />
+            <INTSettings format="0" useSep="1" modus="1" append="0" />
+        </Profile>
+        <Profile name="flex Test 1">
+            <StringSettings df="D:\temp\wktools test\flexible configmaker\data1.csv" lf=" // " config="D:\temp\wktools test\flexible configmaker\conf1.txt" log="D:\temp\wktools test\flexible configmaker\log.txt" output="D:\temp\wktools test\flexible configmaker" fv="$ogname" sep=";" />
+            <INTSettings format="1" flex="1" tags="1" cycle="2" useSep="1" modus="0" append="0" />
+        </Profile>
+        <Profile name="RB-BO-RAS-Backup">
+            <StringSettings df="D:\Projekte\Red Bull\wktools files\bo_data.csv" lf=" // " config="D:\Projekte\Red Bull\wktools files\template_ras_bovpn.txt" log="D:\temp\wktools test\wknLog.txt" output="D:\Projekte\Red Bull\wktools files\configs" fv="$rasvpn;" sep=";" />
+            <INTSettings format="1" flex="0" tags="0" cycle="1" useSep="1" modus="0" append="0" />
+        </Profile>
+        <Profile name="RB-SO-Config-FO">
+            <StringSettings df="D:\Projekte\Red Bull\wktools files\so_data.csv" lf=" // " config="D:\Projekte\Red Bull\wktools files\template_subsidiary_FO.txt" log="D:\temp\wktools test\wknLog.txt" output="D:\Projekte\Red Bull\wktools files\configs" fv="$foname;" sep=";" />
+            <INTSettings format="1" flex="0" tags="0" cycle="1" useSep="1" modus="0" append="0" />
+        </Profile>
+        <Profile name="RB-SO-CSC">
+            <StringSettings df="D:\Projekte\Red Bull\wktools files\so_data.csv" lf=" // " config="D:\Projekte\Red Bull\wktools files\template_csc.txt" log="D:\temp\wktools test\wknLog.txt" output="D:\Projekte\Red Bull\wktools files\configs" fv="$csc1name;" sep=";" />
+            <INTSettings format="1" flex="0" tags="0" cycle="1" useSep="1" modus="0" append="0" />
+        </Profile>
+        <Profile name="RB-SO-TempBO">
+            <StringSettings df="D:\Projekte\Red Bull\wktools files\so_data.csv" lf=" // " config="D:\Projekte\Red Bull\wktools files\template_subsidiary_TempBO.txt" log="D:\temp\wktools test\wknLog.txt" output="D:\Projekte\Red Bull\wktools files\configs" fv="$tempbo;" sep=";" />
+            <INTSettings format="1" flex="0" tags="0" cycle="1" useSep="1" modus="0" append="0" />
+        </Profile>
+        <Profile name="bla">
+            <StringSettings df="D:\Projekte\Red Bull\wktools files\so_data.csv" lf=" // " config="D:\Projekte\Red Bull\wktools files\template_subsidiary_TempBO.txt" log="D:\temp\wktools test\wknLog.txt" output="D:\Projekte\Red Bull\wktools files\configs" fv="$tempbo;" sep=";" />
+            <INTSettings format="1" flex="0" tags="0" cycle="1" useSep="1" modus="0" append="0" />
+        </Profile>
+        <Profile name="bla1">
+            <StringSettings df="D:\Projekte\Red Bull\wktools files\so_data.csv" lf=" // " config="D:\Projekte\Red Bull\wktools files\template_subsidiary_TempBO.txt" log="D:\temp\wktools test\wknLog.txt" output="D:\Projekte\Red Bull\wktools files\configs" fv="$tempbo;" sep=";" />
+            <INTSettings format="1" flex="0" tags="0" cycle="1" useSep="1" modus="0" append="0" />
+        </Profile>
+        <Profile name="RB-BO-Config-ISS">
+            <StringSettings df="D:\Projekte\Red Bull\wktools files\bo_data.csv" lf=" // " config="D:\Projekte\Red Bull\wktools files\template_bo_ISS.txt" log="D:\temp\wktools test\wknLog.txt" output="D:\Projekte\Red Bull\wktools files\configs" fv="$mgmip;" sep=";" />
+            <INTSettings format="1" flex="0" tags="0" cycle="1" useSep="1" modus="0" append="0" />
+        </Profile>
+        <Profile name="RB-SO-Config-ISS">
+            <StringSettings df="D:\Projekte\Red Bull\wktools files\so_data.csv" lf=" // " config="D:\Projekte\Red Bull\wktools files\template_subsidiary_ISS.txt" log="D:\temp\wktools test\wknLog.txt" output="D:\Projekte\Red Bull\wktools files\configs" fv="$mgmip;" sep=";" />
+            <INTSettings format="1" flex="0" tags="0" cycle="1" useSep="1" modus="0" append="0" />
+        </Profile>
+        <Profile name="RB-SO-DYN-CONFIG">
+            <StringSettings df="D:\Projekte\Red Bull\wktools files\so_data.csv" lf=" // " config="D:\Projekte\Red Bull\wktools files\template_DYN_CONFIG.txt" log="D:\temp\wktools test\wknLog.txt" output="D:\Projekte\Red Bull\wktools files\configs1" fv="$mgmip;" sep=";" />
+            <INTSettings format="1" flex="0" tags="0" cycle="1" useSep="1" modus="0" append="0" />
+        </Profile>
+        <Profile name="RB-SO-OOB">
+            <StringSettings df="D:\Projekte\Red Bull\wktools files\so_data.csv" lf=" // " config="D:\Projekte\Red Bull\wktools files\template_subsidiary_OOB.txt" log="D:\temp\wktools test\wknLog.txt" output="D:\Projekte\Red Bull\wktools files\configs" fv="$hostname;_OOB" sep=";" />
+            <INTSettings format="1" flex="0" tags="0" cycle="1" useSep="1" modus="0" append="0" />
+        </Profile>
+        <Profile name="test999">
+            <StringSettings df="D:\Projekte\Red Bull\wktools files\so_data.csv" lf=" // " config="D:\Projekte\Red Bull\wktools files\template_subsidiary_OOB.txt" log="D:\temp\wktools test\wknLog.txt" output="D:\Projekte\Red Bull\wktools files\configs" fv="$hostname;_OOB" sep=";" />
+            <INTSettings format="1" flex="1" tags="1" cycle="1" useSep="1" modus="0" append="1" />
+        </Profile>
+    </wkn>
+    <wke>
+        <!-- Settings for Configure Devices -->
+        <!-- Column Setting for Device Group View -->
+        <DG_COL Col1="50" Col2="100" Col3="70" Col4="70" Col5="69" Col6="308" Col7="100" Col8="36" Col9="34" Col10="100" />
+        <!-- Debug Settings: tx: "Send Data" // rx: "Receive Data" // function: "Function Calls" // bufTest: "BufTest Return Value" // hostname: "Get Hostname" // bufTestDet: "BufTest Detail" // showO: "Show Output" -->
+        <!-- IntSettings: dynConf: "dynamic (ConfigFile Settings)" // defCon: "default" // dynPW: "dynamic (Password Settings)" // clearPW: "visible" // Raute: "Wait for reply" // logsy: "Configure logging sync" // devGroup: "Use Device Groups" // append: "Append" // login: "Command in case of wrong password" -->
+        <!-- ComboSettings: Modus: "Modus" // ModArt: "Type" // showA: "Sow Output" // TSC: "Terminal Server Connection" -->
+        <!-- FileSettings: Hosts: "IP address file" // Config: "Config File" // ConfDir: "dyn Config Folder" // defConFile: "Default Config File" // ext: "File extension" // devGF: "DeviceGroup File" -->
+        <!-- Settings: User: "Username" // lopw: "Login Password" // enpw: "Enable Password" // avz: "Output Directory" // ena: "Exec Mode" // logfile: "Log File" // mHop: "Multihop Command" // port: "Telnet/SSH Port" -->
+        <Profile name="DEFAULT">
+            <IntSettings dynPW="0" clearPW="1" Raute="1" logSy="0" devGroup="1" append="1" login="0" Modus="4" ModArt="0" showA="0" TSC="0" cOption="0" tx="0" rx="0" function="0" bufTest="0" hostname="0" bufTestDet="0" showO="0" />
+            <Settings Hosts="D:\gns3\wktools\ip.txt" Config="D:\gns3\wktools\conf.txt" ConfDir="D:\Projekte\Red Bull\wktools files\configs" ext=".txt" devGF="D:\gns3\wktools\show output\tempDevGroup.txt" User="c" lopw="c" enpw="c" avz="D:\gns3\wktools\show output\" ena="enable" logfile="D:\temp\wktools test\wkeLog.txt" mHop="telnet $ip" port="" defConFile="D:\Projekte\Red Bull\wktools files\wke\conf.txt" />
+        </Profile>
+        <Profile name="stadt ibk">
+            <IntSettings dynPW="0" clearPW="1" Raute="1" logSy="0" devGroup="0" append="1" login="0" Modus="4" ModArt="0" showA="0" TSC="0" cOption="0" tx="0" rx="0" function="0" bufTest="0" hostname="0" bufTestDet="0" />
+            <Settings Hosts="D:\temp\wktools test\redbull\ip.txt" Config="D:\temp\wktools test\redbull\conf.txt" User="osssc" lopw="12qwasyx" enpw="12qwasyx" avz="D:\temp\wktools test\redbull" ena="enable" logfile="D:\temp\wktools test\wkeLog.txt" mHop="telnet $ip" port="" />
+        </Profile>
+        <Profile name="red bull test">
+            <IntSettings dynPW="0" clearPW="1" Raute="1" logSy="0" devGroup="0" append="1" login="0" Modus="4" ModArt="0" showA="0" TSC="0" cOption="0" tx="0" rx="0" function="0" bufTest="0" hostname="0" bufTestDet="0" />
+            <Settings Hosts="D:\temp\wktools test\redbull\ip.txt" Config="D:\temp\wktools test\redbull\conf.txt" User="osssc" lopw="12qwasyx" enpw="12qwasyx" avz="D:\temp\wktools test\redbull" ena="enable" logfile="D:\temp\wktools test\wkeLog.txt" mHop="telnet $ip" port="" />
+        </Profile>
+        <Profile name="ibm-asa test">
+            <IntSettings dynPW="0" clearPW="1" Raute="1" logSy="0" devGroup="1" append="1" login="0" Modus="4" ModArt="0" showA="0" TSC="0" cOption="0" tx="0" rx="0" function="0" bufTest="0" hostname="0" bufTestDet="0" />
+            <Settings Hosts="D:\temp\wktools test\ibm\iplist.txt" Config="D:\temp\wktools test\ibm\conf.txt" devGF="D:\temp\wktools test\ibm\tempDevGroup.txt" User="osssc" lopw="srv369" enpw="cisco" avz="D:\temp\wktools test\ibm" ena="enable" logfile="D:\temp\wktools test\wkeLog.txt" mHop="telnet $ip" port="" />
+        </Profile>
+        <Profile name="httpTest">
+            <IntSettings Raute="1" logSy="0" devGroup="1" append="1" login="0" Modus="4" ModArt="0" showA="0" TSC="0" cOption="0" tx="0" rx="0" function="0" bufTest="0" hostname="0" bufTestDet="0" />
+            <Settings devGF="D:\temp\wktools test\ibmtempDevGroup.txt" avz="D:\temp\wktools test\ibm" ena="enable" logfile="D:\temp\wktools test\wkeLog.txt" mHop="telnet $ip" port="" />
+        </Profile>
+        <Profile name="Teleport">
+            <IntSettings Raute="1" logSy="0" devGroup="1" append="0" login="0" Modus="4" ModArt="1" showA="0" TSC="0" cOption="0" tx="0" rx="0" function="0" bufTest="0" hostname="0" bufTestDet="0" />
+            <Settings devGF="D:\Projekte\Teleport\wktools\output\tempDevGroup.txt" avz="D:\Projekte\Teleport\wktools\output" ena="enable" logfile="D:\Projekte\Teleport\wktools\log.txt" mHop="telnet $ip" port="" />
+        </Profile>
+        <Profile name="grass allgemeine inf">
+            <IntSettings Raute="1" logSy="0" devGroup="1" append="0" login="0" Modus="2" ModArt="0" showA="0" TSC="0" cOption="0" tx="0" rx="0" function="0" bufTest="0" hostname="0" bufTestDet="0" />
+            <Settings devGF="D:\Projekte\Grass\show ausgabe\tempDevGroup.txt" avz="D:\Projekte\Grass\show ausgabe" ena="enable" logfile="D:\Projekte\Grass\show ausgabe\log.txt" mHop="telnet $ip" port="" />
+        </Profile>
+        <Profile name="grass inventory">
+            <IntSettings Raute="1" logSy="0" devGroup="1" append="0" login="0" Modus="2" ModArt="0" showA="0" TSC="0" cOption="0" tx="0" rx="0" function="0" bufTest="0" hostname="0" bufTestDet="0" />
+            <Settings devGF="D:\Projekte\Grass\inventory\Ergebnis\tempDevGroup.txt" avz="D:\Projekte\Grass\inventory\Ergebnis" ena="enable" logfile="D:\Projekte\Grass\show ausgabe\log.txt" mHop="telnet $ip" port="" />
+        </Profile>
+        <Profile name="redBull">
+            <IntSettings dynPW="0" clearPW="1" Raute="1" logSy="0" devGroup="0" append="0" login="0" Modus="4" ModArt="0" showA="0" TSC="0" cOption="0" tx="0" rx="0" function="0" bufTest="0" hostname="0" bufTestDet="0" />
+            <Settings Hosts="D:\Projekte\Red Bull\wktools files\wke\ipa.txt" Config="D:\Projekte\Red Bull\wktools files\wke\conf.txt" User="osssc" lopw="12qwasyx" enpw="12qwasyx" avz="D:\Projekte\Red Bull\wktools files\wke\ausgabe" ena="enable" logfile="D:\Projekte\Red Bull\wktools files\wke\log.txt" mHop="telnet $ip" port="" />
+        </Profile>
+        <Profile name="redBull Inventory">
+            <IntSettings Raute="1" logSy="0" devGroup="1" append="0" login="0" Modus="4" ModArt="0" showA="1" TSC="0" cOption="0" tx="0" rx="0" function="0" bufTest="0" hostname="0" bufTestDet="0" />
+            <Settings devGF="D:\Projekte\Red Bull\wktools files\wke\inventory\tempDevGroup.txt" avz="D:\Projekte\Red Bull\wktools files\wke\inventory" ena="enable" logfile="D:\Projekte\Red Bull\wktools files\wke\log.txt" mHop="telnet $ip" port="" />
+        </Profile>
+        <Profile name="RB-dyn">
+            <IntSettings Raute="1" logSy="0" devGroup="1" append="0" login="0" Modus="4" ModArt="0" showA="0" TSC="0" cOption="0" tx="1" rx="1" function="1" bufTest="0" hostname="0" bufTestDet="0" />
+            <Settings devGF="D:\Projekte\Red Bull\wktools files\wke\ausgabe\tempDevGroup.txt" avz="D:\Projekte\Red Bull\wktools files\wke\ausgabe" ena="enable" logfile="D:\Projekte\Red Bull\wktools files\wke\log.txt" mHop="telnet $ip" port="" />
+        </Profile>
+        <Profile name="RB SSL CONFIG SAVE">
+            <IntSettings dynPW="0" clearPW="1" Raute="1" logSy="0" devGroup="0" append="0" login="0" Modus="4" ModArt="0" showA="0" TSC="0" cOption="2" tx="0" rx="0" function="0" bufTest="0" hostname="0" bufTestDet="0" />
+            <Settings Hosts="D:\Projekte\Red Bull\wktools files\wke\dyn-ip.txt" ConfDir="D:\Projekte\Red Bull\wktools files\ssl config save" ext=".txt" User="osssc" lopw="LlubDer21" enpw="LlubDer21" avz="D:\Projekte\Red Bull\wktools files\wke\ausgabe" ena="enable" logfile="D:\Projekte\Red Bull\wktools files\wke\log.txt" mHop="telnet $ip" port="" />
+        </Profile>
+        <Profile name="test1">
+            <IntSettings dynPW="0" clearPW="1" Raute="1" logSy="0" devGroup="1" append="0" login="0" Modus="4" ModArt="1" showA="2" TSC="0" cOption="4" tx="0" rx="0" function="0" bufTest="0" hostname="0" bufTestDet="0" />
+            <Settings Hosts="D:\Projekte\Red Bull\wktools files\wke\dyn-ip.txt" Config="" devGF="D:\Projekte\Red Bull\wktools files\wke\ausgabe\tempDevGroup.txt" User="osssc" lopw="LlubDer21" enpw="LlubDer21" avz="D:\Projekte\Red Bull\wktools files\wke\ausgabe" ena="enable" logfile="D:\Projekte\Red Bull\wktools files\wke\log.txt" mHop="telnet $ip" port="" />
+        </Profile>
+        <Profile name="test2">
+            <IntSettings dynPW="0" clearPW="1" Raute="1" logSy="0" devGroup="0" append="0" login="0" Modus="4" ModArt="0" showA="0" TSC="0" cOption="3" tx="0" rx="0" function="0" bufTest="0" hostname="0" bufTestDet="0" />
+            <Settings Hosts="D:\Projekte\Red Bull\wktools files\wke\dyn-ip.txt" ConfDir="D:\Projekte\Red Bull\wktools files\ssl config save" defConFile="D:\Projekte\Red Bull\wktools files\template_subsidiary.txt" ext=".txt" User="osssc" lopw="LlubDer21" enpw="LlubDer21" avz="D:\Projekte\Red Bull\wktools files\wke\ausgabe" ena="enable" logfile="D:\Projekte\Red Bull\wktools files\wke\log.txt" mHop="telnet $ip" port="" />
+        </Profile>
+        <Profile name="red bull mh technik">
+            <IntSettings Raute="1" logSy="0" devGroup="1" append="1" login="0" Modus="4" ModArt="0" showA="0" TSC="0" cOption="0" tx="0" rx="0" function="0" bufTest="0" hostname="0" bufTestDet="0" />
+            <Settings devGF="D:\Projekte\Red Bull\mh technik\tempDevGroup.txt" avz="D:\Projekte\Red Bull\mh technik" ena="enable" logfile="D:\Projekte\Red Bull\mh technik\log.txt" mHop="telnet $ip" port="" />
+        </Profile>
+        <Profile name="GNS3">
+            <Settings Hosts="" Config="" ConfDir="" defConFile="" ext="" devGF="D:\gns3\wktools\show output\tempDevGroup.txt" User="" lopw="" enpw="" avz="D:\gns3\wktools\show output" ena="enable" logfile="D:\temp\wktools test\wkeLog.txt" mHop="" port="" />
+            <IntSettings Modus="4" ModArt="0" showA="0" TSC="0" cOption="0" dynPW="0" clearPW="1" Raute="1" logSy="0" devGroup="1" append="1" login="0" tx="0" rx="0" function="0" bufTest="0" hostname="0" bufTestDet="0" showO="0" />
+        </Profile>
+    </wke>
+    <wkl>
+        <!-- Settings for IP List -->
+        <!-- Settings: sVz: "Directory to search" // aVz: "Output Directory" // logfile: "Log File" // intfNr: "Interface Number" // search: "Search Pattern" // Intf: "Interface" -->
+        <Profile name="DEFAULT">
+            <Settings sVz="D:\temp\wktools test\iplist" aVz="D:\temp\wktools test\bla" logfile="D:\temp\wktools test\wklLog.txt" intfNr="20" search="iht" Intf="Vlan" />
+        </Profile>
+        <Profile name="iht">
+            <Settings sVz="D:\temp\wktools test\iplist" aVz="D:\temp\wktools test\bla" logfile="D:\temp\wktools test\wklLog.txt" intfNr="20" search="iht" Intf="Vlan" />
+        </Profile>
+    </wkl>
+    <wkc>
+        <!-- Settings for Compare Files -->
+        <!-- StringSettings: File1: "File 1" // File2: "File 2" // aVz: "Output Directory" // aName: "Output Filename"-->
+        <!-- INTSettings: Case: "Case" // Indent: "Indent"-->
+        <Profile name="DEFAULT">
+            <StringSettings File1="C:\Documents and Settings\AT13636\Desktop\stp.txt" File2="C:\Documents and Settings\AT13636\Desktop\nov.txt" aVz="C:\Documents and Settings\AT13636\Desktop" aName="boDiff" />
+            <INTSettings Case="1" Indent="1" />
+        </Profile>
+        <Profile name="wkcTest">
+            <StringSettings File1="D:\temp\wktools test\ibm\ibm-ibk-20070512.txt" File2="D:\temp\wktools test\ibm\ibm-ibk-20070531.txt" aVz="D:\temp\wktools test\ibm" aName="wkcBla" />
+            <INTSettings Case="1" Indent="1" />
+        </Profile>
+    </wkc>
+    <wkdp>
+        <!-- Settings for Device Information Parser -->
+        <!-- IntSettings: SNMPLocCol: "SNMP Location Columns" // Tool: 0: "Inventroy Parser" ; 1: "Interface Parser" // Append: "Append" // Col1 - Col10: "Show the following Columns" ; 0: "don't show" ; 1: "show" // Description: "Don't collect Interface Descriptions" // ChassisOnly: "Only collect Chassis Information" -->
+        <!-- StringSettings: sD: "Search Directory // oD: "Output Directory" // LogFile: "Log File" // oFile: "Output Filename" // Pattern: "Search Pattern" -->
+        <Profile name="DEFAULT">
+            <IntSettings SNMPLocCol="1" Tool="0" Append="0" Col1="1" Col2="1" Col3="1" Col4="1" Col5="1" Col6="0" Col7="0" Col8="0" Col9="1" Col10="1" Description="1" ChassisOnly="0" />
+            <StringSettings sD="D:\Projekte\Red Bull\wktools files\wke\inventory" oD="D:\Projekte\Red Bull\wktools files\wke\inventory" LogFile="D:\temp\wktools test\wkdpLog.txt" oFile="bla.csv" Pattern="" />
+        </Profile>
+        <Profile name="stadt ibk">
+            <IntSettings SNMPLocCol="1" Tool="0" Append="0" Col1="1" Col2="1" Col3="1" Col4="1" Col5="1" Col6="1" Col7="1" Col8="1" Col9="1" Col10="1" Description="1" ChassisOnly="0" />
+            <StringSettings sD="D:\Projekte\Stadt Ibk\inventory" oD="D:\Projekte\Stadt Ibk\inventory" LogFile="D:\temp\wktools test\wkdpLog.txt" oFile="inventory.txt" Pattern="20070404" />
+        </Profile>
+        <Profile name="test123">
+            <IntSettings SNMPLocCol="1" Tool="0" Append="0" Col1="1" Col2="1" Col3="1" Col4="1" Col5="1" Col6="1" Col7="1" Col8="1" Col9="1" Col10="1" Description="1" ChassisOnly="0" />
+            <StringSettings sD="D:\temp\wktools test\utaTest2\utaFiles" oD="D:\temp\wktools test\utaTest2" LogFile="D:\temp\wktools test\wkdpLog.txt" oFile="bla.csv" Pattern="txt" />
+        </Profile>
+        <Profile name="inventory test">
+            <IntSettings SNMPLocCol="1" Tool="0" Append="0" Col1="1" Col2="1" Col3="1" Col4="1" Col5="1" Col6="1" Col7="1" Col8="1" Col9="1" Col10="1" Description="1" ChassisOnly="0" />
+            <StringSettings sD="D:\temp\wktools test\utaTest2\utaFiles" oD="D:\temp\wktools test\utaTest2" LogFile="D:\temp\wktools test\wkdpLog.txt" oFile="bla.csv" Pattern="" />
+        </Profile>
+        <Profile name="bachmann">
+            <IntSettings SNMPLocCol="1" Tool="0" Append="0" Col1="1" Col2="1" Col3="1" Col4="1" Col5="1" Col6="1" Col7="1" Col8="1" Col9="1" Col10="1" Description="1" ChassisOnly="0" />
+            <StringSettings sD="D:\Projekte\Bachmann\Inventory Files" oD="D:\Projekte\Bachmann" LogFile="D:\temp\wktools test\wkdpLog.txt" oFile="inventory.csv" Pattern="" />
+        </Profile>
+        <Profile name="bachmann phones">
+            <IntSettings SNMPLocCol="1" Tool="0" Append="0" Col1="1" Col2="1" Col3="1" Col4="1" Col5="1" Col6="1" Col7="1" Col8="1" Col9="1" Col10="1" Description="1" ChassisOnly="0" />
+            <StringSettings sD="D:\Projekte\Bachmann\Phone Inventory" oD="D:\Projekte\Bachmann" LogFile="D:\temp\wktools test\wkdpLog.txt" oFile="inventoryPhones.csv" Pattern="" />
+        </Profile>
+        <Profile name="Teleport">
+            <IntSettings SNMPLocCol="1" Tool="0" Append="0" Col1="1" Col2="1" Col3="1" Col4="1" Col5="1" Col6="1" Col7="1" Col8="1" Col9="1" Col10="1" Description="1" ChassisOnly="0" />
+            <StringSettings sD="D:\Projekte\Teleport\wktools\output" oD="D:\Projekte\Teleport\wktools\output" LogFile="D:\Projekte\Teleport\wktools\log.txt" oFile="inventory.csv" Pattern="txt" />
+        </Profile>
+        <Profile name="redbull">
+            <IntSettings SNMPLocCol="1" Tool="0" Append="0" Col1="1" Col2="1" Col3="1" Col4="1" Col5="1" Col6="1" Col7="1" Col8="1" Col9="1" Col10="1" Description="1" ChassisOnly="0" />
+            <StringSettings sD="D:\Projekte\Red Bull\wktools files\wke\inventory" oD="D:\Projekte\Red Bull\wktools files\wke\inventory" LogFile="D:\temp\wktools test\wkdpLog.txt" oFile="bla.csv" Pattern="" />
+        </Profile>
+    </wkdp>
+    <wkp>
+        <!-- Settings for PIX Tools -->
+        <!-- StringSettings: IP: "IP Address" // User: "Username" // lopw: "Login Password" // enpw: "Enable Password" // Modus: "Modus" -->
+        <!-- INTSettings: upwClear: "visible" -->
+        <Profile name="DEFAULT">
+            <StringSettings IP="10.43.160.1" User="osssc" lopw="12qwasyx" enpw="12qwasyx" Modus="SSHv2" />
+            <INTSettings upwClear="0" />
+        </Profile>
+    </wkp>
+    <Scheduler>
+        <!-- Settings for Scheduler -->
+        <!-- ColumnSetting: Col1-Col8: width of the columns in Pixel -->
+        <!-- StringSettings: SchedFile: "Scheduler File"-->
+        <ColumnSettings Col1="50" Col2="108" Col3="75" Col4="146" Col5="132" Col6="80" Col7="68" Col8="90" />
+        <StringSettings SchedFile="D:\temp\wktools test\tempSchedFile.txt" />
+    </Scheduler>
+    <wkm>
+        <Profile name="DEFAULT">
+            <StringSettings sD="" oD="" LogFile="" Pattern="" />
+            <IntSettings ParseNew="0" AnalyzeNew="0" />
+        </Profile>
+    </wkm>
+</wktools>

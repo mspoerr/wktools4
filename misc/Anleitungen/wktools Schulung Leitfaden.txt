@@ -1,0 +1,94 @@
+wktools Schulung:
+- Was ist wktools
+  - 3 Haupttools
+	- Configmaker
+	- Configure Devices
+	- Mapper
+  - Hilfstools
+    - Wizard
+	- IP List
+	- Scheduler
+	- Device Information Parser (Veraltet) 
+- Hintergrund
+  - Schnell einsetzbar, ohne Installation; Ohne Änderungen am Kundennetzwerk um Zugriff zu erhalten
+  - Flexibel, da auch von Remote über MultiHop
+  - Keine versteckten Abfragen/Funktionen (bis auf die Mapper Debug Funktion)
+  - Freeware
+  - Kein SNMP
+- Verfügbarkeit und Doku
+  - www.spoerr.org/wktools
+- GUI
+  - Aufbau (Screenshot)
+  - Menüleiste
+  - Tool Selector
+  - Settings
+- CLI
+  - Optionen und Sinn
+- wktools.xml
+  - Beispiel
+  - Anderer Pfad
+- Configure Devices
+  - Unterstützte Geräte
+    - Cisco IOS, CatOS, ASA, PIX, NXOS, WLC
+	- IP Phones per http/https
+	- UNIX Boxen für Multihop
+  - Haputfunktionen
+    - Configs in Geräte einpielen
+	- Infos von Geräten sammeln und abspeichern
+  - GUI Aufbau
+  - Ablauf
+    - Hostfile
+	- ConfigFile
+	- Wichtige Optionen
+	  - User/PW
+	  - Show Output
+	  - Show 2301
+	- Modus/Type
+	- DeviceGroup Ansicht
+	- DeviceGroup File
+	- Beispiele
+	  - Generelle Abfrage von show Commands auf NTS Geräten
+	  - MultiHop auf vm-nts und dann weiter auf NTS Boxen
+	  - !IFRETURN; !ELSERETURN und Fehlerausgabe
+	  - Einfache Regex
+	  - Advanced Regex
+	- Special Config Tags
+	- Internals?
+
+- Mapper
+  - Hauptfunktionen
+    - Netzwerkplan erstellen
+	- Auffälligkeiten eim Netzwerkplan hervorheben
+	- Diff in der Topologie
+	- Inventory
+	- Reports
+	  - IP Telefone
+	  - STP
+	  - L2
+	  - L2 Geräte
+	  - Interface Fehler
+	  - Interface Fehler Diff
+  - Was ist Mapper nicht
+    - Discovery Tool
+	- Ersetzt keinen manuellen Netzwerkplan
+	- Muss nachgearbeitet werden
+  - Unterstützte Geräte
+    - Cisco IOS, CatOS (teilweise, für Inventory), ASA/PIX/FWSM, Cisco IP Phones, NXOS
+	- Lua Schnittstelle
+  - Ablauf
+    - Infos sammeln mit Configure Devices
+	- Infos analysieren mit Mapper
+	- Erstellte Daten und Ausgaben auswerten
+  - Mapper GUI
+    - Input Optionen
+	- Output Optionen
+	- Visio Optionen
+	- Generelle Optionen
+  - Beispiel anhand der NTS Topologie
+  - Use Cases (siehe HowTo)
+  - Erstellte Dateien
+  - Datenbank
+- ConfigMaker
+  - Spezialfunktionen (Enter in Zelle, Object-Groups mit unterschiedlicher Anzahl an Objekten)
+- Wizard
+  - Achtung auf Admin Rechte unter Win7

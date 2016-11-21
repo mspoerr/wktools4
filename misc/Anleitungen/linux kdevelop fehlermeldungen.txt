@@ -1,0 +1,16 @@
+kdevelp Fehlermeldungen beim Compilieren:
+
+Meldung:
+X--tag=CXX: command not found
+
+Lösung:
+http://ubuntuforums.org/showthread.php?t=945424&page=3
+
+--------------------------------------------------------------------------------------
+
+Meldung:
+error: conversion from 'wxString' to non-scalar type 'std::string' requested
+
+Lösung:
+.c_str() verwenden
+

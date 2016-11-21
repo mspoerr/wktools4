@@ -1,0 +1,62 @@
+wktools Linux setup (Fedora)
+============================
+
+1) kdevelop (3!) installieren:
+	- sudo rpm -Uvh --oldpackage kdevelop-3.5.5-1.fc12.x86_64.rpm kdevelop-devel-3.5.5-1.fc12.x86_64.rpm kdevelop-libs-3.5.5-1.fc12.x86_64.rpm compat-db47-4.7.25-19.fc15.x86_64.rpm 
+	-> installed older version (kdevelop 3.5 for fedora 12) using command line 
+	rpm -Uvh --oldpackage /Drive_E/lin_extn/firefox-download/kdevelop-3.5.5-1.fc11.x86_64.rpm /Drive_E/lin_extn/firefox-download/kdevelop-devel-3.5.5-1.fc12.x86_64.rpm /Drive_E/lin_extn/firefox-download/kdevelop-libs-3.5.5-1.fc12.x86_64.rpm
+
+
+	kdevelop-3.5.5-1.fc11.x86_64.rpm
+
+
+		http://mirror.fraunhofer.de/archives.fedoraproject.org/fedora/linux/updates/12/x86_64/kdevelop-devel-3.5.5-1.fc12.x86_64.rpm
+		http://mirror.fraunhofer.de/archives.fedoraproject.org/fedora/linux/updates/12/x86_64/kdevelop-libs-3.5.5-1.fc12.x86_64.rpm
+		http://mirror.fraunhofer.de/archives.fedoraproject.org/fedora/linux/updates/12/x86_64/kdevelop-3.5.5-1.fc12.x86_64.rpm
+	
+2) wxwidgets
+	- Download source (wxgtk)
+	- libgtk-2 (dev) installieren
+	- g++, autoconf und automake installieren
+	- http://wiki.wxwidgets.org/Compiling_and_getting_started
+	- DEBUG Version: ../configure --disable-shared --disable-unicode --enable-debug
+	- BUILD Version: ../configure --disable-shared --disable-unicode --disable-debug
+	
+3) wxPropertyGrid
+	- Download Source (1.4.x)
+	- BUILD Version: ../configure ; make ; sudo make install
+	- DEBUG Version: ../configure --disable-shared --disable-unicode --enable-debug ; make ; sudo make install
+	
+4) cryptlib
+	- Download source (3.3.x)
+	- unzip -a
+	- make
+	
+	Cryptlib 3.2.2 -> kopieren
+	
+5) boost
+	- Version 1.52 downloaden und installieren: 
+	  wget http://sourceforge.net/projects/boost/files/boost/1.52.0/boost_1_52_0.tar.gz
+	  tar xfv boost_1_52_0.tar.gz
+	  cd boost_1_52_0/
+	  ./bootstrap.sh
+	  ./b2 link=static threading=multi --variant=release --layout=tagged
+	- Threadpool dazugeben:
+	  wget http://prdownloads.sourceforge.net/threadpool/threadpool-0_2_5-src.zip
+	  unzip -a threadpool-0_2_5-src.zip 
+	
+6) MySQL
+	- die ganzen mysql dev Pakete mittels Synaptic installieren
+	- den connector downloaden und laut README installieren; Bei Fehlern die <cstdio> in den Files hinzufügen
+
+7) kdevelop Projekt anlegen
+	- Neues leeres Projekt
+	- kdevelop schließen und CMakeLists.txt ändern
+	- kdevelop wieder öffnene
+	- Projekteinstellungen ändern (erweiterte Einstellungen anzeigen):
+		- Build Type: Release
+		- CXX Flags Release: -funsigned-char -I/usr/local/lib/wx/include/gtk2-ansi-release-static-2.8 -I/usr/local/include/wx-2.8 -D_FILE_OFFSET_BITS=64 -D_LARGE_FILES -D__WXGTK__ -pthread
+		- mysql conn lib und mysql client lib hinzufügen (http://planet.mysql.com/entry?id=18341)
+		- crptlib lib und boost libs (date_time, filesystem, system, thread) hinzufügen (Verzeichnis, in dem Version 1.52 installiert wurde)
+		- Include Verzeichnisse: mysql connector; asio; cryptlib; wxpropertygrid; boost (Verzeichnis, in dem Version 1.52 installiert wurde)
+	

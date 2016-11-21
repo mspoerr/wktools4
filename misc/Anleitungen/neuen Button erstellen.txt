@@ -1,0 +1,8 @@
+* 32x32 Projekt
+* pack 5 - Background Bases - Plain - Rounded
+* Farbe von einem bestehenden Icon holen und das Rechteck neu füllen
+* pack 5 - symbols - aussuchen
+* pack 2 - rounded square - Border09
+* pack 1 - Square - Square effect 9
+* als xpm speichern
+* xpm editieren (static const char * xxxxx_xpm)

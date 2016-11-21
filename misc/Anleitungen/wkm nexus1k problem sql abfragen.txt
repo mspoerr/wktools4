@@ -1,0 +1,105 @@
+Probleme:
+* Kein BoundTo bei Veth bei Nx1k
+* Die physikalischen MAC Adressen tauchen nirgends auf
+-> Auf den UCS kann man sich mit dem BoundTo behelfen -> Zuerst die Nachbarschaften bestimmen, dann die Veth auf Eth umschreiben
+-> Auf den Nx1k geht das nicht
+* 
+
+Alle Interface MAC Adressen vom Nx1k auslesen:
+SELECT DISTINCT macAddress FROM interfaces 
+INNER JOIN devInterface ON devInterface.interfaces_int_id=interfaces.intf_id
+WHERE devInterface.device_dev_id=853
+
+
+Alle Einträge von neighbor auslesen, in denen MAC Adressen vom Nx1k vorkommen; Ausgabe der entsprechenden Interfaces und Hosts
+SELECT DISTINCT intf_id,intfName,device.hostname FROM interfaces
+INNER JOIN nlink ON nlink.interfaces_intf_id=interfaces.intf_id
+INNER JOIN neighbor ON neighbor.neighbor_id=nlink.neighbor_neighbor_id
+INNER JOIN devInterface ON devInterface.interfaces_int_id=interfaces.intf_id
+INNER JOIN device ON device.dev_id=devInterface.device_dev_id
+WHERE l2_addr IN (SELECT DISTINCT macAddress FROM interfaces 
+INNER JOIN devInterface ON devInterface.interfaces_int_id=interfaces.intf_id
+WHERE devInterface.device_dev_id=853 AND phl=2) AND phl>0 AND dev_id<>853
+
+"17359","Gi0/43","swibk01"
+"17434","Veth853","ibk-ucs-A"
+"17440","Veth905","ibk-ucs-A"
+"17487","Veth854","ibk-ucs-B"
+"17493","Veth906","ibk-ucs-B"
+"17583","Gi1/0/25","ibk_sw01_rza"
+"17584","Gi1/0/26","ibk_sw01_rza"
+
+"17434","Veth853","ibk-ucs-A","0022.191a.15e5"
+"17434","Veth853","ibk-ucs-A","0050.5698.0005"
+"17434","Veth853","ibk-ucs-A","0050.56b9.66c0"
+"17440","Veth905","ibk-ucs-A","0050.5697.0000"
+"17440","Veth905","ibk-ucs-A","0050.5698.0016"
+"17440","Veth905","ibk-ucs-A","0050.5698.002f"
+"17440","Veth905","ibk-ucs-A","0050.5698.003f"
+"17440","Veth905","ibk-ucs-A","0050.5698.1ca6"
+"17440","Veth905","ibk-ucs-A","0050.56b9.66c1"
+"17440","Veth905","ibk-ucs-A","0050.56b9.6a0b"
+
+
+Die bei der vorigen Abfrage ausgelesenen MAC Adressen von den anderen Geräten nehmen und schauen, ob sie 
+SELECT intf_id,intfName,macAddress,boundTo_id FROM interfaces 
+INNER JOIN devInterface ON devInterface.interfaces_int_id=interfaces.intf_id
+INNER JOIN device ON device.dev_id=devInterface.device_dev_id
+WHERE macAddress IN (SELECT DISTINCT l2_addr FROM interfaces
+INNER JOIN nlink ON nlink.interfaces_intf_id=interfaces.intf_id
+INNER JOIN neighbor ON neighbor.neighbor_id=nlink.neighbor_neighbor_id
+INNER JOIN devInterface ON devInterface.interfaces_int_id=interfaces.intf_id
+INNER JOIN device ON device.dev_id=devInterface.device_dev_id
+WHERE l2_addr IN (SELECT DISTINCT macAddress FROM interfaces 
+INNER JOIN devInterface ON devInterface.interfaces_int_id=interfaces.intf_id
+WHERE devInterface.device_dev_id=853 AND phl=2) AND phl>0 AND dev_id<>853)
+AND dev_id=853
+
+"17523","Veth1","0050.5698.0004",
+"17524","Veth2","0050.5698.52d2",
+"17525","Veth3","0022.191a.15e5",
+"17526","Veth4","0050.5698.0019",
+"17527","Veth5","0050.5697.0000",
+"17528","Veth6","0050.5698.1ca6",
+"17529","Veth7","0050.5698.001e",
+"17530","Veth8","0050.5698.006d",
+"17531","Veth9","000c.29ed.5810",
+"17533","Veth11","0050.5698.0016",
+"17535","Veth13","0050.5698.000f",
+"17536","Veth14","0050.5698.000d",
+"17537","Veth15","0050.5698.002f",
+"17538","Veth16","0050.5698.0005",
+"17539","Veth17","0050.5698.003f",
+"17540","Veth18","0050.5698.1ca7",
+"17544","Veth22","0050.56b9.66c0",
+"17545","Veth23","0050.56b9.66c1",
+"17548","Veth26","0050.56b9.6a0b",
+"17549","Veth27","0050.5698.0010",
+"17550","Veth28","0050.56b9.6a0c",
+
+
+Nx1k Uplinks festellen:
+SELECT l2_addr,intfName FROM neighbor
+INNER JOIN nlink ON nlink.neighbor_neighbor_id=neighbor.neighbor_id
+INNER JOIN interfaces ON interfaces.intf_id=nlink.interfaces_intf_id
+INNER JOIN devInterface ON devInterface.interfaces_int_id=interfaces.intf_id
+WHERE l2_addr NOT IN (
+SELECT macAddress FROM interfaces
+INNER JOIN devInterface ON devInterface.interfaces_int_id=interfaces.intf_id
+WHERE devInterface.device_dev_id=853)
+AND devInterface.device_dev_id=853
+
+Schauen, welche Endgeräte sich hinter den Nx1k Uplinks verbergen:
+SELECT intfName,hostname FROM interfaces 
+INNER JOIN devInterface ON devInterface.interfaces_int_id=interfaces.intf_id
+INNER JOIN device ON device.dev_id=devInterface.device_dev_id
+WHERE macAddress IN (
+SELECT l2_addr FROM neighbor
+INNER JOIN nlink ON nlink.neighbor_neighbor_id=neighbor.neighbor_id
+INNER JOIN interfaces ON interfaces.intf_id=nlink.interfaces_intf_id
+INNER JOIN devInterface ON devInterface.interfaces_int_id=interfaces.intf_id
+WHERE l2_addr NOT IN (
+SELECT macAddress FROM interfaces
+INNER JOIN devInterface ON devInterface.interfaces_int_id=interfaces.intf_id
+WHERE devInterface.device_dev_id=853)
+AND devInterface.device_dev_id=853)

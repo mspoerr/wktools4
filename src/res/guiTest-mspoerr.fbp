@@ -1,0 +1,7 @@
+<object class="Project">
+    <property name="code_generation">C++</property>
+    <property name="file">guiTestResources</property>
+    <property name="name">guiTest</property>
+    <property name="path">..\</property>
+    <property name="relative_path">1</property>
+</object>

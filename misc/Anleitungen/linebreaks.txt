@@ -1,0 +1,6 @@
+Windows: \r\n -> 0x0d (13) 0x0a (10) -> CRLF
+Linux: \n -> 0x0a -> LF
+
+Excel Line Break in Zelle: \n -> 0x0a -> LF
+
+OpenOffice Line Break und Line Break in Zellen: \n -> 0x0a -> LF

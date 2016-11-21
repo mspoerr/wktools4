@@ -1,0 +1,1740 @@
+wktools4 ToDo:
+==============
+
+Milestones ERLEDIGT:
+====================
+wktools3 Portierung:
+x* CLI neu
+x- Gerüst erstellen
+x- Optionen ausdefinieren
+x* Profile neu
+x- XML mit tinyXML
+x- Laden global beim Programmstart
+x- Speichern global beim Programmstart
+x- Jedes Tool ladet und ändert die Einstellungen bei Bedarf
+x* Main portieren
+x- Version Check
+x° version4.txt downloaden und den Wert lesen
+x° benutzte Version herausfinden -> manuell
+x° Check, ob neuere Version verfügbar
+x° Version Check ein/ausschalten Option aktivieren
+x° Version Check Popup mit der Einstellung aktivieren
+x- Window Größe laden/speichern
+x- Position der Splitter laden/speichern
+x* PIX Tools
+x- einstampfen -> JA
+x* Portieren der Tools
+x- wkn
+x- wkl
+x- wkdp
+x- wke
+x° Problemkinder: x-Seriell; x-Sockets müssen auf asio portiert werden; x-Threads
+x* wkc portieren oder einstampfen? laut der Umfrage ist das das meistgenutzte Tool :o
+x- eingestampft
+x* Mapper: Basis
+x- Parser
+x- Datenbank
+x- Analyse der Daten
+x* Mapper: Zusätzliche Details
+x- cdp Neighbor Ausgabe als zusätzliche Infoquelle
+x- Unknown Switches (Device type 99) anzeigen, wenn Gerät nicht angegeben, aber überzählige Interfaces mit STP Aktivität auf anderen Switches angezeigt werden.
+x- Mapper Template in wke einpflegen und testen
+x- Cluster Graph einführen
+x- Interfacefehler anzeigen
+x- Interfacefehler Nodes in einen eigenen Cluster mit dem Interface legen
+x- STP Fehler anzeigen
+x- STP Blocking Interfaces anzeigen
+x* Doku anpassen
+x* Website anpassen
+x* Windows Scheduler
+x- OnDemand kein Problem
+x- scheduled Tasks -> Windows/Linux trennen; den Windows Teil übernehmen 
+x- Win: SchedTask löschen
+x* Doku -> wie?
+x-> nur noch online
+
+Max Features erledigt:
+======================
+x* Fehler in SQL DB schreiben -> HostID (vom IP Address File hinter ";"); Fehlercode; Zeitstempel
+x- Datenbank Einstellungen in General Settings
+x- Generic SQL error Fehlermeldung erstellen, wenn SQL Fehler
+x- GUI für SQL anpassen
+x* Wie Centralized wktools.xml wieder zurücksetzen? -> Manuell
+x* Directory Mapping
+x*- GUI
+x*- Laden/Sichern
+x- einstellungenInit() -> die Verzeichnisnamen austauschen
+x- Check, ob Verzeichnisse richtig aufhören (/ oder \ am Ende)
+x* Profil wird nicht in zentrales wktools.xml geschrieben, sondern ins lokale (selbstverschildeter xml Fehler, kein Bug)
+x* Bei Profil speichern wird die Meldung 2x in die SQL DB geschrieben
+x-> Behoben; Problem: Bei SQL Fehler wird der Fehler auch in die DB geschrieben; In dem Fall wurde alles 2x geschrieben, egal ob Fehler oder nicht
+x* Keinen DB Fehler ausgeben, wenn keine DB verwendet wird
+x-> Behoben; es wurde nicht geprüft, ob SQL verwendet oder nicht
+x* -s Option: wktools.xml soll nicht geschrieben werden
+
+ERLEDIGT:
+=========
+x* Profile laden im GUI
+x* Default Profil laden im GUI
+x* Schriftart und -größe in den Settingsdarstellungen ändern
+x* Cancel Button entfernen und Go Button als CheckBox ausführen
+x* Profile DropDown bei Programmstart initialisieren
+x* Toolbar Buttons je nach Verfügbarkeit aktivieren/deaktivieren
+x* Schriftgröße für die Settings wählbar machen
+x* Wenn es das Profil noch nicht im XML File gibt, dann anlegen
+x* wktools Tool hinzufügen - für Newsausgabe usw.; Wird bei Programmstart angezeigt
+x* Profil speichern im GUI
+x* Splitterpositionen vom Settings Fenster speichern/laden
+x* wkn Funktionen überprüfen
+x- erstellen nachziehen
+x* doSave splitten - in GUI und nicht GUI Version
+x* Log und Fehlerausgabe 
+x-> mittels RichTextCtrl
+x-> HTML Ausgabe eliminieren
+x- Zeitausgabe hinzufügen
+x- Refresh, sobald was geschrieben wurde
+x* Fehlerausgabe beim Laden/Speichern von Profilen
+x* Wenn auf Settigs umgeswitcht wird, sollen die Spaltenbreiten nicht verloren gehen
+x* In der wke Ansicht das Log Fenster rechts unten anordnen, nicht oben
+x* Wenn das Tool fertig ist, ein ENDE im Logfenster ausgeben
+x* Wenn Tool fertig ist, dann soll eine Nachricht an den Frame geschickt werden
+x* Die Schriftart für die Settings speichern/laden
+x- Speichern
+x- Laden
+x* "Tooltip" Hilfe
+x* Links in der internen HTML Hilfe mit dem externen Browser öffnen
+x* WkLog umbenennen
+x* Bei drücken auf Start das Tool immer in einem eigenen Thread starten
+x- Umbauen der Ersteller Klasse; von wxThread ableiten
+x- Logausgabe per Events
+x* Toolbar Buttons mit Leben befüllen
+x- Profil Sektion
+x- Datei Speichern
+x- Datei Öffnen
+x- Clipboard Funktionen
+x- Settings
+x- Start/Cancel
+x- Kill
+x* Font Settings Load/Save funktioniert noch nicht richtig
+x-> Laden/Speichern passt, nur werden sie Settings beim Laden im Control nicht überschrieben
+x* Versions Check Optionen richtig im XML laden/speichern
+x* bestehende HTML Seiten verbessern
+x* Icons aufpeppen
+x* Button für Logansicht einführen, damit der Debug Output weggeblendet werden kann
+x* Splitterposition vom Settings Fenster speichern/laden
+x* "For Future Use" Option im Settings Dialog hinzufügen
+x* Fehler ausgeben, wenn wktools.xml nicht da
+x* WKE Settings: Manche Gruppen schließen
+x* WKE Settings: Schriftart und Splitter Position laden/speichern
+x* WKE Tree GUI befüllen; inkl Hilfe
+x* WKE Settings: Enable/Disable Funktion hinzufügen
+x* WKE Settings: User/PW verstecken/zeigen Funktion hinzufügen
+x* Settings allgemein: Die wichtigsten Einstellungen farblich markieren
+x* Markierung Setting hinzufügen, damit die wichtigsten Einstellungen hervorgehoben werden
+x* registry in xml Umwandeltool anpassen, damit aus ursprünglich STR Settings INT Settings werden
+x* <composed> Option beim Propertygrid ausschalten
+x* Splitterpositionen werden nicht richtig gespeichert
+x* Beim ersten Start die Fenstergröße anpassen
+x* DeviceGroup Refresh Button einführen
+x* WKE: Grundfunktionen befüllen
+x- einstellungenInit
+x- doTest
+x- doTestGui
+x- doIt
+x- cancelIt
+x- kilIt
+x- doLoad
+x- doSave
+x- xmlInit
+x- sets
+x- guiSets
+x- ladeProfile
+x- schreibeLog
+x- setMainFrame
+x- OnWkeFertig
+x* DeviceGroup Features:
+x- Contextmenü
+x- Checkbox in der Spaltenüberschrift
+x* Settings: Überschriften anders einfärben
+x* DeviceGroup Refresh Button mit Leben befüllen
+x* DeviceGroup Funktionen portieren
+x* DeviceGroup mit weniger Zeilen starten und beim Refresh alle Zeilen löschen
+x* wke: Start Button zurücksetzen, wenn fertig
+x* wke: DeviceGroup: Wenn in der DG was geändert wird, Änderungen übernehmen
+x* wke: DeviceGroup: Checkboxen stimmen nicht -> bei Click für Uncheck darauf sieht man den 1er wenn checked.
+x* wke: DeviceGroup: Checkbox Status wird nicht richtig geladen und gespeichert (wenn geändert vor START)
+x* wke: beim Ausgabeverzeichnis fehlt der abschließende "\"
+?* wke: DeviceGroup: Wird nicht richtig befüllt, wenn neu gemacht. -> konnte nicht mehr nachgestellt werden
+x* wke: Fehlerliste am Ende stimmt nicht -> die Meldungen werden nur ans Logfenster geschickt, und nicht an wke
+x* wke: DeviceGroup: Wenn nichts angehakt, dann Fehlermeldung ausgeben und Start Button zurücksetzen
+x* wke: DeviceGroup: die einzelnen Zeilen nach Abarbeitung farblich hinterlegen
+x* wke: Telnetport von uint auf std::string umbauen, da sonst crash
+x* wkn: Letzte Änderungen übernehmen (?<alle $blank löschen>, 3.4.4.2 Fix)
+x* wke: DeviceGroup: Farben löschen, wenn Liste neu geladen wird
+x* wke: DeviceGroup: nur ein Klick auf Checkbox und Status zu ändern
+x* wke: DeviceGroup: COMx statt COM2 schreiben
+x!* Verbindungsfehler mit Telnet und SSH -> ???????
+x* https für 7921 Phones
+x* cryptlib statisch einbinden -> geht nur in Linux; unter Windows ird die statische Lib nicht richtig erstellt; kein Interesse für Lösung vom Hersteller
+x* wkn und wke: Verzeichnis und Dateiangaben prüfen, damit alles Linux kompatibel ist.
+x-> Alle Nachrichten posten; Nichts direkt
+x* wke: DeviceGroup: Show Config File Funktion noch fertigstellen
+x* Im Linux überholen die direkten Logs (wke, wkn), die Logs, die per PostMaessage geschrieben werden(verbinder, ersetzer) 
+x* Logausgabe in File aktivieren
+x* Fehlernummern einführen
+x- Mit Beschreibung auf der Website
+x- Format: xyzz: x (Toolnummer); y (Level); z (Fehlernummer)
+x* Fehlerausgabe bei boost::asio::write Funktionen aktivieren -> mittels Check ob alle Daten gesendet wurden
+x* ICON richtig einfügen
+x-> http://wxforum.shadonet.com/viewtopic.php?t=14576&highlight=set+application+icon
+x* Cookbook für neue Tools machen
+x* dip: Spalte 11 im wktools.xml hinzufügen
+x-> Wird beim ersten Ausführen dann von selber hinzugefügt
+x* UTA Parse: Wenn AusgabeFile vorhanden, dann -> headerSchreiben = false;
+x* DIP: Cancel aktivieren
+x* DIP: Tabellenausgabe fürs Ergebnis einbinden
+x* DIP: enable/disable aktivieren
+x* Configure Devices: Data File tabellarisch anzeigen; Check ob konsistent und Fehler in der Tabelle rot markieren
+x* DIP: Interface Parser einbinden
+x* Scheduler: Einträge von File laden
+x* Scheduler: File Kompatibilität mit Version 3 File herstellen?
+x* Scheduler: Laden der Liste beim Start
+x* Scheduler: Einträge in File sichern
+x* Scheduler: Speichern der Liste beim Beenden
+x* wktools.xml Problematik mit Pfad lösen
+x* Scheduler: Wenn Zeile angeklickt, dann sollen die Werte in den PropGrid übernommen werden. Wenn dann wieder der Neu Button gedrückt wird, dann soll die Zeile upgedatet werden, wenn sich der Name nicht ändert
+x* Scheduler: Elemente in der Liste verschieben
+x* Scheduler: Thread
+x* Scheduler: cancelIt, killIt: Tool Thread selber killen
+x* Scheduler: DoIt 
+x* Scheduler: Nur ausgewählte Einträge ausführen
+x* Copy/Cut/Paste/Delete auch für Debug Log
+x* wke: Fehleranzeige bei SSH funktioniert nicht (Timerproblem mit Events)
+x* wkn: Wertedatei wird nicht im Profil abgespeichert
+x* Version Check überarbeiten -> mit asio statt wxUrl
+x* (wke) Crash bei DeviceGroup Laden
+x* Änderungen in Settings werden erst übernommen, wenn auf ein anderes Feld geklickt wird.
+x* Stop und Kill haben keine Auswirkung
+x* LogFilePattern
+x* Markierung der Fehler nicht immer OK in der DeviceGroup Tabelle
+x* Hosts tauchen manchmal als OK und als Fehler auf -> Zeitablauf bei den Nachrichten vom Thread?
+x* Logfile Funktion dokumentieren
+x* wkn: Letzte Zeile nicht als Fehler anzeigen
+x* Sicherstellen, dass der Start Button nicht für verschiedene Tools gleichzeitig gedrückt werden kann
+x* wke: Wenn Abbruch und dann gleich wieder Start, dann unvorhergesehene Probleme -> nicht alle Parameter richtig zurückgesetzt?
+x* Statusbar und Menü entfernen
+x* Fehler von wktools4.cpp an das GUI weitergeben
+x* SQL Features per Default deaktivieren -> Die SQL Version muss eigens kompiliert werden
+x* Centralized wktools.xml -> Link im lokalen wktools.xml
+x* wke: Änderungen beim devgroup file übernehmen ohne Start zu drücken -> Button einführen
+x* Switch zwischen lokalem wktools.xml und zentralem wktools.xml -> Button einführen
+x* wke: Beschreibung vom IP File wird nicht in die Device Group übernommen, wenn sie kürzer als drei Zeichen ist
+x* wke: Anzeige bei Fehlern nicht richtig: IP Adressen sind in mehreren Kategorien angeführt. Wenn eine IP fehlschlägt, wird die nächste zwar abgearbeitet, aber nicht in der Liste angeführt
+x* wke: Manchmal out of sync beim Einspielen, wenn es Fehler dazwischen gibt.
+x-> behoben durch ssh Buffer löschen, bevor bei WEITER was anderes passiert
+x* Mapper: cdp Infos verwerten
+x* Mapper: In der L2 Topologie nicht die Subinterfaces, sondern Hauptinterfaces anzeigen
+x* Mapper: Firewall Interfaces für L2 Topologie auf Physikalisches Interface umbauen und Subinterfaces gleich wie bei IOS behandeln
+x* Mapper: P2P Link zwischen Router anschauen, da es noch Probleme gibt -> in der ARP Table sind die MACs drinnen
+x* Mapper: FW Nachbarschaft funktioniert nicht mehr seit dem Umbau der FW Interfaces
+x* Mapper: Non-Switch Nachbarschaften neu machen (wegen Firewall Thematik)
+x* Mapper: STP#1 Abfrage 1 dauert extrem lange -> Optimieren
+x* Mapper: Cluster IDs nicht eindeutig!
+x* Mapper: konsistenzCheck einführen, der noch einmal alles prüft, bevor der AnomalyCheck läuft
+x* Mapper: Crash bei großen GML Files -> Meldung im OGDF Forum 
+x-> Scheint mit dem erweiterten Anomaly Check behoben zu sein.
+x* Mapper: Endgeräte ID auf Zahlen größer 10 ändern: 11-IP Phone; 12: Hosts
+x* Mapper: CDP Optionen hinzufügen:
+x- keine CDP Infos
+x- keine Endgeräte, die über CDP gelernt wurden
+x* Mapper: Option für STP unbekannte Nachbaren
+x* Mapper: Nodes mit Größe 0 auf den Grund gehen
+x* Mapper: CDP gelernte Boxen anders markieren
+x-> 4.0.7 END
+x* Mapper: Organic Layout anpassen, sodass es nicht so viele Überlappungen gibt
+x* Mapper: Layer 3 Topologien
+x- DB Erweiterungen
+x- Parser Umbau (Subnet Mask in eigene Spalte schreiben)
+x- Parser Erweiterung: intfSubnet und ipSubnet Tabellen befüllen
+x- intfSubnet und ipSubnet Tabellen auswerten
+x- L3 Topologie ausgeben
+x* Mapper: Neue Ausgabe Optionen einführen: L2, L3, Organic, Hierarchic
+x* DirMap: Alle Daten löschen, wenn XML neu geladen wird
+x* wke: DevGrp File Filename wird beim Speichern nicht von den Einstellungen übernommen
+x* Mapper: Verbesserung der Ausgabe der Daten
+x- Basic Ausgabe zur Kontrolle in das Log Fenster
+x- GML in V1
+x- SVG oder VDX in V2
+x-> VDX
+x- Einbinden der Cisco Symbole in V2
+x- Farben in der GML Ausgabe überdenken 
+x-> Obsolet, da GML nicht mehr die primäre Ausgabe und Interface Farbkodierung verwendet wird
+x- Interfacefehler als eigene Nodes anzeigen löschen und den neuen generischen Farbcode einführen.
+x* Mapper: Verbesserung der vdx Ausgabe
+x- Ausgabefilename als Option angeben lassen
+x- L3 Map als eigene Seite einfügen
+x- UNKNOWN als UKNWN anzeigen
+x* wke: Zusätzliche Spalte in der DeviceGroup einführen
+x* Mapper: Wenn L2 und L3 Ausgabe, dann wird das im Visio vermischt ???
+x-> 4.0.8 END
+x!* Log Files als mandatory kennzeichnen und auch gelb hinterlegen
+x* Mapper: CDP Infos für Access Points richtig zuordnen
+x* Mapper: Weiteren Check für gegengleiche Einträge, wenn einer komplett und der andere so halb
+x* wke: Verbesserte SSH Fehlerausgabe
+x* wke: Die Steuerzeichen auf der Pix irgendwie eliminieren (wenn es in der Zeile nicht Platz hat)
+x!* wke: Passwörter in der DeviceGroup Ansicht ausblenden, wenn als hidden gekennzeichnet
+x* wke: DeviceGroup File wird nicht mehr automatisch eingetragen, wenn die Einstellung leer ist
+x* wke: Verbindung abbrechen, wenn sie hängenbleibt
+x-> Wenn für eine bestimmte Zeit nichts weitergeht, dann soll die Verbindung unterbrochen werden
+x-> ist vor allem dann interessant, wenn was zurückkommt, das nicht verarbeitet werden kann und dann auf weiteren Traffic gewartet wird, der aber nie kommt
+x* wke: Erster Host wird in der DeviceGroup Ansicht nicht markiert, wenn er abgearbeitet wurde
+x!* Überlegen, wie man Log Files anlegen könnte, wenn es in den Einstellungen fehlt
+x* wke: if/then/else einführen
+x- Wenn auf ein command das zurückgegeben wird, dann mach das, ansonsten was anderes
+x- Die Rückgabe soll auch als Variable verwendet werden können
+x- RegEx -> JA
+x* wke: variable Commands aufgrund einer Regex über die letzte Antwort
+x* wke: Neue Tags für Userspezifische Fehlerausgabe einführen, die vor allem bei !IFRETURN und !ELSERETURN zum Einsatz kommen kann
+x* Mapper: IP Adressen der Geräte anzeigen (im Interface?)
+x* Löschen von Profilen (Schwemmi Anfrage); Mit Popup und Nachfragen
+x* wke: Die Regex Rückgaben in vector speichern und wiederverwerten
+x* wke: Es wird probiert die DevGrp Zeilen zu löschen, obwohl keine mehr da sind
+x* Version nur an einem Punkt im Tool angeben und von dort ins HTML Dokument usw. kopieren
+x* HTML Anzeigen anpassen
+x- Neue HTML Ausgabe? -> Noch nicht notwendig
+x- Die HTML Seiten kompilieren oder als html ausliefern? -> kompilieren
+x* wke: Die Fehlercodes am Ende in der Übersicht pro Host angeben, damit man leicht nachvollziehen kann, wo es welche Probleme gegeben hat
+x-> Formatierung in der Ausgabe noch verbessern
+x-> Multimap löschen, wenn fertig
+x* wke: Die Custom Fehler führen nicht zu roten Markierungen in der Tabelle (wird markiert, aber wieder überschrieben)
+x* wke: Fehleranzeige in der DevGroup überarbeiten
+x* wke: Es fehlen manchmal Zeichen bei der Rückgabe raus (hängt mit dem ASA Steuerzeichen Filter zusammen)
+x-> Wenn ein Zeichen falsch, zu wenig, oder zu viel ist, dann ist lastChar falsch; War im Original szPos+38, jetzt szPos+30;
+x* wke: Fehlermeldung "2309: 169.254.255.2: Use the same protocol for all Multihop devices!" läuft durch -> Nur einmal ausgeben
+x* wke: Error Log Zuordnung auf DeviceGroup und IP Ebene auch für Fehler bei startSeriellDevGroup ausweiten, damit alle Fehler in der Übersicht zu sehen sind
+x* Mapper: ogdf Version 2010.10 verwenden
+x* wke: Wenn erste Box in der DevGroup nicht angehakt, dann geht nicht
+x* wke: Tests mit asio ssl, damit das alte cryptlib mit sshv1 Support wieder verwendet werden kann
+x-> SSL Tests -> OK
+x-> SSH Tests -> OK
+x-> Rückbau auf altes cryptlib ()
+x* wke: Endlosschleife bei Config not found
+x* endgültiges Release 4.1
+x-> 4.1 End
+x* Mapper: Access Points richtig anzeigen
+x!* Mapper: Error Handling einführen für den Fall dass die Neighborship Tabelle leer ist.
+x* Mapper: Abstände zwischen den Nodes bei Hierarchic vergrößern
+x* wke: Wenn Sonderzeichen im Filename für show Ausgabe vorkommen, dann kommt ein I/O Error
+x* Port Scanner mit Asio in IP List einbauen
+x- GUI
+x- Port Scanner als solches
+x- File Ausgabe
+x- Tests
+x- die generierte Liste als Input bei wke ermöglichen
+x!* wke: Crash, wenn Hostname nicht passt (Aufgetreten bei SWF: BSP: 10.001.254.043)
+x* wke: Wenn die Verbindung geschlossen wird, bevor alle Commands gesendet wurden, dann wird am Multihop Gerät weitergesendet 
+x-> ein !EXIT einführen
+x-> zusätzlich noch !ENDEXIT einführen
+x* Port Scanner Doku
+x* Wizard
+x* dip: Bei der Ausgabe fehlt ein ";" zwischen der Lic Spalte und der Flash Spalte
+x* Portscanner gesprächiger machen
+x-> 4.2 End
+x* Port Scanner Result passte nicht -> for Schleife falsch.
+x* wke: Nexus Support
+x-> 4.2.0.1 End
+x* Mapper: Neue Visio Icons einführen (Voice Router) und eine Anleitung schreiben wie es am einfachsten gemacht wird.
+x- Anleitung
+x- Visio Icon hinzufügen
+x- Parser anpassen
+x* Mapper: L2 - Neue Features:
+x- Unterscheidung L2/L3 Switches
+x- STP Root anzeigen
+x- STP Root Port anzeigen
+x* Version Check funktioniert nicht richtig
+x* dip: ISR G2 Support
+x* dip: Nexus Support 
+x* wke: SSHv21 einführen -> SSHv2 mit v1 Fallback
+x* wke: Spaltenbreite bei DEvGrp Ansicht bei manchen Clients extrem groß -> limitieren
+x* Wizard: Config File Fehler bei wke Profil speichern 
+x-> config.txt zuerst anlegen?
+x* Wizard: Passwörter makieren
+x-> 4.2.1.0 Ende
+x* Mapper: Search Pattern funktioniert nicht
+x* Mapper: Wenn Filename gleich TempDevGrp.txt oder wkm.db, dann auf keinen Fall parsen
+x* Mapper: Analyze New immer anhaken, wenn Parse New angehakt ist
+x* Mapper: Use CDP Info umbenennen (Network devices oder so)
+x* Mapper: Organic L3 Ansicht: Bei Manuel sieht man da die Linien
+x-> muss eine Ausnahme sein; Bei mir sieht man nichts
+x* Mapper: Bei einer Verbindung zwischen Router und Switch wird ein Vlan Interface verwendet. Warum?
+x* Mapper: Größe der Netze in GML anpassen
+x* Start Button umbenennen, wenn rotes X
+x* wke: DevGrp Ansicht vergrößern, wenn nicht sichtbar
+x* wke: Errors und Warnings separieren (Detailed Error list)
+x!* wke: Protokolle durcheinander, da es SSHv1 nicht mehr gibt; Durcheinander nur beim Laden eines Profiles
+x-> Ist so. Wird in der Doku vermerkt
+x* Wizard: Ergebnis (Ausgabefile) im Log vermerken
+x* Mapper: Symbol für ATAs richtig stellen; Zur Zeit werden sie als Server angezeigt (CDP Infos vom ATA: Platform: Cisco ATA 186,  Capabilities: Host)
+x* Mapper: Interfacenamen verkürzen (Loopback...)
+x* Mapper: Nexus Support 
+x- wke: Zusätzliche Commands in der Mapper Config hinzufügen
+x- Parser
+x- Combiner
+x* Mapper: Wenn für normale Switches kein "show mac-address-table" verfügbar ist, dann den Abschnitt mit "show mac address-table" verwenden
+x* Mapper: Symbol für Video Überwachungskameras
+x* Mapper: Portbeschriftung bei L3 Plänen passt nie ins Kästchen -> vergrößern
+x* Mapper: Markierte Einträge (flag in neighborship) werden in der Ausgabe nicht markiert
+x* Mapper: Fehlerausgabe, wenn bei Einfügen vom Gerät in DB ein Fehler auftritt
+x-> 4.2.1.5 Ende
+x* Mapper: Probleme mit Nexus: Bim Nachbaren sind MACs von zwei verschiedenen HW Interfaces sichtbar
+x-> bei Stufe 2 von "Dedizierte L2 Nachbarschaften auslesen" alle Interfaces in die Nachbarschaftstabelle aufnehmen
+x-> mit "2" taggen
+x-> Danach prüfen, ob es doppelte Einträge gibt und die doppelten Einträge löschen -> markAnomaly() erweitern
+x* Mapper: Zusatzdaten darstellen
+x-> Shape Data anschauen. Vielleicht kann man zusätzliche Infos besser darin verpacken
+x* Mapper: IP Infos irgendwo vermerken
+x-> Shape Data
+x* Mapper: IP Adressen von den CDP Nachbaren in die DB eintragen
+x* Mapper: Doppelte Einträge bei Interfaces -> Warum?
+x-> Betrifft nur Vlan Inerfaces vom Nexus
+x* Mapper: IntfID in den Interface Namen einbauen, um ihn dann in der Visio Ausgabe weiterzuverwenden
+x* Mapper: Interface Description in Shape Data anzeigen
+x* Mapper: Channel Members in den Interface Shape Daten anzeigen
+x* Mapper: Interface Shape Daten um E/L/D/S erweitern: Die Anzeige ausschreiben, wenn ein Feld nicht grün
+x* Mapper: Interface Doku erweitern
+x* Mapper: Transition Count Fehler wird bei Intf2 nicht angezeigt
+x* Mapper: STP Mixed nur noch anzeigen, wenn für mindestens 1 VLAN blocking
+x* Mapper: Shape Data für Interfaces (STP Blocking Infos, Intf Name)
+x* Mapper: Probleme mit STP Interface Status -> Wird das richtig angezeigt?
+x* Mapper: Anzeigen, für welche VLANs das Interface auf Forwarding ist
+x* Mapper: Device Shape Data für Root Bridges -> anzeigen für welche VLANs das Gerät Root ist
+x-> 4.2.2.0 Ende
+x* Logausgabe raufscrollen, wenn fertig, da sie sonst leer ist
+x!* Wizard: Umstellen von COM und Multihop auf SSH und SingleHop in den wke Settings
+x* dip: Ausgabe Spalten per default alle anhaken -> Wäre schon gesetzt gewesen
+x!* wke: DevGrp: Wenn IP file nicht wktools generated, dann wird das Protokoll nicht übernommen
+x!* Wizard: Config File für IP Phones (http+s) muss leer sein
+x!* wke: Crash beim Laden vom Profil unter Linux -> int Settings Array zu klein
+x!* Tool bleibt hängen, wenn es das Config File nicht gibt
+x* wke: Zusätzlich Rückgabe bei outBufZusammensteller: YESY
+x* Wenn Profil gespeichert wird, dann xml schreiben
+x* wke: Neue Config Tags: "!cmd-prefix <STRING>" und "!device <PREFIX> hostname|ip <POSTFIX>"
+x* wke: Neuer Config Tag: !remove-newline
+x* Mapper: Shape Daten für Interface: Muttergerät dazuschreiben
+x* Mapper: Shape Daten für Interface: Interfacegeschwindigkeit und Duplex
+x* Mapper: Abgespeckter Debug: Nach jedem Schritt die Nachbarschaften ausgeben
+x* Mapper: Diff Tool für Neighborship Tabelle; Vorbereitungen: 
+x- Revision Control für alle Tabellen? -> Ja
+x- Neue Tabelle einführen, wo der letzte Eintrag von der aktuellen Runde eingetragen wird (ID oder Zeile)
+x- rControl befüllen
+x- Alle SELECT Statements anpassen, dass sie nur für die letzte Version gelten
+x-> wkmParser
+x-> wkmCombiner
+x-> wkmAusgabe
+x-> wkmVisioAusgabe
+x- Tests, ob alles passt (Probleme noch mit den langen MAX select statements)
+x- Tabellen nicht mehr löschen, wenn neu geparsed oder analysiert wird
+x* Mapper: Clear DB Funktion einbauen, um die DB komplett zu löschen
+x* Mapper: DB Cleanup Funktion einbauen, da es nach einigen Durchläufen sehr langsam wird
+x* Mapper: L3 Visio Output funktioniert nicht richtig
+x* Wizard: Wizard splitten
+x* Mapper: SQL Diff: http://weblogs.sqlteam.com/jeffs/archive/2004/11/10/2737.aspx
+x- Problem: Der Index für Interfaces, Device usw. ändert sich immer -> Diff kann nicht für den Index gemacht werden, sondern für die Namen, die eindeutig sind
+x-> 4.3.0.0 Ende
+x* Mapper: Nexus vPC Support
+x* vPC Infos in der Visio Ausgabe vermerken
+x-> 4.3.0.1 Ende
+x* Mapper: Report am Ende von wkmAusgabe erweitern
+x- Fehler/Load/Duplex/STP für Endgeräte und Nachbarschaftsports
+x- Statistik: Wie viele Geräte, Interfaces, Nachbarschaften, Gerätetypen
+x-> 4.3.1.0 Ende
+x* wke: DevGroup Ansicht -> Lib aktualisieren
+x* wke: DevGroup Ansicht: Spaltenbreite bei User/Pass ist extrem groß
+x!* Crash bei "show run" absaugen
+x-> iosBufTester wenn bei der Rückgabe der komplette Hostname ohne # gesehen wird -> wird zu weit zurückgeschaut?
+x-> Kommt Ausgabe der Empfangsdaten nach IOSbufTester?
+x* Neues wxWidgets wegen wxGrid Bug
+x* Config Tag für Output File
+x* DeviceGroup File überschreiben -> Schutz einbauen
+x-> Backup vom alten File und Popup
+x-> Option in Settings aktivieren? -> Nein, wird immer ausgeführt
+x-> Release 4.3.2.0 - NTS Features - ENDE
+x* wke: utaNamenAuslesen erweitern, dass der wirkliche Name ausgelesen wird
+x* wke: Unterstützte Unix Prompts erweitern
+x-> Release 4.3.3.0 - Erweiterter Unix Support - ENDE
+x* wke: Wenn es den Ausgabeornder nicht gibt, dann anlegen (vor allem wenn im Config File angegeben)
+x* wke: Crash, wenn Config file leer (bei Multihop)
+x-> Release 4.3.3.1 - Bug Fixes - ENDE
+x* Mapper: Performance bei iosCamParser verbessern
+x* Mapper: Performance bei Step 1 - L2 verbessern
+x-> Release 4.3.3.2 - Mapper Performance - ENDE
+x* Mapper: Ausgabe Optionen erweitern, damit der User angeben kann, wie das Layout im Groben ausschaut (Min. Abstände usw.)
+x* Mapper: Report Ausgabe nach Anzahl der Fehler absteigend sortieren (pro Box)
+x* Mapper: Zusätzliche Spalten im Report (xLast clearing of interface counters, xZeilennummer, xcdp Neighbor, xcdp Neighbor type)
+x* Mapper: cdp Check -> Probleme beim Parsen? -> So gewollt? -> Habe es deaktiviert
+x* wke: ssh Fallback Fehleranzeige anpassen, damit bei erfolgreicher SSHv1 Verbindung kein schwerwiegender Verbindungsfehler angezeigt wird.
+x* Mapper: IOS 15.x Support -> Speed/Duplex Anzeige anders als vorher
+x* Mapper: STP Topologoie 1: Änderung der SQL Abfragen, damit keine MAC Adressen von L3 Interfaces fr die Nachbarschaftsberechnung verwendet wird.
+x* Mapper: Bei ATM Switches wird das STP Protokoll falsch angezeigt
+x* Mapper: Diff Funktion für Interface Error Report
+x* wke: Wenn im Config File in einer Zeile das erste Zeichen ein Space ist, dann wird der Command ignoriert
+x* wke: Erweitertes Debugging von den Empfangsdaten (HEX Ausgabe)
+x* Mapper: Interface intfType wird bei ATM Switches nicht erkannt (RAS) 
+x-> Problem: "Auto-duplex, Auto Speed, 100BaseTX" -> Speed/Duplex wird nicht angezeigt
+x-> Wenn kein Speed ausgelesen wird, dann den max. Speed annehmen? -> JA
+x* Mapper: Denkfehler bei STP Check#2? 
+x-> Es werden alle MAC Adressen vom Nachbargerät ausgelesen, und nicht nur die von dem lokalen Interface (Abfrage 3)
+x-> Nein, ist ok so
+x* Mapper: Nachbarschaft mit ATM Switch wird nicht richtig erkannt (aufgetreten bei RAS)
+x-> geht nicht besser
+x* Mapper: STP Check prüfen, da bei RAS (core<->ATM Switch) das doppelt verwendete Interface nicht markiert wird
+x* Mapper: Bei Flag=1 wird in der Ausgabe nur ein Interface markiert (dI_intf_id)
+x* Mapper: Root Bridge Anzeige bei RAS nicht richtig
+x* wke: BEL am Ende der Empfangsdaten löschen
+x* wke: Erweitertes Debugging von den Sendedaten (HEX Ausgabe)
+x* Mapper: Wenn nur "Analyze New" und kein "Parse New" angehakt, dann wird die Nachbarschaftsbeziehung nicht mehr berechnet.
+x-> Löschen der letzten Nachbarschaftsberechnung
+x-> Release 4.4 - Mapper Report Erweiterungen und Verbesserung der Ausgabe - ENDE
+x* Mapper: PIX 6.3 support
+x* Mapper: PIX/ASA Interfacename in der DB hinterlegen
+x* Mapper: PIX/ASA: Die Abfragen, die Interfaces betreffen umbauen, sodass nameif und nicht interfaceName verwendet wird
+x* wke: PIX Namenausleser ändern, damit man den F/O Status im Hostnamen sieht
+x* Versionsausgabe über CLI (-v Option)
+x* wke: Commands bei PIX nur senden, wenn wirklich der Prompt zurückkommt -> nicht nur auf Raute prüfen, sondern gleich wie bei IOS, auf Hostname+Raute
+x* wke: SSH Fallback als Info ausgeben, nicht Warning
+x* wke: showOutputHostname einführen und vom hostname trennen, damit es in internen Checks keine Probleme gibt
+x* Mapper: Crash beim Route Parser, wenn in der ersten Zeile von der Routing Tabelle kein "via" steht
+x* wke: SSH Debugs umbauen: HEX Ausgabe verschieben; Anzahl der gesendeten Bytes anzeigen
+x* wke: Wenn am Schluss ein ungültiges Command gesendet wird, dann wird dauernd TERMLEN gesendet.
+x-> Workaround: Bei den bufTestÄnderungsabfragen
+x* wke: wktools bricht ab, wenn ein Gerät nicht erreicht werden kann, anstatt mit den weiteren Geräten fortzusetzen
+x* wktools.xml: Check einbauen, ob das xml woanders geändert wurde und im Fall Fehler ausgeben
+x* wke: DeviceGroup File wird überschrieben und ist leer, wenn die Spaltenanzahl nicht passt.
+x* wke: IOS Fehlermeldung leer
+x* wke: 2301 wird öfters ausgegeben, obwohl kein Fehler vom Gerät zurückgekommen ist
+x-> Option zum Deaktivieren von 2301 
+x* wke: show Ausgabe bricht in speziellen Fällen ab
+x* Mapper: VSL Infos in der Visio Ausgabe hinzufügen
+x* Mapper: Nachbarschaften bei VSS nicht immer stimmig
+x-> VSL Infos auslesen und die VSL Interfaces auf phl=2 setzen
+x-> Combiner Check einbauen, dass Nachbarschaften mit phl=2 Interfaces gelöscht werden
+x* Fehlermeldungen ein/ausschaltbar machen
+x-> Zuerst alle "SchreibeLog" anpassen, damit die Fehlernummer extra angegeben wird (wie bei wke)
+x-> Dann alle Fehlermeldungen in einer Klasse erfassen
+x-> wktools.xml mit Fehlercode Status befüllen
+x-> GUI bauen (in Settings)
+x-> GUI Einstellungen in wkErrMessages Klasse zurückschreiben
+x-> in der Log Ausgabe prüfen, ob der Fehlercode ausgegeben werden soll
+x-> in LogFile Ausgabe prüfen, ob der Fehlercode ausgegeben werden soll
+x* wke: Bevor ein Timeout, während einer Verbindung, die Verbindung schließt, 2x ein Enter schicken; 
+x-> Damit wird abgefangen wenn irrtümlicherweise was zurückkommt, das nicht verstanden wird und dadurch eine gute Verbindung abgebrochen wird
+x* wke: Für Singlehop eine Dummy Config Zeile hinzufügen, die dann "exit" schickt
+x-> Damit gibt es immer ein valides Command am Schluss
+x* wke: Wenn Verbindung abgebaut wurde (durch exit), obwohl noch Commands übrig wären, dann gibt es einen schwerwiegenden Fehler
+x-> prüfen, ob das letzte Command ein "exit war. Wenn ja, dann keinen Fehler ausgeben
+x* wke: Bei Linux sind manchmal ungewollte Zeichen in den Empfangsdaten, die dann das Tool stören
+x- scheint daran zu liegen, dass Windows Files als Eingabe verwendet werden (Mit Windows Line Break \r\n)
+x- Bei statConfig alle \r löschen
+x-> Release 4.4.1.0 ENDE
+x!* Crash bei Telnet
+x-> Release 4.4.1.1 ENDE
+x* Summary Log, nur mit den wichtigen Fehlern und Infos
+x-> Einträge mit Zeitstempel und wke Report
+x-> In den Global Settings
+x* wke: Auflistung der Erklärungen zu den Fehlern, die beim Report angezeigt werden
+x* Report: DirUmbauen
+x-> Release 4.4.2.1 ENDE
+x* Error Details anpassen:
+x- Enter nach jeder Erklärung
+x- Jede Meldung nur einmal ausgeben
+x* wke: Crash in IOSbufTester
+x* Mapper: ASA F/O Interface wird nicht als Nachbar angezeigt; Am Switch sieht man die MAC Adresse aber im CAM Table
+x-> MAC Adresse wird vom Parser nicht ausgelsen und in die DB eingetragen
+x* Mapper: SNMP Location Parser (Shape Daten)
+x* Mapper: Shape Daten für Gerät: Gerätetype
+x* Mapper: Geräte Details (S/N, usw) in den Shape Daten
+x* Mapper: Wenn es ein Gerät schon gibt, dann den Namen um "-1" erweitern
+x* wke: Neue Debugs: HEX; Spezial1; Spezial2
+x* wke Multihop: Es wird nicht immer erkannt, wenn vom Gerät zum Ausgangspunkt zurückgestiegen wird.
+x-> Bei den xxxConf Funktionen wird ein "\n" hinter jedes Command gesetzt; Daher wird immer ein Enter zu viel geschickt 
+x-> Löschen von dem "\n" hinter den Commands
+x* Mapper: PIX/ASA und Router: Vlan's bei Subinterfaces erfassen
+x* Mapper: Channelinfos werden bei Routern angezeigt, obwohl es keinen Channel gibt
+x-> IntfType Subinterface als Kriterium verwenden
+x-> Release 4.4.3.0 ENDE
+x!* Report File funktioniert nicht im GUI Mode
+x-> Report und Log File auch im GUI Mode schreiben
+x-> Log File wird jetzt immer geschrieben -> -S Option nicht mehr notwendig
+x* Mapper: cdp Parser: Überlegen wegen ".", da AccessPoints den Punkt benötigen (teilweise)
+x- Möglichkeiten:
+x° Eine weitere Spalte einführen, mit dem alternativen Hostnamen; Später dann prüfen, ob es ähnliche Einträge gibt. Wenn ja, dann den Hostnamen mit dem Punkt verwenden. Wenn nein, dann den anderen. (JA)
+x° Bei Accesspoints per Default den langen Hostnamen verwenden (NEIN)
+x* wke: Per Default ist unter dem Punkt „Connection Settings“ der Modus auf „COM1“ gestellt. Obwohl nun via DeviceGroupFile Telnet bzw. SSH vorgegeben wird, muss der Modus auf „Telnet“ gestellt werden. Ansonsten bleibt WKTools nach der ersten Komponente hängen und verbindet sich nicht mehr mit dem nächsten Device…
+x-> Bei COM1 wird Multihop eingestellt. Daher das Problem; Als Default SSH einstellen
+x* wke: 2301 Erkennung verbessern
+x* wke: Probleme bei ":" mitten in den Abfragen; Wenn es keine User/PW Abfrage ist, dann wird auf den nächsten Host verbunden
+x* Mapper: "-1" Option bei class_wkmParser::insertDevice verbessert, da es bei leerer DB nicht funktioniert hat
+x* Mapper: Pfanner - Parsing Probleme bei Tunnel Interfaces -> Duplex Parser?
+x* Mapper: Unterscheidung Router/Switch 
+x-> Immer wenn "WS-C" im Produktnamen vorkommt, dann ist es ein Switch. Wenn nicht, dann ist es ein Router
+x-> Check nur machen, wenn das Gerät als Switch erkannt wurde, und ein IOS Gerät ist
+x-> Alle IOS Parser auch bei Router aktivieren
+x* Mapper: Für "5.2 Query 2" alle Rückgabewerte berücksichtigen
+x* Mapper: Duplex Spalte beim Report vergrößern
+x* Mapper: Pfanner - Probleme mit Router STP in Hamburg (Viele Nachbarschaftsfehler)
+x* Mapper: Debug Infos für WkmCombiner::cdpChecks und WkmCombiner::insertRControl einfügen
+x* Mapper: CDP Infos auch für Geräte mit Infos hinzuziehen, wenn verfügbar (bei den Inkonsistenz Checks)
+x-> Release 4.4.4.0 ENDE
+x* Mapper: ARP Parser Problem: Die Leerzeichen am Ende der IP Adresse bleiben bestehen -> löschen
+x* Import für Endgeräte
+x- Neue Option für das Importfile
+x- Parser
+x- Auswertung für MAC Adresse
+x- Auswertung für IP Adresse -> wenn nur die IP im Import File angegeben wird, dann nach der MAC Adresse suchen
+x- Probleme: Kein Import, wenn es das Gerät bereits gibt
+x* Import Doku + Fehlermeldungen
+x* wke: Wenn 2301 ausgeschalten, dann werden die Commands, die zu dem Fehler führen, teilweise nicht angezeigt.
+x* Mapper: Crash wenn VLAN Infos falsch ausgelesen werden (STP Parser)
+x-> Alle direkten Zugriffe auf das sql Result absichern!
+x-> Wenn ein direkter SQL Zugriff keinen Wert ausgibt, dann eine Systemfehlermeldung schreiben
+x* Mapper: Crash bei ARP Parser
+x* Mapper: Crash bei cdpAnomaly
+x* Mapper: Trunk/Access Port Infos erfassen -> "show interface switchport" auswerten?
+x-> JA
+x- config Template erweitern
+x- DB Erweiterung (Interface Tabelle)
+x- DB Doku aktualisieren
+x- Welche Infos sollen zusätzlich ausgewertet werden? -> Operational Mode, Access Mode VLAN, ...
+x- Parser
+x- Report
+x° Alle Interfaces bei denen der l2AdminMode ungleich dem l2Mode ist
+x° Alle Interfaces bei denen allowedVlan nicht "All" ist.
+x- Visio Ausgabe (Shape Daten)
+x- Visio Problem: Die Infos werden für alle Interfaces angezeigt, auch wenn in der DB "NULL" steht.
+x* Mapper: Import Funktion erweitern: Wenn ein Hostname öfters vorkommt, dann wird für jeden Eintrag ein zu dem Host gehöriges Interface angelegt (falls es das nicht schon gibt)
+x* Mapper: GML Ausgabe nur im Debug Mode
+x* Mapper: Probleme bei Walser Privatbank
+x- Cat4k Links werden nicht oder nur teilweise erkannt:
+x-> sw_w61_lampertz Gi2/6 <-> Gi2/ sw_w61_lampertz_neu
+x-> sw_w43_keller Gi2/4 <-> Gi2/4 sw_w63_tresor
+x-> cdp Infos dazunehmen, wenn ein unbekannter STP Nachbar oder ein Interface auf UKNWN steht
+x* Mapper: Detaillierter Error Report?
+x-> Detaillierte Fehler neben den Overall Fehlern
+x- DB Erweiterung (Interface Tabelle)
+x- DB Doku aktualisieren
+x- Parser
+x- Report -> WIE?
+x* Mapper: Fortlaufende Nummerierung bei allen Reports
+x* Mapper: Neuer Report mit Hostname, Geräte-Type, S/N und SW Version
+x* dip Crash -> Lizenzparser für Router (ISR G1, wenn keine Lic vorhanden)
+x* Mapper: STP Parser für XL Switch anpassen
+x* Mapper: PIX/ASA Interface Parser passt nicht mehr -> Probleme mit neu eingeführten den Interface Fehler Parsern
+x* Mapper: (Intern) Debug für alle SQL Statements und Rückgabewerte -> Nur beim Combiner, da sonst zu umfangreich und unübersichtlich
+x* Probleme mit CAM Parser für "Alle anderen Switches"
+x-> Manchmal ist am Ende der Zeile ein Leerzeichen; Das muss gelöscht werden
+x* Mapper: Neue Fehlermeldungen spezifizieren; Immer das Interface mitangeben.
+x* Mapper: S/N wird bei manchen Geräten nicht richtig ausgelesen -> Space am Anfang
+x* Abschließende Tests:
+x- RAS
+x-> Probleme mit CAM Parser bei LS1010 Switches -> Durch die heutigen Umstellungen; Behoben
+x- Pfanner
+x-> Problem: Beim zweiten Durchlauf werden die Nachbarschaften nicht richtig gemacht...
+x-> Fri Nov 11 22:36:27 2011:	6620: Adjacencies - Step 9: Anomaly Check
+x-> Problem: VLAN Interface wird berücksichtigt: LA-SRV1-4506-Gi6/38 <--> LA-SERV1B-1-3548-VLAN255
+x-> Problem mit XL Switches: Nachbarschaften werden nicht berechnet
+x-> Neuer CAM Parser für XL Switches, da der CAM Table anders ausschaut
+x- Walser Bank
+x-> Problem: Beim zweiten Durchlauf werden die Nachbarschaften nicht richtig gemacht...
+x- RedBull
+x- Sandoz
+x* Mapper: Reports beinhalten alle Durchläufe -> Einschränken auf den letzten ("Det Intf error" und "Devices")
+x* Mapper: Detailed Error Report erweitern (cdp, decription, last clear)
+x* Mapper: STP Protokoll wird bei RAS für LS1010 falsch ausgelesen
+x* Mapper: Falls ein Router STP Infos in DB hat, dann diese auch anzeigen.
+x* Farbe und Formatierung bei wktools4.cpp logs passt nicht mehr
+x-> Release 4.5 ENDE
+x* wke: Mehrere http get Requests in einem File speichern
+x* wke: Mapper Template für IP Phones
+x* Mapper: MAC Adressen Umwandler für IP Phones von ABCDEFGHIJKL in das Format xxxx.yyyy.zzzz
+x* Mapper: Parser für Telefone
+x* Mapper: Daten in der Visio Ausgabe (Shape Data) nur anzeigen, wenn auch relevant (keine leeren Elemente einfügen)
+x* Mapper: Tabelle für erweiterte Telefon Infos einfügen + Doku
+x* Mapper: Weitere Telefoninfos einbinden (Nebenstelle, User usw)
+x-> Mapper mit dip verheiraten und dip Infos in DB schreiben?
+x-> Telefonnummer als Anzeigename in der Visioausgabe, anstatt des Hostnamens (SEP...)
+x-> Viso ShapeData Ausgabe
+x* Mapper: Telefon Report
+x* Mapper: Report Ausgabe in csv
+x- 2.2 -> Detaillierter Fehler Report
+x- 5 -> Device Report
+x- 6 -> Detaillierter Telefon Report
+x* Mapper: DevType für CDP gelernte Geräte in device Tabelle nachtragen
+x* Mapper: SW Version für CDP gelernte Geräte erfassen, wenn verfügbar
+x* Mapper: Legende im Visio Output
+x* Mapper: Wichtigste Doku Infos im Visio ausgeben
+x* Mapper: Warnung ausgeben, wenn DB leer -> Check Anzahl Geräte
+x* Mapper: Alle relevanten Visio Files und sonstigen Infos in das Projektverzeichnis kopieren
+x* Mapper: Fehlermeldungen updaten
+x* Mapper: Cat6k Type wird falsch ausgelesen (Loacker VSS)
+x* Mapper: erste Stelle bei SW Version bei cdp wird abgeschnitten
+x* Mapper: CDP für UCS Probleme -> IP Adresse steht ganz am Ende, nicht am Anfang; Daher werden alle Attribute verschluckt
+x* Mapper: S/N in Klammer beim Hostnamen extrahieren
+x* Mapper: CDP Alternate Hostnamen in Device Tabelle übertragen wenn Gerät nur per CDP gelernt
+x* Mapper: CDP - SW Version bei Router passt nicht, da in zwei Zeilen angegeben
+x* Mapper: HW relevante Infos aus der Device Tabelle nehmen und alles in der hwInfo konsolidieren (Chassis S/N, hwRevision, SW Version, Device Type)
+x-> wkmAusgabe bearbeiten
+x-> wkmVisioAusgabe bearbeiten
+x* Merge Mapper und dip 
+x-> restliche DIP Features im Maper einbauen 
+x-> DIP deaktivieren -> Erst später; In den ersten Versionen parallel nutzen
+x-> Verbinder Template erweitern
+x- Offene Probleme:
+x° show inventory bei Router
+x° HW Revision für Chassis bei Router
+x° Crash bei Auflistung der cdp Geräte -> hwlink wird bei cdpSchreiben nicht geschrieben
+x* Mapper: Bei L2 Report, wenn Admin Mode=Trunk, dann bei Operational Mode Check, ob Trunk vorkommt.
+x* Mapper: HW Infos in Visio Ausgabe werden nicht mehr ausgegeben.
+x* Mapper: Zusätzlicher Report mit den DIP Daten
+x-> Report erstellen
+x-> Zeilen unterschiedlich farblich markieren
+x* Mapper: show file system für alle Geräte in die flash DB schreiben
+x* Mapper: Lizenzinfos in DB schreiben
+x- PIX
+x- IOS
+x- Switch
+x* Problem bei VLAN Einfügen von Routern
+x* Mapper: log.txt vom Parsen ausnehmen
+x* TESTS
+x->Release 4.6 ENDE
+x* Mapper: Neuer Report: IP/MAC/Port/Gerät
+x* Mapper: Neue GUI Optionen: Checkbox für alle Reports, ob sie ausgegeben werden sollen, oder nicht (nur für Reports, die viel Zeit benötigen)
+x!* wke: Problem bei GSR Router (XR Version 4.0): Telnet Optionen müssen fertig ausgehandelt sein, damiter Daten schickt
+x-> Alle "Do" als "Won't" zurückschicken
+x->Release 4.6.0.1 ENDE
+x* Mapper: rControl Doku nachziehen
+x* Mapper: Zeitstempel bei rControl hinzufügen
+x* Mapper: MAC Search: Statt AccessPort Check, STP BPDU Check, ob Interlink oder Accessport
+x* Mapper: MAC Adress Search
+x- Neuer Button in der Menüleiste zum Öffnen vom Such Dialog
+x- Suchdialog mit "MAC Adresse", "IP Adresse", "Switch+Port"-Dropdown
+x- Eingabefelder: MAC, IP, Switch-Drop-Down mit Interface-Drop-Down
+x- Checkboxen: History, Trunks -> Nicht mehr notwendig
+x- Ausgabefeld: Vergrößerbares Textfeld
+x- Buttons: Suche, Schließen, Felder löschen
+x- Ergebnis bei Mac Suche direkt im Suchdialog ausgeben und zusätzlich im Log Fenster mit der Suchzusammenfassung
+x* Mapper: wkmMain und wkm migrieren
+x* Mapper: MAC Vendor Codes importieren
+x- Neuer Button in der Menüleiste zum Updaten der MAC OUI DB
+x* Mapper: endgeräte Report mit Vendor Codes updaten
+x* wke: Crash bei Telnet bei Failed Authentication
+x!* wke: Crash bei Multihop zusammen mit Telnet
+x-> Problem bei Daten Senden, wenn Socket down -> Fehlererkennung eingeführt
+x* wke: https Authentication Support
+x* Crash beim Schließen in der Linux Version
+x-> Schuld ist der Mapper -> Alle Mapper Module raus, wenn WKTOOLS_MAPPER nit definiert; nicht nur so halb.
+x* Mapper: Doku anpassen
+x* Mapper: IP Phone Report auf die neue DB Struktur anpassen
+x* Mapper: Neuer Thread für MAC Update?
+x-> Nein, aber ein Popup, das anzeigt, dass die nachfolgende Abfrage einige Zeit dauern wird; Mit der Möglichkeit, den Vorgang abzubrechen.
+x->Release 4.6.1
+x* Dokument schreiben: Network Health Check mit wktools
+x- Einleitung: Anwendungsszenarien zu typische Probleme; Was es tut und vor allem, was es nicht tut
+x- Beispiele für Szenarien, wo es schon geholfen hat: RedBull Loop am Cat6k; Stadtwerke Kufstein - mehrere Verbindungen auf einem Interface; Walser Privatbank; Pfanner usw.
+x- GUI Einführung und Config von wktools
+x* wke: User/PW Settings per Default aufklappen
+x* wke: IP Phone URLs ändern im Mapper Template
+x* wkm: MAC Eingabe bei Host Search -> Format soll egal sein
+x* wkm: Normalizing vom STP Protokoll bevor es in die DB eingetragen wird
+x* wkm: vdx Endung bei Ausgabefile hinzufügen, wenn nicht vorhanden
+x* wkm: throttels Spalte kommt 2x im Report vor (Intf Err Det)
+x* wkm: Host Search: Wenn Interface Ergebnis gleich EtherChannel ist, dann in Klammer die phyiskalischen Interfaces ausgeben
+x* wke: Bei Mapper Template 2301 per Default deaktivieren
+x* wkm: STP Protokoll Check/Report
+x* wke: Wenn Major Error leer, dann komplett weglassen
+x* wkm: STP Transition Count Abfrage fix auf 15 setzen, damit ein Fehler ausgegeben wird
+x* wkl: Warnung ausgeben, dass Scanner mit Admin Privilegien gestartet werden sollte
+x* wkl: Crash wenn als Admin gestartet
+x* wkm: CDP Nachbaren in L3 View hinzufügen
+x* wkm: Sporadischer Crash -> INT Optionen Arrays waren zu klein
+x* wkm: wkmAusgabe: Die CDP Option bei doItL3 nicht vergessen
+x* wkm: Bei CDP Geräten, die in der L3 View ausgegeben werden, wird kein Hostname dazugeschrieben
+x* wke: Telnet Crash wenn login PW fehlt -> Zähler für den username Vector war das Problem, wenn mehr als drei Abfragen kommen (ulez)
+x* wke: DevGroup: Doppelklick auf Spaltenbegrenzer soll die Spaltenbreite anpassen, aber nicht nur anhand der Überschrift
+x-> http://trac.wxwidgets.org/ticket/11371
+x* wkm: Option, damit auch Endgeräte ausgegeben werden (Visio)
+x* wkm: wkm: DNS Auflösung für Endgeräte Ausgabe
+x* wkm: Bei Endgeräte Ausgabe die Kategorie SNMP Location in MAC Vendor umbenennen
+x* wkm: Endgeräte Report umbauen -> funktioniert nach Endgeräte Ausgabe nicht mehr
+x* wkm: DNS Option für Endgeräte einfügen, da es sehr lange dauert, wenn die Endgeräte nicht aufgelöst werden können.
+x* wkm: MAC Adresse der CDP Nachbaren rausfinden und in die Interface Tabelle eintragen
+x* wke: http dauert zu lange (bei CM 4.1.3 Phones)
+x* wkm: Phone Parser Crash für alte Telefone
+x- Beschreibung: Cisco Systems, Inc. 
+x- CallManager: CallManager 
+x- CDP: -ID
+x- CDP IP: -IP-
+x- Check, ob npos für alle
+x* wke: Mapper Template ändern, sodass als erster Link immer "/" geschickt wird
+x* wkm: ATA und 7912 Parser Probleme:
+x- 7912: CDP
+x- ATA: Grundsätzlich
+x-> INTERIMS RELEASE 4.6.2 fertig
+x* wke: Fehlerausgabe für 2301 per Default deaktivieren für IPT Mapper Template
+x* wkm: Endgerätereport (csv Ausgabe) passt nicht ganz -> Kein Seperator für letzten Spalten
+x* wkm: IP Phone Parser Nachbesserung für 7912: Subnetmask und Default Gateway passt nicht
+x* wkm: ATA Symbole für ATAs verwenden, wenn per http eingelesen; per CDP passt es
+x* wkm: ATA Modell Beschreibung wird nicht ausgelesen
+x* wkm: CDP Neighbor IP wird falsch in DB eingetragen
+x* wkm: IP Phone 7940 Parser liest die Modellbeschreibung falsch aus
+x* wkm: HostSchreiber vom Parser in den Combiner legen? -> JA
+x* wkm: Im Debug Mode die SQL Ausgaben beim Combiner zentralisieren
+x* wkm: L3 Ausgabe passt nicht mehr -> Jedes Interface wird doppelt an die Netze angebunden
+x-> beim zweiten Durchlauf, wenn die DB nicht gelöscht wurde
+x* wkm: Nach dem Einfügen der Endgeräte muss noch rControl aktualisiert werden
+x* wkm: HostSchreiber funktioniert beim zweiten Durchlauf nicht
+x* wkm: Visio Ausgabe prüfen, wenn mehrere Endgeräte auf einem Interface hängen (IP Phone Test -> Endgeräte hinter Access Point)
+x-> Sie werden richtig eingetragen (in die neighborship Tabelle nach dem Parsen)
+x-> anomalyCdp Step 1 löscht sie raus
+x-> Wenn der CDP Nachbar ein AccessPoint ist, dann die Endgeräte hinter den AP hängen (in der neighborship Tabelle) und nicht löschen
+x-> Dasselbe gilt auch für IP Phones
+x-> WLAN Interface bei APs notwendig, wenn sie per CDP gelernt wurden; Für Phones das Host Port hinzufügen (immer)
+x* wkm: Pfanner: Nachbarschaftsbeziehungen für Firewall in Lauterach passt nicht 
+x-> Immer dann wenn Endgeräte Ausgabe eingestellt ist
+x-> Zwischen Step 8 und 9 wird der fehlerhafte Eintrag nicht gelöscht. (genau da kommen die Endgeräte dazu)
+x-> HostSchreiber vor CDP Checks einfügen
+x* wkm: Überlegen, ob ein Interface immer nur einmal dargestellt werden soll
+x-> Jetzt wird in der Visio Ausgabe jedes Interface pro Nachbar einmal ausgegeben. Man könnte aber alle Nachbarschaftsinterfaces auf das selbe verbinden
+x-> Ist besser, wenn nur ein Interface angezeigt wird -> Die Duplikate entfernen
+x* wkm: Reports überarbeiten:
+x-> Device Report und Detailled Device Report zusammenfassen
+x-> STP Protokoll Check im neuen Report einfließen lassen
+x-> NEU: Switch Report (Für alle Geräte, die STP sprechen): Hostname|SNMP Location|Type|S/N|SW Version|bootfile|Bridge-ID|STP Protokoll|#STP Blocking Ports|#Ports with 1-100 Errors|#Ports with > 100 Errors|#Ports with STP Transition Count|Root für VLANS
+x* wkm: Report Reihenfolge überdenken und für jeden Report eine eigene Funktion bauen
+x* wke: Bei NX OS Geräten wird kein Command abgesetzt
+x* wke: Telnet Login bei NX OS Geräten funktioniert nicht
+x* wkm: In der Visio Ausgabe werden keine "&" als Text unterstützt
+x* wkm: Crash bei WLAN Phones
+x* wkm: Crash bei Konferenzspinne (7937G)
+x* wkm: Crash bei Bachmann CDP Checks
+x* wkm: Crash bei Bachmann bei wkmAusgabe -> L2 Cluster bauen -> Es wird nach einer ID gesucht, die es nicht gibt...
+x-> Problem: Wenn es ein Gerät und Interface mit der selben ID gibt, dann wird z.B.: das Interface gefunden, es ist aber ein Gerät (Zeile 366)
+x-> Start-ID für Interface-IDs sehr hoch festlegen
+x* wkm: CDP zeigt den den Phone Hotnamen hin und wieder in Lower Case; Der Parser schreibt ihn immer in Upper Case
+x* wkm: In CDP werden die ATAs als SEPxxx angezeigt; Der Parser erkennt sie als ataxxxx
+x* wkm: Problem, wenn cdp Neighbor Einträge auf den Phones leer sind -> Es wird dann ein falscher Wert eingetragen
+x* wkm: Manche cdp-gelernte Phones werden im Visio als Server angezeigt
+x-> Release 4.6.5 ENDE
+x* wke Dokument schreiben
+x* Links zu wkm und wke Dokumenten auf die wktools Startseite hinzufügen (htmlstrings.cpp)
+x* wkm: Nexus ARP Parser: Die Leerzeichen am Ende vom Interfacenamen löschen
+x* wkm: Nexus: CAM Parser: Eigene MAC Adressen ausnehmen, sodass keine Fehlermeldung ausgegeben wird (0042)
+x* wkm: Nexus: Crash bei file sytems Parser -> Bei Nexus ausnehmen, da keine relevanten Infos ausgegeben werden
+x* wkm: vPC Parser Probleme (0021) -> vPC id's werden für die Channels nicht in die DB eingetragen
+x* wkm: Root Bridge wird nicht immer angezeigt (Visio) 
+x-> Wenn nur für VLAN 1, dann nicht anzeigen!
+x* wkm: Wenn nur Vlan 1, dann doch anzeigen
+x* wkm: "&" aus snmp-location ersetzen
+x* wkm: Error Code 0010 bei MCI CDP
+x* wkm: Bei Parser Fehlermeldungen den SQL String mitausgeben
+x* wkm: Interfaces werden teilweise gelb markiert, obwohl es nur einen Link gibt (MCI v1)
+x-> Ganz am Ende noch einen Anomaly Check machen
+x* wkm: Wenn kein "Operational Mode:" gefunden wird, dann bei iosSwitchportParser das Interface ignorieren
+x* wkm: STP Blocking Status (Interface) wird nicht immer angezeigt (MCI v1)
+x* wkm: Wenn das letzte Interface beim iosSwitchport Parser down ist, dann wird es trotzdem durchsucht.
+x* wkm: "Virtual" Interfaces beim ARP Parser ignorieren
+x* wkm: Nexus: CAM Parser: "vPC Peer-Link" MAC Adressen behandeln (0042)
+x-> "vPC Peer-Link" erstellen und in der vpc Spalte auf die entsprechende vpc_id verweisen
+x-> vPC Parser vor dem CAM Parser an die Reihe nehmen
+x-> "vPC Peer-Link" gegen das entsprechende Po Interface tauschen
+x* wkm: Nexus Problem: HW Interfaces und Channel Interfaces sind durchmischt. 
+x-> Daher kann es vorkommen, dass die Channel Members noch nicht geparst wurden wenn das ChannelInterface an der Reihe ist und die Channel Members werden nicht gefunden
+x-> Mögliche Lösung: channel Interface Mamebers in string exportieren, für den Moment ignorieren und am Ende durchnehmen? -> Map mit Intf ID (int) vom Channel als Key und Members (string) als Datensatz
+x* wke: "Configuring devices ended with errors!" Fehlermeldung kommt, obwohl keine Fehler aufgetreten sind; Immer dann, wenn 2301 unterdrückt wird
+x* wke: Report am Ende passt nicht -> Nur Linux? -> Kann nicht nachgebaut werden
+x* wkm: nxOScdpParser passt nicht
+x- Hostname
+x- SW Version
+x* wkm: Probleme mit Nexus 5k
+x- CAM Parser
+x- vPC Parser
+x* wkm: CDP Parser Erweiterung: Wenn beim Hostnamen die S/N in Klammer angeführt wird, dann extrahieren
+x- Am besten am Ende wenn alle CDP Neighbors eingetragen werden
+x* wkm: "><" aus Descriptions und snmp Locations löschen
+x* wkm: NX OS: Channel Intf ID wird nicht in DB eingetragen
+x* wkm: CDP: Wenn Nexus 7k als Nachbar, dann die "cmp" Einträge ändern
+x-> cmp5 und cmp6 vom Hostnamen weg und zum Interface
+x-> Es steht jetzt überall cmp5
+x* wkm: Nexus 7k - VLAN Interface MAC Adressen werden nicht richtig geparst
+x* wkm: Cat4k ARP Parser prüfen
+x* wkm: NX OS Nachbarschaften prüfen
+x- Channel Nachbarschaften granularer finden -> vielleicht ist es besser als erstes die HW Nachbarschaften auszulesen und dann zusammenzufassen?
+x- vPC's werden gelb markiert
+x- vPC Nachbarschaften komplett analysieren -> Eigener Step?
+x* wkm: vPC Peer-Link ist keinem Gerät zugeordnet, sondern steht nur in der Intf Tabelle
+x* wkm: vpc Peer Link von den Nachbarschaften ausnehmen
+x* wkm: Nexus Probleme:
+x- Boot Image passt nicht
+x- Im Spar Plan werden verschiedene Produktbeschreibungen und S/Ns für die N7k angegeben
+x* wkm: Alle Interfaces erfassen? Auch inaktive? -> Ja
+x* wkm: Statistik erweitern: Verhältnis Anzahl Ports zu Anzahl aktive Ports
+x* wkm: Interface Auswertungen machen: Check ob inaktive Interfaces Channel members sind
+x* wkm: Die Mgmt Adresse bei CDP Nachbaren wird manchmal mehr als einmal angezeigt (Visio)
+x* wkm: Combiner Step 1 verfeinern: "phl=1" statt reinen L2 Interfaces (l2l3 LIKE 'L2') und zusätzlich nur aktive Interfaces (status=1) betrachten
+x* Scheduler: Mapper hinzufügen
+x* wkm Testumgebung bauen
+x-> eigener Host mit vordefinierten Profilen -> xMCI, xPfanner, xWalser Privatbank, xSpar, xSandoz, xBachmann, xLoacker, NTS, xRedBull, xRAS
+x* wkm: Manche CDP Nachbaren werden öfters in die Device Tabelle eingetragen -> Nexus 1010, bei denen mehrere verschiedene S/Ns angezeigt werden
+x-> Überlegen, wie CDP Nachbaren mit mehreren Interfaces, sprich mehreren CDP Neighbor Einträgen, am besten in die Device/Interface Tabelle geschrieben werden
+x* wkm: Die über cdp gelernten Nexus 1010 werden teilweise falsch in das Visio eingetragen
+x* wkm: mgmt Interfaces beim 7k werden nicht in den Plan eingezeichnet
+x* wkm: PIX Interface Parser funktioniert seit den letzten Änderungen nicht mehr (Intf Down Änderungen)
+x* wkm: FW Nachbarschaften bei RedBull passen nicht -> Prüfen auf Interfaces, die "UP" sind, da die falschen Nachbaren alle down sind.
+x-> Einen Anomaly Check einführen, bei dem alle Nachbarschaften mit Interfaces, die nicht UP sind, entfernt werden
+x* wkm: Anomaly Check: Intf l2l3 Check - wenn ein Interface öfters vorkommt, dann schauen, ob auf beiden Seiten l2l3 gleich ist. Wenn nicht für einen Eintrag, dann diesen Eintrag löschen
+x* wkm: Spar Probleme: Die Nexus Switches werden alle doppelt ausgegeben -> Nur bei zweitem Durchlauf
+x* wkm: Sandoz Probleme: Eine Nachbarschaft stimmt nicht
+x* wkm: 5505 ASA Problem -> IP address unassigned auswerten
+x* wkm: Debug Ausgabe für Release überlegen -> For Future Use Feld?
+x* wkm: Crash bei Gemeinde Rum AnyomalyCheck#5
+x* wkm: Gemeinde Rum Nachbarschaften fehlen teilweise
+x-> cdp Infos werden aufgrund vom zweimaligen "." falsch eingelesen
+x-> Zweiter Check, ob die Mgmt IP Adresse schon erfasst ist
+x* wkm: ASA: "show names" auswerten, oder xWarnung für "no names"?
+x* wke: Nexus1k Support Check
+x-> N1K: 172.24.89.252: admin/rfc1918!
+x-> Ist kompatibel
+x* wkm: "show intefrfaces switchport" in "show interface switchport" ändern, da sonst nicht kompatibel mit NX OS
+x* wkm: Nexus1k Parser
+x- ARP
+x- CAM
+x- STP -> MST Variante fehlt
+x* wmk: MST Variante fehlt beim iosSTPParser
+x* wkm: NX OS Switchport Parser
+x* wkm: Visio: IP Adress Ausgabe: Check, ob IP Adressfeld leer
+x* wkm: Crash bei UCS/nxosCamParser
+x* wkm: intfNameChanger: Vethernet in Veth ändern
+x* wkm: IOS Interface Parser Probleme: Wenn VLAN Interface down, dann wird es ignoriert und das nächste Interface ist 2x vermerkt.
+x- Passiert auch hin und wieder bei phyikalischen Interfaces. Bsp.: Vlan83 ung G0/23 beim NTS IBK Core Switch
+*x wkm: Anyomaly Check: Loop auf sich selber am selben Interface löschen
+x* wkm: Nexus 1k hängt in der Luft
+x-> Sollte eigentlich 3750---UCS---N1k---Server sein
+x* wkm: DB aufbohren (inklusive Parser Anpassungen): interfaces: 
+x- Bound Interface für Veth Zuordnung bei Nexus
+x- "Active on Module" Zuordnung bei Nexus1k
+x- Owner bei Nexus1k
+x- Port Profile bei Nexus1k
+x- PoE Status für Catalyst Switches (nur DB vorbereiten): Status; Watt; Watt Max; PoE Device
+x* wkm: Visio Ausgabe: Die neuen Nexus Infos in die Interfaceausgabe mitaufnehmen
+x* wkm: "Bound Interface is" bei Nexus1k und UCS FICs mitaufnehmen
+x* wkm: Veth Interfaces in allen Inferface Normailzern aufnehmen
+x* wkm: Neuer AnomlyCheck: alle Verbindungen mit Veth Interfaces den physikalischen Interfaces zuordnen (ähnlich dem Channel Check)
+x-> Vor dem Channel Check, damit etwaige Channels danach noch angewandt werden können
+x* wkm: Interfaces Status bei Nexus Switches besser erfassen: 
+x- DOWN: Administratively down, Link not connected, Bound Physical Interface Down, BoundIfDown, SFP not inserted, 
+x- UP: vfc857 is trunking, 
+x* wkm: ASA Duplex/Speed Parser nok -> Für Interfaces die Down sind
+x* wkm: Intf Report: Die Ausgabe passt für NX OS nicht; Check der Fehlercounter -> giants und iCRC Counter passen nicht
+x* wkm: MAC Adress Parser für Fibre Channel Interfaces anpassen, da keine MAC Adresse vorkommt
+x* wkm: Bridgeverbindung bei Stadt Bregenz wird nicht angezeigt
+x-> Beide Bridges werden als Nachbar von einem Switch erkannt (auf dem selben Interface)
+x-> cdp Info wäre verfügbar, ansonsten nichts
+x-> Zum Schluss noch alle CDP Nachbarschaften eintragen, für die es keine Nachbarschaften gibt
+x* wkm: Host Search Dialog: Die Nexus Switches fehlen in der Drop Down Liste
+x* wkm: Host Search Check: Zusätzliche Checks einführen: Ist das Interface Mitglied von ... und ist das andere Interface in einer Nachbarschaftsbeziehung?
+x- BoundTo
+x- Channel Member
+x* wkm: BoundTo Visio Ausgabe nicht ganz richtig
+* wkm: Warum werden die Endgeräte vom Nx1k nicht ausgegeben?
+*-1> Veth Interfaces nicht in der Suchroutine
+x-2> Die Veth Interfaces von den UCSen werden verwenet, obwohl sie bei der Nachbarschaft dabei sind
+x* wkm: Veth Interfaces beim Nexus1k aus der Switch Nachbarschaftssuche ausnehmen, 
+x- da dort immer die Endgeräte angeschlossen sind und die MAC vom Interface als Endgeräte MAC verwendet wird
+x- Selbiges gilt fürs UCS
+x-> Alle Veth Interfaces als phl=3 markieren
+x-> Einzige Möglichkeit cdp für Nachbarschaft UCS<->Nx1k?
+x* wkm: DB Doku nachziehen
+x* wkm: Nx1k Anbindungen prüfen -> Vor allem UCS-A<->Nx1k -> Da passt was mit den cdp Abfragen nicht
+x-> Problem: Wenn es mehr Nachbaren auf einem Interface gibt, wird cdp_cdp_id in der devInterface Tabelle immer überschrieben
+x-> Re-Design der DB -> eigene Link Tabelle zwischen "interfaces" und "cdp"
+x- Combiner anpassen
+x- wkmAusgabe
+x* wkm: Wenn MarkAnomaly Check 3 fehlt, dann löscht anomalyCdp die Nachbarschaften
+x-> cdp Check ganz am Ende machen, nachdem alles andere erledigt wurde
+x-> Nicht gut, denn dann sind die Hosts schon in der Nachbarschaftstabelle und APs, Phones usw werden nicht mehr richtig angezeigt und die Channel Zusammenfassung passt nicht mehr
+x-> Daher den anomalyCdp Check ändern/anpassen und neues Flag einführen (3)
+x* wkm: Anomaly Check für Nexus1k, damit er richtig verbunden wird
+x* wke: UCS Erkennung einbauen und dann automatisch auf den Nexus weiterspringen (connect nxos)
+x-> UCS: 172.24.89.230: admin/rfc1918!
+x-> Unterscheidung schwierig zwischen UCS und Nexus, da sich beide gleich melden; Einzige Möglichkeit wäre der Pre-Authentication Prompt, der aber von cryptlib nicht ausgegeben wird
+x-> Automatisch beim Mapper Template "connect nxos" mitschicken, wenn Gegenstelle NX OS
+x* wkm: Engeräte hinter IP Phones und APs werden parallel angezeigt, nicht dahinter
+x* wkm: err-disabled Interfaces in der DB entsprechend markieren
+x-> GigabitEthernet0/5 is down, line protocol is down (err-disabled)
+x* wkm: Interface Last Input auslesen und in DB schreiben
+x* wkm: Trim von den gesamten HW Infos vor dem Befüllen der DB
+x* wkm: Trim von Speed/Duplex bei IOS Interface Parser
+x* wkm: Intf Report: Die Anordnung der Spalten passt nicht -> Falsche Werte für manche Spalten -> csv Ausgabe und Textausgabe
+x* wkm: Host Search Check ausweiten: Interfaces, auf denen es Nachbarschaftsbeziehungen gibt, auslassen
+x!* wkm: cdp Parser überprüfen -> cdp_id teilweise nicht in devInterace auffindbar
+x* wkm: Config Register auslesen und ausgeben
+x* wkm: Test Walser: Loops am sw_w63_og_new -> OK -> Neu durch CDP Check
+x* wkm: Test MCI Auswertung passt nicht -> Hängt mit dem deaktivierten "MarkAnomaly Check 3" Check zusammen
+x* wkm: Test RAS - Auf dem ras-access-dtm Switch sind einige gelb markierte Interfaces ohne Nachbaren; ebenso bei Sandoz Switches; 
+x-> Schaut danach aus, als ob die STP Unknown Nachbaren falsch markiert sind
+x-> Hängt mit dem deaktivierten "MarkAnomaly Check 3" Check zusammen
+x* wkm: Test STW Kufstein: Anomaly zwischen ASRs und uBR
+x-> Hängt mit dem deaktivierten "MarkAnomaly Check 3" Check zusammen
+x* wkm: MarkAnomaly Check 3 löscht cdp Nachbaren raus
+x-> Check deaktivieren -> NEIN, aber verbessern; Wenn deaktiviert, dann gibt es Probleme bei z.B.: MCI, STW Kufstein, RAS
+x-> Check überarbeiten -> Nachbarschaftsbeziehungen mit Flag=3 (CDP) auslassen
+x- Als ersten Schritt alle NULL Flags auf 0 setzen, sonst gibt es Probleme mit der SQL Abfrage
+x* wke: Wenn connect nxos, dann ein zusätzliches "exit" dazugeben
+x* wkm: Aufgrund der Probleme mit MarkAnomaly Check 3 macht es vielleicht Sinn, die Nachbarschaftsbeziehungen umzuordnen, damit ein Interface immer auf der selben Seite steht.
+x* Probleme Bachmann:
+x- Bachmann: IP Phone hängt am falschen Port -> MarkAnomaly Check 3 löscht die richtige Verbindung raus:
+x-> Falsch: atfkvoice01-Gi0/0 <--> SEP0017949727F6-Port 1
+x-> Richtig: AT1C-V4-SW01-Fa4/0/4 <--> SEP0017949727F6-Port 1
+x-> Tritt für ersten und zweiten Durchlauf auf; 
+x-> Combiner Schritt 1 auf Switch<->Switch Nachbarschaften eingrenzen
+x-> Möglichkeit 1: 5 Query 1 auf L3 Interfaces begrenzen -> Nein
+x-> Möglichkeit 2: Check, warum Anomyly bleibt und gute Nachbarschaft gelöscht wird -> Lösen! -> OK; Lösung: MarkAnomaly Check 3 verbessern (siehe vorigen Punkt)
+x* Probleme Stadt Bregenz: Core Switch - Anomalie
+x-> Wenn es für eine Box eine Anomlie gibt, dann sofort prüfen, ob es eine MAC Adresse von der anderen Box in der ARP Table gibt und das Interface gegenchecken.
+x-> Änderung wieder rückgängig machen, da Probleme bei Pfanner
+x* wkm: 5 Query 1 umbauen, sodaass nur aktive Interfaces verwendet werden
+x* Gemeinde Rum: Beim dritten Durchlauf gibt es Probleme bei den Nachbarschaften -> Problem bei iosCDPSchreiber
+x* wkm: Beim zweiten Durchlauf werden manche CDP Nachbaren mit leerem Hostnamen in die device Tabelle geschrieben
+x* wkm: In die Device Tabelle wird immer der alternatenName geschrieben (CDP), und die Abfrage lautet dann auf den nName, somit werden keine CDP Nachbaren angezeigt
+x-> Immer den nName in die device Tabelle schreiben
+x* wkm: Problem Stadt Bregenz: PIX Nachbarschaften werden nicht mehr angezeigt -> Anomaly-CDP löscht sie raus
+x-> Beim zweiten Durchlauf (Anomaly-CDP) -> Das ist gut so, denn da fehlt ein Switch dazwischen
+x-> Warum werden sie beim ersten Durchlauf nicht rausgelöscht
+x-> Status ist jetzt, dass die FW Nachbarschaften immer drinnen bleiben (nach der CDP Schreiber Anpassung von vorher);
+x-> Jetzt muss noch geschaut werden, warum sie drinnenbleiben
+xxxxx RELEASE 4.6.7 ENDE (Nexus Support verfeinern) xxxxx
+x* wkm: CDP Check erweitern, sodass der AP Check noch schaut, ob es für den alternatenName einen Device Eintrag gibt (device Table). Wenn ja, dann die CDP Einträge anpassen
+x-> Tut er eh schon
+x* wkm: CDP Schreiber: Nicht alle nName werden durch alternatenName ersetzt, wenn es mehrere nNamen mit unterschiedlichen alternatenNamen gibt
+x* wkm: CleanUp DB funktioniert nicht -> Es wird alles gelöscht
+x* wkm: Cancel aktivieren
+x-> Danach muss ein DB Cleanup durchgeführt werden, damit wieder ein sauberer Ausgangszustand hergestellt wird
+x* wkm: Problem mit CleanUp DB: Beim zweiten Durchlauf wird die erste Zeile von rControl (0,0,0,0...) gelöscht.
+x* wkm: L2 Report erweitern: #Err-Disabled Ports; #Active Ports; #Nie benutzte Ports; #Total Ports; Legende
+x* wkm: "show power inline" (Status; Watt; Watt Max; PoE Device) und Port Type hinzufügen
+x- Mapper Conf, DB, Visio Ausgabe
+x- Parser
+x- Cat6k Parser
+x- Report: #PoE Ports im L2 Device Report 
+x* wkm: Loacker: Probleme mit NX OS CDP Parser beu UCS
+x-> mgmt3 Interface ist bei den cdp Nachbaren ersichtlich, aber nicht bei show interface...
+x-> Ist so
+x* wkm: Stadt Bregenz - DIFF zwischen ersten und zweiten Durchlauf
+x- A: SW-INFO03-Gi0/1 <--> sw-be1-Gi5/2 -> FALSCH
+x- B: sw-be1-Gi1/1 <--> SW-INFO03-Gi0/1 -> RICHTIG
+x-> Anomaly Check (Step 9) löscht bei B den Eintrag SW-INFO03-Gi0/1 <--> sw-be1-Gi5/2 raus -> OK
+x-> MARK-ANOMALY Global Query 3 löscht bei A den Eintrag SW-INFO03-Gi0/1 <--> sw-be1-Gi5/2 raus (zwei Schritte später) -> NOK; Warum löscht (Step 9) den Eintrag nicht raus?
+x* wkm: XL Switch STP Parser Problem: Interfaces werden nicht richtig ausgelesen
+x* wkm: STP Transition Count gibt es bei XL Switches nicht; Daher schlägt das INSERT bei stp_status fehl
+x* wke: Crash bei NTS Kunde VAK; Grund ist die Telnet Optionen Behandlung
+x* DB Version einführen, zum Erkennen, ob die DB gelöscht werden muss, oder nicht
+x- Wenn DB Version neuer, dann alle Tabellen löschen und neu initialisieren. Davor Warnung ausgeben
+x* DB Ver Check Zusatz: Warnung unterdrücken, wenn DB das erste Mal geschrieben wird -> Check ob es irgendeine Tabelle gibt. Wenn ja, dann Version auslesen und vergleichen
+x* wkm: Datenbank Anpassungen:
+x- Neue Tabelle: "vrf": Wird auf "interfaces" über "vrfLink" gehängt
+x- Neue DB Felder in der "device" Tabelle: poeStatus (poe ja/nein), poeVerbrauch (aktueller Verbrauch), poeMax (wie viel steht zur Verfügung)
+x* wkm: Check, wie viel Aufwand es wäre, die alte DB Tabellen als OLD+Versionsnummer abzuspeichern und zu behalten anstatt komplett zu löschen
+x-> Es ist möglich, einzelne Spalten hinzuzufügen: Bsp: ALTER TABLE device ADD COLUMN poeStatus TEXT
+x* wkm: Device PoE Infos befüllen und darstellen
+xxxxx RELEASE 4.6.8 ENDE (Letzte Nacharbeiten) xxxxx
+x* wkm: Interface Infos in L3 View hinzufügen
+x* wkm: L3 View: Keine Nachbarschaften für Shutdown Interfaces
+x* wkm: Parser Fehlermeldungen am Ende zusammenfassen (ähnlich Report bei wke)
+x* wkm: Combiner Abfragen - Debug Ausgabe vereinfachen, zusammenfassen und templatisieren
+x-> Type 3 noch verbessern
+x* wkm: Nexus5k CAM Parser: Einträge mit "Router" beim Interface ignorieren
+x* wkm: ASA 8.4 Parser passt nicht:
+x- Intf Duplex
+x- Intf Channel Members
+x* wkm: In der Debugausgabe vom Combinder fehlen die Nachbarschaftsbeziehungen nach jedem Schritt
+x* wkm: Channel Subinterfaces nicht bei Channel Members im Visio Output hinzufügen
+x* wkm: In der Visio Ausgabe bei den FW Interfaces den Namen dazuschreiben und bei der Box auch die Namen verwenden
+x* wkm: Fehlende Nachbarschaften bei MH Neu zwischen Nexus und Firewalls
+x- Problem: Po Subinterfaces wurden als phl=1 markiert, statt phl=0
+x* wke: Mapper Template erweitern: "show ip route vrf all", "show vrf all", "show ip vrf"
+x!* wke: Problem bei Nexus: Es wird ein "exit" zu viel gesendet, wenn das Mapper Profile verwendet wird (aufgrund vom UCS -> connect nxos)
+x!* wke: vm-spar Problem: Wenn irgendwo in den Sendedaten "ogin", "assword", "sername" vorkommt, und als letztes oder vorletztes Zeichen ":", dann wird auf loginBufTester zurückgestellt
+x-> Verfeinern der Abfrage; Möglichkeiten:
+x-1: Check von 2xZeichen vor "ogin", "assword", "sername"; Wenn kein \r\n oder Space, dann überspringen
+x-2: Check ob "ogin", "assword", "sername" direkt vor dem ":" vorkommt -> Soll auf alle Fälle gemacht werden, deckt aber nicht 100% der Fälle ab
+x?-3: Check ob Empfangsbuffer = MAX Empfangsbuffer ist (1024 Byte); Wenn ja, dann überspringen
+x-> Wird nicht gemacht, da zu schwammig
+x-4: rfind erweitern um ":" bzw ": "
+x* wkm: PoE Parser Daten Ende nicht richtig -> Nimmt vrf Infos teilweise mit
+x* wkm: PoE Parser Crash bei 3550 switches
+x* wkm: PoE Parser: Pfanner 3750,2960S Box-spezifisch funktioniert nicht
+x* wkm: show ip route | excl B |subnetted|Null0 (Offen: Parser für NXOS)
+x* wkm: Visio Symbole: Wolken einfügen
+x* wkm: Visio Ausgabe: Neue Farbe für VPN Tunnel überlegen (Grau) und Code vorbereiten
+x* wkm: DB wird gelöscht, wenn alle vier Checkboxen leer?
+x-> War wegen dem Crash während der Ausgabe, da die DB Version immer erst ganz am Schluss geschrieben wurde -> Wird jetzt gleich nach dem Combiner erledigt
+x* wkm: NX OS CAM Parser: Teile der Überschrift werden als Intf interpretiert: "Ports/SWID.SSID.LID": 10.143.255.11+12
+x* wkm: Admin Mode bei Nexus (show interfaces switchport) wird nicht richtig erkannt 
+x-> Admin Mode gibt es nicht beim Nexus
+x-> Wenn Admin Mode gleich NULL, dann keine Ausgabe beim Report
+x* wkm: PoE Parser für Stacks: Box PoE Info wird pro Modul ausgegeben -> auslesen und addieren
+x- Bsp: MH Switch 01: ATSZGMHSW01RB
+x* wke Multiline RegEx
+x- Wenn ein RegEx mehrere Ergebnisse zurückgibt, dann soll der Befehl für alle Ergebnisse ausgeführt werden
+x- Bsp: Alle Interfaces in VLAN 90 sollen auf VLAN 100 umgesetzt werden
+x- Command Block Eingabe
+x- !RGXBLOCK Tags einführen -> Regex kommt in der gleichen Zeile; In den folgenden Commands gibt es nur noch den Platzhalter [rgx], ohne [/rgx]
+x- Alles zwischen !RGXBLOCK Statements soll so lange ausgeführt werden, solange es Werte im RegEx Array gibt
+x- Doku anpassen
+x- Bsp. in HowTo Dokument
+xxxxx RELEASE 4.6.9.0 ENDE
+x* Multiline Regex so erweitern, dass Regex auch im !RGXBLOCK Block verwendet werden kann
+xxxxx RELEASE 4.6.9.1 ENDE
+x* wkm: iosPoeParser Crash bei 3750 (LWTSWCI018-20120906.txt) (12.2.35SE2)
+x* OGDF Version 2012.07 integrieren
+x- neue OGDF Version testen, ob Bugs behoben -> Leider nicht
+x* wkm: Endlosschleife bei Interfaceparser
+x* wkm: VSS Parser Probleme: Wenn Switch 2 aktiv, dann gibt es falsche Einträge
+x* sqlite in-memory und nach dem Durchlauf in DB File speichern
+xxxxx RELEASE 4.6.10.0 ENDE
+x* wkm: Option einbauen, um In-Memory abzuschalten
+x* wkm: Shapes für die Berechnung vergrößern, damit es zu weniger Überlappungen kommt
+x* wke: Check, warum RGXBLOCK so lange dauert -> Behoben
+x* wkm: Orthogonal Layout implementieren
+x* wkm: vPC Peer Link Verbindung fehlt in der Ausgabe -> Anomaly 3-Way Check haut sie raus
+x- Problem: "L2 - vPC Peer Link" Check fügt ungültige Nachbarschaften hinzu
+x-> VPC Domain ID muss auch erfasst werden - am besten beim Device
+x- Zusätzlicher Check bei "L2 - vPC Peer Link", dass vPC Nachbarschaften nur in der selben Domain zulässig sind
+x* wkm: L2 Device Report Änderungen/Verbesserungen:
+x- #STP Blocking Ports stimmt nicht -> Es wird die Summe der STP Blocking Vlans gemacht, nicht der Ports; Pro Port können mehrere Vlans auf blocking sein (Per VLAN STP!) -> Spalten Label geändert
+x- Zusätzliche Spalten für PoE Infos
+x* wkm: nxos ARP Parser anpassen -> vrf Output fehlt -> show ip arp vrf all -> schaut gleich aus wie "show ip arp" Output
+x* wkm: Bestimmte ASA Routen ignorieren (kommt nur auf der Standby ASA vor): 
+x- Schlecht:
+x  O E2 10.243.3.2 255.255.255.255 [110/10] via 10.143.35.178, 78:31:41
+x  O E1 10.144.96.0 255.255.255.0 [110/30] via 10.43.138.75, 321:27:35, wan
+x- Gut:
+x  S    10.243.173.128 255.255.255.192 [1/0] via 10.43.138.65, wan 
+x* wkm: Doku View im Visio: Interface Shapes verkleinern; Nur Bezeichnungen reinschreiben
+x* Dokumentation der Datenbankstruktur
+x* wkm: vrf Parser
+x- nxos
+x- ios (Bsp: FH Kärnten Router Villach)
+x* wkm: vrf Info in der Visio Ausgabe bei den L3 Interfaces hinzufügen 
+x* wkm: Label für Netzwerke ändern in "Subnet" statt "Hostname"
+x* wkm: Erweiterte Fehlermeldungen für DB Einfüge Fehler -> Jedes Mal prüfen, ob Einfügen erfolgreich war
+x* wkm: PoE Parser für Box funktioniert nicht richtig für SW_AP_H8_1 (Aquadome) -> Keine Box Angabe für PoE; Interface Angabe passt.
+x* wkm: 2600 APs werden nicht als AP angezeigt
+x* wke: grid Fix wieder einfügen (Damit bei Doppelklick auf die Spaltenbegrenzer die Spaltenbreite richtig angepasst wird)
+x* wke: Leerzeichen bei den Hostnamen löschen
+x* wke: WLC Erkenneung für Config Sicherung von WLCs
+x* wke: SSHv1 eliminieren und neuestes cryptlib verwenden
+x* wke: WLC Verbindung hat noch Probleme mit Zurückspringen bei MultiHop
+x* wke: openSSL eliminieren -> https per cryptlib realisieren
+x- Eliminieren
+x- Cryptlib HTTPS zum Leben erwecken
+x- Testen
+x* Unter Linux erstellen (wktools.nts.at)
+x- boost erneuern
+x- https testen
+x* wkm: Nexus Parser für MAC Adressen und BoundTo Interface passt nicht -> Reihenfolge ist falsch -> Description Parser gehört später
+x* wke: SSH Fallback deaktivieren
+x* wke: RC4 aktivieren, damit SSL auf PIXen funktioniert
+x* wke: 2411 Fehlermeldung anpassen (HTTPS+SSH anstatt nur SSH)
+x* wkm: DB und Parser Teile entkoppeln -> Der Parser selber sollte nichts mehr mit der DB zu tun haben
+x- Überlegungen: 
+x  - intfType, intfName und phl erst beim Interface Einfügen prüfen und in der Einfügefunktion verstecken? -> Nein
+x  - channel_intf_id als NULL einfügen (wie gehabt), aber nicht vom User spezifizierbar
+xxxxx RELEASE 4.7.0.1 (Bug Fixes und Design Anpassungen) - ENDE
+x* wkm: Lua: Alle .lua Files einlesen, die im wktools Verzeichnis sind
+x* wkm: Lua: Die eingelesenen .lua Files prüfen und einem Parser zuordnen
+x- Filename ist Parsername
+x- Im Datenfile (zu parsenden File) muss dann der Parsername angegeben sein
+x* wkm: eigene Klasse für die DB Operationen erstellen und alle relevanten Parser Funktionen dorthin auslagern
+x!* wkm: Check warum Pfanner Output falsch ist
+x* wkm: ATM Interfaces werden falsch eingelesen (Name wird falsch abgeschnitten)
+x* Nachbarschaftsbeziehung zwischen ATM und Ethernet Interface bei Pfanner -> ???
+xxxxx RELEASE 4.7.0.2 (Bug Fixes und Design Anpassungen) - ENDE
+x* Überlegen wie Import Schnittstelle für Non-Cisco Geräte ausschauen könnte -> Lua
+x* wkm: Nicht die komplette ARP Tabelle von der ASA wird eingelesen!
+x* wkm: Combiner: Dedizierte L2 Verbindungen - Änderung bei der SQL Abfrage; Details siehe Remarks im cpp File
+x* wkm: Phone IP fehlt im Visio Output
+x* wkm: Lua Integration
+x-> Thread im Cisco Forum -> Schauen welche Commands notwendig sind
+x- Gute Links: http://www.rasterbar.com/products/luabind/docs.html und http://blog.nuclex-games.com/tutorials/cxx/luabind-introduction/ und http://stackoverflow.com/questions/7483809/luabind-how-to-bind-specific-instance-of-class-to-lua
+x- Parser laden und ausführen, wenn im Datenfile spezifiziert
+x- Parser DB Operationen (Funktionen) für Lua zugänglich machen
+x- DB Objekt ist nicht vorhanden, wenn nur die einzelnen Einfüge-Funktionen aufgerufen werden!!!!
+x* wkm: rLink Tabelle: vrf_vrf_id Feld als NULL zulassen
+x* wkm: Secondary IP Adressen überlegen; "Connected" doch auslesen? -> Nein; Bei HP wurde es jetzt so gelöst, dass alle Secondary IPs in die Subnet Table eingetragen wurden
+x* wkm: Unknown STP Handling für Non-Cisco Geräte überlegen, da es z.B. bei HP kein Received BPDU Feld gibt 
+x-> Lösung für das Script: Nur Non-Edge Ports erfassen
+x* wkm: HostSchreiber anschauen -> viel zu viele Abfragen
+x* wkm: intfNameChanger für Vlan Interfaces
+x* wkm: Ibk UCS Check -> Topologie passt nicht ganz
+x- Neue Gerätetypen einführen für UCS und N1k
+x- Neue Gerätetypen entsprechend einbinden und ausgeben
+x- Anomalie Test für die neuen Gerätetypen bauen
+x- Anomalie Test für UCS<->N1k Nachbarschaften ausschalten (3-WAY Check)
+x* wkm: Endgeräte nicht erfassen, wenn bereits als CDP erkannt!
+x* wkm: Leichte Unschärfe bei N1k Nachbarschaften (mgmt Interface fehlt)
+x* wkm: Non-Switch L2 #2 hat N1k<->N1k Nachbarschaften gebracht
+x* wkm: Nach den letzten Änderungen (05.03. und 06.03.) werden die Telefon + PC Nachbarschaften gelb gezeigt; PCs sollten auch hinter den Phones hängen
+x* wkm: Vlan 9999 Handling für MST (Visio Ausgabe)
+x* wkm: NXOS Route Parser - intfNameChange beim Interface hinzufügen
+x* wkm: Lua Beispiel
+xxxxx RELEASE 4.7.5.0 ENDE (Scripting aktivieren)
+x* Alle Files im Binar Mode öffnen (| std::ios_base::binary), da sonst in der Ausgabe ein \r zu viel dazugehängt wird.
+x* wke: Wenn enable PW falsch, dann wird bei Multihop weitergesprungen -> Jetzt wird ein "exit" gesendet
+x* wkm: Cat6k 12.1 - CAM Parser anpassen
+x* wkm: MST STP Parser anpassen (IT Graz)
+x* wkm: STP Parser für MST -> ????
+x* wkm: NXOS ARP Parser umbauen (Tokenizer auf Trennzeichen, anstatt Spaltenbreite)
+x* wkm: MST Interface related funktioniert noch nicht
+x* wkm: Unbekannte Interfaces von Boxen aus CDP Nachbarschaften in die Interface Tabelle übernehmen
+x* wkm: CatOS CDP Parser
+x* wkm: MST NXOS anschauen
+x* wkm: CatOS CDP Nachbaren werden nicht richtig angezeigt, da im Format SERIAL(HOSTNAME) und im Normalfall sollte es umgekehrt sein. Jetzt wird nur noch der Hostname zurückgegeben...
+xxxxx RELEASE 4.7.5.2 ENDE (Bug Fixes)
+x* wke: Problem mit MultiHop auf IOS -> Bleibt hängen wenn zurückgesprungen
+x* wke: Crash bei ASA wenn enable PW fehlt
+x* wkm: Lua Doku fertigstellen
+x* wke: AdvancedRauteCheck für NXOS -> JA
+x* wkm: Probleme bei Kufgem
+x- STP#2 erstellt diese falschen Einträge: 15548P02-Po1 <--> 15548P01-Po5
+x* wkm: Wenn "Parse New" nicht angehakt, "Analyze New" aber schon, dann kommt ein Fehler, dass DB leer ist
+x-> Kann nicht mehr nachvollzogen werden; Wahrscheinlich DB wirklich leer
+x* wkm: Crash bei IOS vrf Parser
+x* wke: CLI als Protokoll einführen -> Zum Absetzen von Shell Commands
+xxxxx RELEASE 4.7.6.0 ENDE (Bug Fixes)
+x* wke: Multihop -> Bleibt hängen bei Pfanner
+x-> Problem, dass Config File im MAC Format war und daher die Linebreaks falsch waren und die komplette Config in einer Wurst erfasst wurde und nicht Command nach Command
+x* wkm: nxos Route Parser Problem wenn NH Interface nicht in der Routing Ausgabe -> Es wird jetzt geprüft, ob Interface ok. Wenn nicht, dann wird NH Interface ausgelesen
+x* wkm: ParserDB - neue Funktion eingeführt: getIntfNameFromID; Inklusive Doku
+x* wkm: Nexus7k cmp Interfaces in Interface Tabelle hinzufügen, dass sie auch in der Nachbarschaftsausgabe berücksichtigt werden
+x* wkm: Neue DB Tabellen für IPSec Tunnel: crypto, cryptolink
+x* wkm: Fehlererkennung bei ParserDB verbessern 
+x-> das "SELECT last_insert_rowid() FROM ..." ist nicht ausreichend 
+x-> Alles auf "if (dieDB->error != "not an error")" umstellen
+x* wkm: ParserDB Erweiterungen und Doku für IPSec
+x* wkm: PIX License Parser Probleme mit alten SW Releases behoben (Spaltenbreiten anders)
+x* wkm: l2Detail.csv Ausgabe - kleine Probleme behoben (Interface Anzahl mit Fehlern stimmte nicht; Überschrift bei Gesamt Anzahl Interfaces geändert)
+xxxxx RELEASE 4.7.6.1 ENDE (Bug Fixes)
+x* wkm: CDP Check - CDP gelernte Nachbaren wurden auf sich selber gemappt; Das ist jetzt behoben
+x* Jahreszahl in den wktools Seiten nachziehen
+x* wke: Zusätzliche Abfragen (URLs) bei Phones für ATAs
+x* wke: Crash bei ATAs wegen den cgi URLs; Behoben
+x* wkm: ATA Parser passt nicht 100%ig -> Hostname wird nicht ausgelesen
+x* wkm: Manchmal wird die STP Info (Block, Forward, usw VLANs nicht angezeigt) -> Parser Problem (Nexus 5k)
+x-> Ursache ist, dass nicht für alle Interfaces STP Info gesammelt wird
+x-> Alles sammeln, aber mit neuem DB Feld (Statistikzwecke)
+x- STP Checks prüfen, ob alles noch passt
+x* wkm: DB Doku updaten
+x* wkm: API Doku updaten
+x* wkm: Testumgebung wiederherstellen
+x* wkm: Parser Fehlermeldungen besser machen.
+x* wkm: Combiner Flowchart erstellen
+x* wkm: WAAS Lua Parser (Demo)
+x* wkm: Combiner Neudesign
+x- Mit Vertrauenswürdigkeitsfaktor in der neighborship Tabelle
+x° Priority Spalte in neighborship Tabelle einfügen
+x- Entkoppelte Checks
+x- CDP Gewichtung am höchsten und CDP Check am Anfang
+x- Checks einbauen mit Berücksichtigung der neighborship Priorität
+x- Abschließende Tests
+x* wkm: IP Adresse in der Visio Ausgabe beim Interface als eigene Zeile in den Shape Daten hinzufügen
+x* wkm: CDP Nachabren, wenn verfügbar, in der Visio Ausgabe beim Interface als eigene Zeile in den Shape Daten hinzufügen 
+x* wkm: Interface MAC Adresse in der Visio Ausgabe beim Interface als eigene Zeile in den Shape Daten hinzufügen
+x* wkm: Kufgem: UCS Interface Parser vergisst letztes Interface (E2/1/33) bei z.B.: UCS01-B-20130312.txt -> "show arp" war mitten in der Interface Ausgabe
+x* wkm: NTS-IBK: Bei 172.24.89.252-20130305.txt gibt es Probleme mit Channel-Zuordnung -> Betroffene Interfaces nicht in show Ausgabe -> UCS Bug?
+x* wkm: N1K Nachbarschaften nicht gelb markieren? -> OK, Ausnahme gebaut
+x* wkm: Loop auf sich selber überdenken, da unter Umständen vorkommen kann
+x-> Lösung: Prio sehr hoch setzen anstatt löschen -> OK
+x* wkm Combiner Probleme gelöst:
+x- Intf 1/0/10 fehlt am 10.143.254.5 -> Flüchtiger Fehler
+x- MH STP Neu: FW sieht sich als direkter Nachbar auf mehreren Interfaces
+x- Gemeinde Rum: Core Switch (MG-Rum.200-GA-Amt-links) wird 2x dargestellt
+x-> Kann nicht mehr nachvollzogen werden
+x- Stadt Bregenz: Link "sw-be1-Gi1/1 <--> SW-INFO03-Gi0/1" fehlt, bzw wird als "SW-INFO03-Gi0/1 <--> sw-be1-Gi5/2" falsch dargestellt
+x-> STP Check 2 und 3 deaktiviert, da Zufalls-Checks
+x- Sandoz passt nicht mehr
+x-> Priority Problem -> Dedicated L2 Switch auf Prio 3 geändert
+x- Pfanner: Link Rickertsen_3560G-Gi0/23 <--> PF_Hamb-CONSA-RPG-Eth1/0 fehlt
+x-> Rickertsen_3560G hängt jetzt in der Luft 
+x- RB AU: Einige Anomalien
+x- Switch lernt die ASA DEV MAC an dem Port wo eigentlich die PROD ASA hängt -> wktools macht das richtig
+x- MCI: ap4B-eg-raum0.01--id12607 und ap4B-eg-raum0.01--id12633 werden als eine Box gesehen
+x-> Übertag von cdp Tabelle auf device Tabelle fehlerhaft
+x- Gemeinde Rum: Mit Combiner2 gibt es 2x Unknown Interfaces bei der Anomalie
+x-> SOLL: MG-RUM.210 G0/1 <-> G1/0/19 und G1/0/2 MG-Rum.200-GA-Amt-links
+x-> IST: MG-RUM.210 UNKMWN <-> G1/0/19 und UNKNWN MG-Rum.200-GA-Amt-links
+x-> Problem: stpKonistenzCheck() -> dI_intf_id1 auf 0 setzen, wenn es bereits einen Eintrag auf einen anderen Host gibt und wenn der STP Status von dem Interface auf Blocking ist
+x* wke: show fex im Mapper Profil hinzugefügt
+x* wkm: Lösung überlegen für 2960S Stacks wegen Interface StackPort1 in STP Ausgabe.
+xxxxx RELEASE 4.7.7.2 ENDE (Neuer Combiner und Bug Fixes)
+x* wke: show failover für ASA Failover Status ins Mapper Template aufnehmen
+x* wkm: IOS XE Channel-Members richtig parsen
+x* wkm: Routen auf das Null Interface (Null0) ignorieren und keinen Fehler auswerfen
+x-> RedBull STL: D:\Projekte\Red Bull\stl neu\wktools\output\10.1.109.60-20140622.txt
+x-> Break bei der Null0 Schleife passt nicht?
+x* wkm: Check für grundsätzlich gültige Interfaces einführen, die aber nur Switch-intern (CAM, ARP, CDP) verwendet werden (mgmt3 bei Nexus z.B., oder BackplaneInterfaces)
+x* Upgrade auf Boost Version 1.56
+x* wke: Wenn der Banner nicht passt (Hostname wird falsch ausgelesen), dann wird die ganze Zeit "terminal lenght 0" geschickt -> sollte abgebrochen werden
+x-> termLenCounter einführen und bei Wert>3 die Verbindung abbrechen
+x* ASA F/O Status ausgeben
+x- Parser
+x- DB erweitern und dokumentieren
+x- ParserDB Funktion zum Aktualisieren und Doku
+x- Visio Ausgabe
+x* wkm: Null0 Check noch einmal prüfen, da bei RedBull STL nicht mehr ok
+x-> IP Adresse darf auch nicht Null0 sein
+x* wkm: vpc Parser Problem: SELECT intf_id FROM interfaces INNER JOIN devInterface ON (devInterface.interfaces_int_id=interfaces.intf_id) WHERE interfaces.intfName LIKE 'Applicable' AND devInterface.device_dev_id=202;
+xxxxx RELEASE 4.7.7.3 ENDE (Bug Fixes)
+x* wkm: Neuer Check in iosCDPSchreiber, dass vor Einfügen eines Interfaces geprüft wird, ob es das Interface schon gibt.
+x-> Es wird dadurch vermieden, dass Interfaces mehrfach in der DB stehen und Loops auf sich selbst bei CDP Nachbaren wegfallen
+x* Mapper L3 Vorbereitungen
+x- DB Erweiterungen
+x- Visio Shapes
+x- Verbinder Config Template anpassen
+x* DIP entfernen
+x* DIP Doku anpassen
+x* wke: IOS vrf Ausgabe für ARP und Routing Table mittels !RGXBLOCK testen und in Mapper Template am Ende einbauen
+x* wkm: Probleme mit IOS vrf Parser mit neuen SW Versionen, da Ausgabe Syntax leicht anders
+x* wkm: Virtual-Template und Virtual-Access Interfaces normalisieren
+x* wkm: Kombinierten Parser für IOS Routing Table und ARP Parser für IOS (pos99)
+x* wkm: Unnumbered IPs erkennen und in DB eintragen
+x* wkm: Tunnel Interface Zusatzinfos erheben? 
+x-> Tunnel Source und Destination
+x* wkm: wkmParserDB Funktionen zum Einfügen der Daten anlegen und dokumentieren: für OSPF und RP Neighbor
+x- Anlegen
+x- Doku
+x- Befüllen
+x* Mapper L3 OSPF Parser
+x- ASA
+x- IOS
+x- NXOS
+x* wkm: BGP AS ParserDB Funktionen und Doku
+x* wkm: insertRoute() erweitern, sodass NH und IP Check mitgemacht wird und unsigned long Werte ebenfalls in die DB eingetragen werden
+x* wkm: ParserDB: Neue Funktion für intf_id: Lookup in der Routing Tabelle für IP Adresse; Zurückgeliefert wird die intf_id vom Outbound Interface
+x* wkm: ParserDB Funktion, die den Interfacenamen für eine IP Adresse und eine dev_id zurückliefert
+x* wkm: IOS BGP Parser
+x- Parser
+x- "show ip bgp neighbors" zusätzlich auslesen
+x* wkm: iosRouteParser Probleme mit Type "% - next hop override"
+x* wkm: rp trimmen
+x* wkm: BGP Routen Next Hop Problem: Zeitangabe wird statt Next Hop angezeigt
+x-> AND interfaces.intfName LIKE '6d17h'
+x* wkm: iosInterfaceParser: Tunnel Interface Destination ist leer 
+x-> Wird von ipsecParser überschrieben, da dort leer; -> Check in insertCryptoIntf, ob schon befüllt. wenn ja, dann bestehenden Wert verwenden
+x* wkm: Doppelt verwedemdete Interfaces werden von wkmAusgabe als UNKNOWN ausgegeben
+x- L3RP
+x- L2
+x* wkm: Wenn L2 Ausgabe, dann gibt es bei L3RP Ausgabe einen GML Fehler
+x* wkm: L3 Intf Shape Daten nicht vollständig? -> Doch, es passt alles
+x* wkm: L3 Ausgabe: Drei falsche Default Felder bei Netze sind vorhanden
+x* wkm: Diff auf rpneighborship Tabelle ausgeben
+x* Mapper L3 OSPF Visio Ausgabe
+x- rpneighborship Tabelle bauen
+x- rpneighborship Tabelle befüllen
+x- GUI Optionen einbauen
+x- rpneighborship Tabelle ausgeben
+x- rpneighborship Tabelle in Visio ausgeben
+x- Visio Ausgabe anreichern
+x-> Linien zwischen den Interfaces strichlieren, wenn Nachbarschaft nicht up und in den Shape Daten vom Link den Nachbarschafts-Status vermerken
+x-> OSPF Area, OSPF Network Type, OSPF Cost, aktive Routing Protokolle bei Interfaces hinzufügen
+x-> BGP AS#, aktive Routing Protokolle bei Device hinzufügen
+x* wkm: Auf jedem Interface mit CDP Nachbaren wird auch ein Link auf sich selber eingetragen
+x* wkm: RP Neighbor Reports
+x- Report 1: Tabelle: Hostname, #OSPF Nachbaren, #BGP N, #EIGRP N, RIP aktiv, #OSPF Interfaces, #BGP I, #EIGRP I, #RIP I, BGP AS#
+x- Report 2: Tabelle mit allen Nachbarschaften und #State Changes, Uptime, State, Neighbor AS
+x- Report 3: Tabelle mit OSPF Details pro Host pro Prozess (Basis: ospf Tabelle)
+x* wkm Unnumbered IP Adressen Problem 2: "Luxemburg-Tu0 <--> DCR02-Lo0   (Flag: 0 // RP: OSPF)" UND "DCR02-Vi1 <--> Luxemburg-Tu0   (Flag: 0 // RP: OSPF)"
+x* wkm: Bei der ersten IP Adresse der Nexus ARP Tabelle wird die erste Stelle weggeschnitten
+x* wkm: Unbekannte Next Hops aus der Rotuing Tabelle in Device und Intf Tabellen eintragen und dann auch ausgeben
+x* wkm: IOS ARP Parser Fehler wenn Globale ARP Tabelle leer ist
+x* wkm: Mapper config Template passt nicht ganz für vrf ARP und Routing Tabelle, da keine Sonderzeichen berücksichtigt sind
+x* wkm: OSPF Interface Parser für IOS nicht vollständig
+x* wkm: IOS vrf Parser Problemchen mit Interface Erkennung
+x* wkm: l3rp Report: Anzahl der BGP Nachbaren stimmt nicht
+x* wkm: L2 Interface Report: Bei den Überschriften fehlt eine Spalte
+x* wkm: BGP Nachbaren vom RB werden nicht als Host in die DB eingetragen -> unknownRpNeighborSchreiber() einführen
+x* wkm: OSPF Process ID in der Visio Ausgabe beim Interface ausgeben
+x* wkm: RB Interfaces haben teilweise doppelte Nachbarschaften
+x- BSP: ATFSLDCSW82RB-Te4/1 <--> ATFSLDCSW42RB-Te9/4   (Flag: 3 // Priority: 1)
+x       ATFSLDCSW42RB-Te9/4 <--> ATFSLDCSW82RB-Te1/1   (Flag:  // Priority: 2)
+x* wkm: vpc Parser Problem mit der ersten Zeile ("----..." wird auch verwendet)
+x* wkm: Behobene Combiner Probleme:
+x- RedBull STL Neu Inkonsistenzen, vor allem mit CDP Nachbaren und ASAs
+x-> Anomalie: USSTLDCVP02RB G0/0 hängt auf USSTLDCFW01RB G0/0 und c4948-dc3d1-2 G1/47 (CDP)
+x-> Anomalie wird nicht markiert
+x* wkm: Unbekannte Next Hops werden in der L2 Nachbarschaftsausgabe nicht berücksichtigt
+x-> Grund ist, dass Interfaces als L3 und ohne intfType und phl in DB geschrieben werden
+x-> Mit neuer Ausgabe Option
+x!* wkm: Host Search funktioniert nicht mehr
+x* wkm: macSearch: Interface Description beim Ergebnis mit ausgeben
+x* wke: Neue Option, dass Datum bei Ausgabefiles nicht angehängt wird
+x* wkm: Interface Error Report: Speed/Duplex Settings in der Tabelle mit ausgeben
+x* wkm: Keine zusätze mehr beim Hostnamen, wenn doppelt geparst, sondern mit originalem Hostnamen einfügen
+x* wkm: FW F/O Status beim Hostnamen in der Visio Ausgabe dazuschreiben
+x* wkm: VisioAusgabe nicht anhand vom Hostnamen, sondern der Node-ID erstellen
+x* wkm: Interface Error Detail Report: cdp Nachbaren fehlen in der Ausgabe
+x* wkm: wkmParserDB::iosCDPSchreiber() überarbeiten
+x-> Check, ob Gerät bereits in device Table ist zu wenig; Es muss zugleich geprüft werden, ob Gerät mit IP Adresse schon bekannt ist
+x* wkm: Check aller string NOT IN SELECT Abfragen 
+x-> Wenn Rückgabe leer, dann kann es zu Problemen kommen 
+x-> Siehe WkmParserDB::unknownNextHopsSchreiber(): "SELECT DISTINCT nextHop FROM l3routes WHERE nextHop NOT IN (SELECT ipAddress FROM interfaces WHERE ipAddress NOT LIKE '')"
+x* wkm: Combiner: CDP Check überarbeiten, da bei unterschiedlichen Geräte mit gleichem Hostnamen falsche Nachbarschaften angezeigt werden
+x* Probleme Pfanner: AP hängt zwischen zwei Switches
+x- AP_5 EN_SRV1_3750 G1/0/19 <-> AP_5 <-> LA-HSLA1-2-3560G G0/17
+x-> Problem mit den doppelten Hostnamen. Diesmal unter CDP
+x- Müsste eigentlich als zwei verschiedene Geräte erkannt werden, da andere Neighbor IPs
+x- Tritt immer dann auf, wenn eines der beiden Geräte erfasst wird und das andere nur per CDP gelernt wird
+x-> Lösung: CDP Check Überarbeitung
+x* Generelle Designänderung für Parser Tools in wke (Überlegen)
+x-> Geräteabhängige Infos auslesen
+x- zuerst feststellen, um welches Gerät es sich handelt, dann die gerätespezifischen Infos auslesen
+x-> "show version" immer am Anfang auslesen
+x- dann Features feststellen, die aktiviert sind: IPSec, vPC, vrf, Routing Protokolle... und featureabhängig Infos auslesen
+x-> Wenn spezielle Commands benötigt werden, kann es per Regex Feature realisiert werden (siehe show ip route vrf...)
+x* wkm: Verwenden vom letzten OGDF Snapshot
+x* wkm Combiner: Crash CDP Check
+x* Abschließende Tests
+xxxxx RELEASE 4.8.0.0 ENDE (Mapper L3 Phase 1 - OSPF)
+x* Variable für Jahreszahl in den statischen Seiten einführen ((c) 2003-Variable)
+x* Mapper: HSRP Parser
+x- Parser
+x- PaserDB
+x- Lua und Doku
+x- DB Erweiterungen
+x* Mapper: MAC Search: csv Operation für Massensuche
+x* wkm: Test mit doppelt so großen Nodes, damit es weniger Überkappungen gibt
+x* wkm: Undokumentierte wkmParserDB Funktion "updateDeviceDataSource" hinzufügen
+x* wkm: Die direkten DB Inserts bei hostSchreiber aus wkmCombiner2 auf die parserDB Variante umbauen und im Fall notwendige Erweiterungen hinzufügen
+x* wkm: Undokumentierte wkmParserDB Funktion "unknownNetworkSchreiber" zum Einfügen von Netzwerken hinzufügen
+x* Mapper L3 Auswertung und Darstellung:
+x- Default Route -> Internet Wolke
+x- Alle unbekannten Next Hops erfassen -> Wenn Default Route auf unbekannten Hop, dann diesen Hop als "Default" Wolke; Alle Boxen mit Routen zu unbekannten Hops mit der "Default" Wolke verbinden
+x- Falls eine Route auf ein bekanntes Netz, aber unbekanntes DG zeigt, dann Wolke -> bekanntes Gerät -> Netz
+x?- Unbekannte Next Hops grau einzeichnen -> Nein
+x* wkm: Darstellung der Wolken-Verbindungen überarbeiten -> ist jetzt unglücklich
+x-> Wolken werden ohne Wolkeninterface und direkt auf den unbekannten NH verbunden
+x-> In Nachbarschaftstabelle wird bei beiden Interfaces "0" eingetragen
+x-> wkmAusgabe kümmert sich dann darum, dass die beiden Nodes ohne Interface miteinander verbunden werden
+x* wkm: Wenn schon in die Default Wolke verbunden, dann nicht noch zusätzlich in eine andere Wolke
+x* wkm: Netze in die Network Cloud reinschreiben, die in dieser liegen
+x?* wkm: Interface Farbe Grau (VPN) in Doku hinzufügen -> Es gibt doch keine grauen Interfaces
+x* wkm: DB Upgrade auf Version 9 mit zusätzlichen Crypto Table Feldern
+x* wkm: Lua Doku Update
+x* wkm: ipsec Parser (Crypto Map)
+x* wkm: ParserDB: updateSubInterfaces() umbauen, dass 2x intf_id und kein Name mehr
+x- Doku anpassen
+x* wkm: PIX: Wenn mehr als 1 OSPF Prozess, dann wird der zweite nicht mehr erfasst
+x* wkm: IPSec Tunnel zwischen Nodes einzeichnen
+x- Darstellung: Eigenes Crypto Interface pro Peer und die Edges andersfarbig und/oder Fett
+x- Interface erstellen und verlinken
+x- Lua Doku aktualisieren
+x- Unbekannte Peers als Hosts in DB eintragen
+x- Visio mit Crypto Infos anreichern
+x* Search IP in WkmEnd2End Klasse migrieren und in Host Search Dialog darauf verweisen
+x- Klasse erstellen und Funktionen übertragen
+x- Überlegen wie History eingebaut werden kann (String Vectoren?)
+x- Check, ob Search IP in der richtigen Reihenfolge gemacht wird (Stichwort History)
+x* wkm: MacSearch: History Datum angeben
+x* wkm: Cloud Intf und Device nicht in rControl
+x-> rControl Pflege passiert am Ende vom Parser und Wolken im Combiner
+x-> Update von rControl am Ende vom Combiner?
+x* wkm: RP Nachbarschaft beim zweiten Durchlauf nicht komplett
+x- Problem 1: Unknown RP Neighbors werden nicht in DB geschrieben
+x- Problem 2: Default NextHops werden nicht in DB geschrieben
+x-> Ursache: hsrp_id fehlt in rControl
+x- Problem 3: A: H-89.140.161.49-UNKNOWN <--> NetworkCloud-UNKNOWN ist neu dabei
+x* wkm: Beim zweiten Durchlauf werden alle Wolken (auch vom ersten Durchlauf) verbunden -> Hat wahrscheinlich auch mit dem Problem 3 zu tun...
+x* winver in stdwx.h auf 0x0601 erhöht, da es sonst Probleme mit Casablanca gibt
+x* Casablanca wieder entfernt
+x* wke: Mapper Config erweitert (802.1X Abfragen)
+x* Mapper: Warum werden Switchport Infos von DOWN Ports nicht in DB eingetragen?
+x-> Werden sie jetzt
+x* Mapper: Etherchannel Report erweitern, sodass "down (suspended member of bundle PoXXXX)" auch angezeigt wird
+x-> Problem: Wenn Port auf DOWN, dann wird es beim Po Interface nicht als Member angezeigt
+x-> Switchport Parser kümmert sich um das Problem, da es im L2 Mode angezeigt wird
+x* Mapper: Switchport Report zeigt jetzt alle DOWN Ports an
+x* Mapper: Manchmal steht in der CAM Table Drop bei Interface -> Wenn das vorkommt, den Eintrag ignorieren
+x* Mapper: 802.1X Infos auslesen und auswerten
+x- DB erweitern: Neue Tabelle dot1x hinzufügen
+x- Parser bauen
+x- ParserDB bauen (insertDot1xIntf und insertDot1xUser und insertDot1xDev) und dokumentieren
+x- DB Erweiterungen dokumentieren
+x- Alle Switchports in der DB auf MAB und DOT1X Status == "OFF" setzen, wenn MAB/DOT1X nicht aktiv
+x- Report bauen, der alle nicht 802.1X Ports auf 802.1X Switches anzeigt
+x- 802.1X Failed Authorization Report bauen
+x- 802.1X Übersicht in den L2Device Report einbauen (3 neue Spalten: status, #enabled ports, #missing ports)
+x- IP Adresse und VLAN in den 802.1X Report einbauen
+x* Mapper: Allowed VLANs parsen bei Nexus funktioniert nicht
+x* Koordinaten der Interfaces und Boxen in der DB speichern
+x- Für Organic Layout: L2, L3, L3R
+x- wkm erweitern
+x- Koordinaten in DB eintragen -> wkmVisioAusgabe
+x* DHCP Snooping Infos sammeln und auswerten
+x* IP Device Tracking Infos sammeln und auswerten
+x* wkm: ASR920 CAM Parser Probleme
+x* Cat6k CAM Parser Probleme bei 15.x SW Version
+x* Mapper Nexus9k Version 7.x Probleme:
+x- HSRP Parser
+x- vPC wird nicht korrekt angezeigt 
+x-> Es werden die CDP Nachbaren in die Device Tabelle eingetragen, obwohl sie ausgelesen wurden
+x-> Grund ist, dass der Interface Parser die IP Adressen aus den VLAN Interfaces nicht richtig ausliest
+x- OSPF Parser
+x- CDP Neighbor auf sich selber mit S/N in Klammer darf nicht als eigene Box erkannt werden -> hängt mit dem Interface IP Problem zusammen
+x- vrf Parser gibt einen Fehler beim Null0 Interface aus
+x* Mapper: Crash bei amtcs008.txt (DeviceTracking Parser)
+x* Mapper: Diverse IOS XE Probleme:
+x- Geräte-Type wird falsch ausgelesen
+x- 3850 PoE Parser passt nicht
+x* Mapper: IP Device Tracking und DHCP Snooping Lua Funktionen dokumentieren
+xxxxx RELEASE 4.9.0.0 ENDE (Mapper Enhancements)
+x* wke: !RGXCLEARMEM command zum Zurücksetzen vom rgxMem Speicher
+x* wke: !RGXCLEARMEM comamnd dokumentieren
+xxxxx RELEASE 4.9.0.2 ENDE (Mapper Enhancements)
+
+
+OFFEN:
+======
+
+* wke: !ENDIF und !ENDELSE einführen, damit !IFRETURN und !ELSERETURN mehrere Commands beinhalten kann
+x- Schauen, dass die "!" Commands nicht ausgegeben werden
+- Dokumentieren
+* wke: Neue SSH Lib -> libssh2
+
+* Probleme in 4.9.0.2:
+!- Crash bei L3 Neighborship
+!- cl32.dll aktualisieren
+
+Release 4.9.3.0
+* Mapper: dot1x Report: Noch eine Spalte mit Last-Input hinzufügen
+* sqlite3 Performance Tuning
+- Latest sqlite Version verwenden?
+* Mapper: Option, dass zur vorigen Version zusätzliche Files eingelesen werden können, ohne dass alle Files neu gelesen werden müssen
+* Mapper Dedizierte L2 Nachbarschaft Performance -> Check ob die neue Abfrage das gleich macht
+
+Release 4.9.5.0 (Mapper L3 Phase 2 - VPN und L3 Erweiterungen; End2End Analyse)
+* Per VLAN Ausgabe: Nur Nachbarschaften anzeigen, wo VLAN auch wirklich aktiv ist
+- GUI Option zum Aktivieren der Funktion einführen
+- Umsetzung
+* VLAN zu MST Zuordnung?
+* Review aller verwendeten Socket Libs
+- Boost Asio für http Client und Telnet
+- Cryptolib für https Client und SSHv2
+- Casablanca in V5
+-> Konsolidieren ????
+
+* wkm: End2end Analyse undokumentiert in den Search Host Dialog einbauen
+x- Vorbereitungen in Search Host Dialog treffen (Eingebfelder und Button mit zugehörigen Funktionsrümpfen)
+- Analyse bauen
+* wkm: Services hinzufügen 
+-> eigene Tabellen in DB zum Abbilden von z.B. Voice (IP Adressen der zentralen Services und TCP/UDP Ports)
+-> Auf diese Services kann dann geprüft werden, wie sie erreichbar sind und später, ob alle FWs im Pfad etwas blockieren
+
+* wkm: BGP Internet Uplink ohne Default Route trotzdem in die Default Cloud verbinden
+* Mapper L3 BGP Parser
+- ASA
+- NXOS
+
+
+Release 5.0 (ASA REST Integration und HTML5 UserInterface Phase 1)
+* Umbau wktools als Client/Server Anwendung
+-> HTML5/JavaScript fürs GUI und JSON für die Kommunikation
+* Version 5.0 Vorbereitung:
+- 4.8.1.0
+* PLAN: End-to-End View für eine Session -> User kann Source/Destination IP/Ports eingeben
+- wktools schaut im Routing auf den Pfad und verbindet sich auf die ASAs im Pfad und schaut per packet-tracer, ob die Verbindung erlaubt ist
+- Der Pfad wird dargestellt und ob die Session funktioniert, oder zeigt an, wo und warum blockiert wird
+- pxGrid Kopplung mit ISE?
+* wkm: Doku Tool Erweiterungen
+- Nodes gruppieren (nach Hostnamen, damit alle Switches für ein Gebäude immer zusammengefasst werden)
+- Gruppierungen besser abstimmen -> in Blöcke zusammenfassen (Gebäude, Standorte)
+* Kommunikation über JSON: http://www.drdobbs.com/windows/json-and-the-microsoft-c-rest-sdk/240164821?pgno=1
+
+* ASA Zugriff per REST API 
+- wktools ruft Python Script auf -> Das Script macht den REST Call und verarbeitet das Ergebnis und liefert ein Ergebnis (String-Set) zurück
+- REST Calls mit Lua statt Python?
+?* Python Integration: http://realmike.org/blog/2012/07/08/embedding-python-tutorial-part-1/
+?* Lua REST Calls: http://www.kinvey.com/blog/98/resting-anywhere-using-kinveys-api-with-the-lua-programming-language
+
+
+Mapper wichtige Erweiterungen
+* Mapper L3 EIGRP Parser
+- ASA
+- IOS
+- NXOS
+* wkm: Option, ob CrpytoMap Nachbarschaften angezeigt werden sollen
+* wkm: Wenn lokaler und bekannter IPSec Peer Verbindung in eine Wolke hat, dann den Remote Peer (unbekannt) auch mit der Wolke verbinden?
+* wkm: Wolken in Visio Doku hinzufügen
+?* Mapper L3 - Neue Option, dass nur Router in der Visio L3 Ausgabe angezeigt werden
+?* Mapper L3 - Neue Visio Ausgabe, in der nur Router mit Verbindungsnetzen angezeigt werden
+?* wkm: Hinter unbekannten Next Hops Wolken für die nirgends angrenzenden Netze zeichnen; Aufpassen auf Summary Routen!
+
+Mapper andere Erweiterungen
+* wkm: show ip route Lua Parser Probleme mit Next-Hop Interface Vlan1
+* wkm: Überlegen, wie Ausgabe für StackPort STP Infos gemacht werden soll...
+-> Eigener Report am besten.
+* wkm: Zusätzliche Infos sammeln und auswerten:
+- User Suche basierend auf 802.1X Infos
+- SGT/SXP Mappings
+- QoS Counters
+* Mapper zusätzliche Infos...
+- Show controller -> Nein
+- Show ip traffic -> Vielleicht
+- Show ip interface -> Nein
+* wkm: Endgeräteausgabe -> Wie mit über CDP gelernte Switches umgehen?
+x-> Wird ignoriert, da schwierig zum Umsetzen; Problem: Es werden keine Interfaces betrachtet, auf denen CDP gesprochen wird
+-> Noch einmal überlegen! Interessant für VM Ware Switch um zu sehen, was am N1k hängt und was nicht.
+* wkm: IOS XR Support
+
+Bekannte offene Minor Bugs:
+* wkm Unnumbered IP Adressen Problem 1: "DCR02-Tu999 <--> DCR01-Lo0   (Flag: 0 // RP: OSPF)" --> Signa DC Router
+* wkm: macSearch: VendorDB Update funktioniert nicht.
+- HTTP Client mit Casablanca?
+?* wkm: Pfanner: Link ENNS_2811_TELEKOM-Fa0/0 <--> PFANNER_2921-Gi0/1 fehlt
+-> Non-Switch L2 Problem; Die Interfaces auf beiden Seiten haben unterschiedliche Geschwindigkeiten
+-> Keine CDP Info verfügbar
+-> Überlegen, wie verbessert werden kann -> Geschwindigkeit ignorieren und Prio sehr hoch setzen?
+* Mapper: Crash bei RAS L2 View Hierarchic UND Crash bei MH L2 Hierarchic
+-> OGDF Bug (auch 2012.07, Letzter Snapshot 2014)
+-> Crash von OGDF probieren abzufangen
+-> Orthogonal und Hierarchic ist derzeit deaktiviert
+
+
+
+Andere Erweiterungen:
+* wke: Protokoll "detect" Option einführen
+-> Für SSH schon erledigt
+* wke: CommandSend Debug einführen -> Was habe ich mir dabei gedacht?
+* wke: Bei Fehlermeldung soll nur ENTER geschickt werden, wenn # am Schluss
+* wke: Parallel
+* wke: Telnet streambuf Umwandlung gleich wie bei http/s?
+* wke: dyn User/PW in Hostfile
+* wke: Wenn DevGroup aktiviert, dann Popup für User, wenn er ausgegraute Optionen anklickt -> Mit Hinweis, dass davor DevGroup deaktivert werden muss
+* wke: Proxy für https einführen
+- Connect zum Proxy, dann das GET schicken: http://stackoverflow.com/questions/7155529/how-does-http-proxy-work
+* wke: NICHTSaendertBufTest: Prozedur überdenken und dokumentieren; Es gibt immer wieder Probleme damit
+
+* IPv6 Support (wke und wkm)
+
+* wkl: Fortschritt bei Portscan Tool
+-> Schwierig
+* wkl: Scanner Port Option?
+* Wizard: Option, ob IP Phones oder andere Geräte, damit man die Wertigkeit beim scannen umdrehen kann
+* Abbruch/Kill Funktion funktioniert nicht richtig -> Tut trotzdem weiter
+
+* Linux Scheduler
+- mit Cron Jobs arbeiten
+- Linux: Cron Jobs löschen
+
+* Überlegen, ob cryptlib gegen libssh tauschen?
+-> http://www.libssh.org/
+
+
+Verworfen und/oder verschoben:
+==============================
+x?* wkm Combiner Probleme offen:
+x- Pfanner: Rickertsen_3560G ist jetzt 2x angebunden; bzw fehlt nach dem letzten Durchlauf ganz
+x-> Den gibt es nicht mehr in den Output-Files
+x* wke: Drop Down Menü in DeviceGrp Ansicht für Protokolle
+x-> Kein Drop down, sondern die Eingabe nicht mehr Case sensitive machen
+x-> Obsolet, da neues GUI
+x* wke: DevGroup Ansicht: Spalten sortieren
+x-> http://stackoverflow.com/questions/236172/how-do-i-sort-a-stdvector-by-the-values-of-a-different-stdvector
+x-> http://docs.wxwidgets.org/trunk/classwx_grid.html
+x-> Nein, da Umbau in HTML5
+x* HTTPS Authentication für Linux benötigt boost Upgrade?
+x-> Nein, schaut nach OpenSSL Problem aus
+x-> Egal, da kein OpenSSL mehr in Verwendung
+x?!* wke: Bei falschem login (10.43.204.1) werden trotzdem Daten gesendet
+x?-> kann nicht mehr nachgestellt werden
+x* Tooltips erweitern
+x-> Nein
+x* Schriftart für Linux einstellen, da Lucida Console offensichtlich nicht verfügbar ist -> hilft nichts. Suche und Frage im Forum..
+x-> Egal, da HTML5 in Zukunft
+x* Splitterpos wird beim Beenden nicht richtig ausgelesen -> wxWidgets Bug?
+x-> Egal, da HTML5 in Zukunft
+x* Überlegen, ob boost::asio gegen POCO tauschen?
+x-> http://pocoproject.org/index.html
+x-> Nein
+x* Neue html Anzeige organisieren - wxHtmlWindow ist nicht gut genug
+x- wxWebConnect: http://www.kirix.com/labs/wxwebconnect.html am wahrscheinlichsten
+x- http://wxwebkit.wxcommunity.com/pmwiki/index.php?n=Main.HomePage
+x- wxIEHtmlWindow, wxMozilla and wxWebKitCtrl
+x- http://www.kirix.com/labs/wxwebconnect.html
+x -> Nein, da kompletter Umbau in HTML5 GUI
+x* wkm: show fex?; FEX Probleme
+x-> RedBull STL: D:\Projekte\Red Bull\stl neu\wktools\output\10.1.109.60-20140622.txt
+x-> Nein
+x?* wke: DevGroup in Datenbank abbilden -> Nein
+x?* wkm: Parser: Nexus: Bei allen Fehlern zu Interface mgmtX den Fehler unterdrücken, da die Interfaces intern verwendet werden, aber unter show interface nicht sichtbar sind
+x-> Nein!
+x?* Mapper: Diff Report für MAC Adressen
+x-> Nein
+?* Mapper: CDP geht immer auf HW Interface; Wenn es einen Channel gibt, dann wird das nicht kombiniert
+?-> problematisch, denn das Po Interface beim CDP Neighbor ist nicht bekannt
+?* wke: In manchen Fällen gibt es einen Absturz bei fehlerhaftem IP File (Bsp.: Segmentierung mit So, BO usw) -> kann nicht mehr nachvollzogen werden
+x?* SCP Client in General Settings 
+x-> Nein
+x?* Settings von einem Remote Host laden und wieder zurückspielen (mit SCP) inkl. Lock, damit nicht doppelt geschrieben werden kann
+x-> Nein
+x?* Wichtige Meldungen per Syslog verschicken?
+x-> Nein
+?* wke: Passwörter in devGroup File verschlüsseln?
+?* DeviceGroup: Drag&Drop Funktion implementieren
+?* Configure Devices: Config File Preview
+?* wke: DeviceGroup: Neuer Button, um nur die Fehler im Logfenster anzuzeigen
+?* Scheduler: Wenn Links Click auf eine Zelle, dann die gesamte Zeile markieren (außer Spalte mit Checkboxen)
+?-> Hat den Nachteil, dass dann die Zellen nicht mehr editierbar sind
+?* Scheduler: Drag and Drop? -> zu aufwändig; Vielleicht später, wenn die Funktion mal integriert ist
+x* wke: Wenn etwas im DeviceGroupFile Feld steht, dann wird dieses File verwendet, auch wenn neues Profil angelegt wird
+x-> Works as designed
+x?* Mapper: VLANs auf Link als Edge Label anzeigen?
+x-> Wird wahrscheinlich zu unübersichtlich
+?* wke: SSHv1 Workaround dokumentieren
+?-> Nicht mehr notwendig, da SSHv1 wieder unterstützt
+?* CLI Command für DevGroup File generieren für ein bestimmtes Profil
+?* wke: OpenSSH statt cryptlib?
+?-> Nein, da Workaround mit cryptlib und OpenSSL
+?x* Mapper: Zusatzdaten darstellen -> JA, mit Shape Data
+x-> Tabelle?
+x-> eigene Seite?
+x-> Layers?
+x-> Comments mit IP Adressen und VLAN Infos?
+x-> Tooltips für Shapes? 
+x-> http://www.eggheadcafe.com/software/aspnet/30017979/creating-popup-text-for-a-shape.aspx
+x-> http://blogs.msdn.com/b/visio/archive/2006/07/04/655569.aspx* Mapper: Connector Problem beheben
+x* dip: CSC Parser -> Nein
+
+
+
+Tipps und Tricks:
+=================
+* Microsoft Visual C++ 2005 SP1 Redistributable Package (x86)
+-> http://www.microsoft.com/downloads/details.aspx?FamilyID=200b2fd9-ae1a-4a14-984d-389c36f85647&DisplayLang=en
+
+
+Design und Allgemeines:
+=======================
+* Neue Linux Umgebung mit aktuellen Libs und kdevelop -> Fedora mit kdevelop 3.5
+-> kdevelop 4 nicht brauchbar
+-> Ubuntu mit der neuen Oberfläche nicht brauchbar
+-> CentOS bietet in der aktuellen Version kein kdevelop
+
+* Weitere Dokumente:
+- Advanced wke: Beispiele mit regex und checks
+- Advanced wkn: Beispiel mit variablen Inhalt und Scheduler
+
+
+
+!!!!! ACHTUNG !!!!!
+* Bei wxWidgets Upgrade den Patch für wxGrid einbauen 
+-> Doppelklick auf Spaltenbegrenzer soll die Spalte auf die maximale Breite setzen, und nicht auf die Headerbreite
+-> http://trac.wxwidgets.org/ticket/11371

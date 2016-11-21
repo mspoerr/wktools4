@@ -1,0 +1,5 @@
+Limitierungen:
+* Punkte in hostnamen
+* Nexus 1000V nur per CDP
+* names bei ASA/PIX
+* Gleiche Hostnamen für verschiedene Boxen

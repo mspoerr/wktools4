@@ -1,0 +1,29 @@
+1. am srvcolt01
+neue version in passenden ordner am srvcolt01 zu kopieren:
+mkdir /usr/share/nts/wktools/binaries/wktools4410
+scp nts@172.21.40.64:/home/nts/wktools4/src/wktools4 /usr/share/nts/wktools/binaries/wktools4410
+
+2. wktools auf den vm kopieren
+scp /usr/share/nts/wktools/binaries/wktools4607/wktools4 vm-spar:/opt/nts/wktools
+
+3. schauen ob die zieverzeichnisse leer sind:
+ls -l /tmp/wktools/configs /tmp/wktools/syslog /tmp/wktools/counters /tmp/wktools/hardware
+
+falls nicht leeren:
+rm /tmp/wktools/hardware/* /tmp/wktools/counters/* /tmp/wktools/syslog/* /tmp/wktools/configs/*
+
+
+4. wktools checken & ausführen 
+
+cd /opt/nts/wktools
+/usr/bin/Xvfb :1 >/dev/null 2>&1 &
+export DISPLAY=:1
+./wktools4 -v   
+(version prüfen dass sicher noch nicht durch rsynch überschrieben wurde – wird 1x pro h automatisch gemacht)
+
+/opt/nts/wktools/wktools4 -s -S -t=cfg -p=vm-redbull
+
+5. log kontrollieren 
+tail –n 1000 /tmp/wktools/log.txt
+
+

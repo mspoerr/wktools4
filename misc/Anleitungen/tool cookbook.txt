@@ -1,0 +1,30 @@
+Tool Cookook:
+1) PropertyGrid klonen
+2) PropertyGrid in wktools4Frame.h hinzufügen
+3) PropertyGrid in wktools4Frame.cpp hinzufügen
+	- Destruktor
+	- CreateGuiControls
+	- OnToolLeftClick
+	- OnNewSettingsFont
+	- OnHighlight
+	- OnClose
+	- Create
+4) Events anlegen
+	- dann noch folgende wktools4Frame.cpp Funktionen bearbeiten: ToolEnableDisable
+5) Tool Ctrl anlegen bzw klonen
+6) Fehlermeldungen erfassen (Doku)
+7) Tool Ctrl in wktools4.h einbinden
+8) Tool Ctrl in wktools4.cpp einbinden
+	- Destruktor
+	- OnInit
+	- toolSets
+	- toolSetsGui
+	- doSwapXml
+9) Tool Ctrl in wktools4Frame.h hinzufügen
+10) Tool Ctrl in wktools4Frame.cpp hinzufügen
+	- CreateGuiControls
+	- OnToolLeftClick
+	- OnToolProfLoadSave
+	- OnToolStartStop
+11) Tool migrieren
+12) Tool in Tool Ctrl einbinden

@@ -1,0 +1,1382 @@
+SELECT DISTINCT interfaces_int_id FROM devInterface
+INNER JOIN interfaces ON devInterface.interfaces_int_id=interfaces.intf_id
+INNER JOIN int_vlan ON int_vlan.interfaces_intf_id=interfaces.intf_id
+INNER JOIN stp_status ON stp_status.stp_status_id=int_vlan.stp_status_stp_status_id
+WHERE devInterface.device_dev_id=4 AND interfaces.macAddress NOT IN (SELECT designatedBridgeID FROM stp_status)
+
+
+
+
+INNER JOIN int_vlan ON int_vlan.interfaces_intf_id=interfaces.intf_id
+INNER JOIN stp_status ON stp_status.stp_status_id=int_vlan.stp_status_stp_status_id
+
+
+SELECT DISTINCT stp_status_id FROM stp_status
+INNER JOIN interfaces ON devInterface.interfaces_int_id=interfaces.intf_id
+INNER JOIN int_vlan ON int_vlan.interfaces_intf_id=interfaces.intf_id
+INNER JOIN devInterface ON interfaces.intf_id=devInterface.interfaces_int_id
+WHERE devInterface.device_dev_id=24
+
+
+
+SELECT DISTINCT intf_id FROM interfaces
+INNER JOIN devInterface ON devInterface.interfaces_int_id=interfaces.intf_id
+INNER JOIN nlink ON nlink.interfaces_intf_id=interfaces.intf_id
+INNER JOIN neighbor ON neighbor.neighbor_id=nlink.neighbor_neighbor_id
+WHERE devInterface.device_dev_id = 28 AND neighbor.l2_addr IN (
+SELECT macAddress FROM interfaces
+INNER JOIN devInterface ON devInterface.interfaces_int_id=interfaces.intf_id
+WHERE devInterface.device_dev_id = 24)
+
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+1) ALLE interface IDs von einer Box abfragen, bei denen die Designated Bridge ID nicht gleich einer eigenen MAC Adresse ist
+
+SELECT DISTINCT intf_id,intfType FROM interfaces 
+INNER JOIN devInterface ON interfaces.intf_id=devInterface.interfaces_int_id
+INNER JOIN int_vlan ON int_vlan.interfaces_intf_id=interfaces.intf_id
+WHERE devInterface.device_dev_id=71 
+AND stp_status_stp_status_id IN (
+SELECT DISTINCT stp_status_stp_status_id FROM int_vlan
+INNER JOIN interfaces ON interfaces.intf_id=int_vlan.interfaces_intf_id
+INNER JOIN devInterface ON devInterface.interfaces_int_id=interfaces_intf_id
+INNER JOIN stp_status ON stp_status.stp_status_id=int_vlan.stp_status_stp_status_id
+WHERE devInterface.device_dev_id=71 
+AND stp_status.designatedBridgeID NOT IN (
+SELECT macAddress FROM interfaces
+INNER JOIN devInterface ON devInterface.interfaces_int_id=interfaces.intf_id
+WHERE devInterface.device_dev_id=71))
+
+-> 123,192
+
+...................
+
+2) Device ID der Designated Bridge IDs von 1) rausfinden
+
+SELECT DISTINCT device_dev_id FROM devInterface
+INNER JOIN interfaces ON interfaces.intf_id=devInterface.interfaces_int_id
+WHERE interfaces.macAddress IN (
+SELECT DISTINCT designatedBridgeID FROM stp_status
+INNER JOIN int_vlan ON stp_status.stp_status_id=int_vlan.stp_status_stp_status_id
+WHERE int_vlan.interfaces_intf_id=123 AND stp_status.designatedBridgeID NOT IN (
+SELECT macAddress FROM interfaces
+INNER JOIN devInterface ON interfaces.intf_id=devInterface.interfaces_int_id
+WHERE devInterface.device_dev_id =4))
+
+-> 8
+
+.................
+
+3) Schauen, ob MAC Adressen von der Ausgangsbox irgendwo auf einem L2 Interface auf der Box von 2) gelernt werden
+
+SELECT DISTINCT intf_id,intfType FROM interfaces
+INNER JOIN nlink ON nlink.interfaces_intf_id=interfaces.intf_id
+INNER JOIN devInterface ON devInterface.interfaces_int_id=interfaces.intf_id
+INNER JOIN neighbor ON nlink.neighbor_neighbor_id=neighbor.neighbor_id
+WHERE devInterface.device_dev_id=8 AND neighbor.l2_addr IN (
+SELECT DISTINCT macAddress FROM interfaces
+INNER JOIN devInterface ON devInterface.interfaces_int_id=interfaces.intf_id
+WHERE devInterface.device_dev_id=4) AND neighbor.l3_addr IS NULL
+
+-> 387
+
+..................
+
+
+
+
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------
+		// Die MAC Adressen und zughörige Interface ID für ein Gerät auslesen, die sowohl in der interfaces, als auch in der neighbor Tabelle vorkommen 
+		sString = "SELECT DISTINCT macAddress,intf_id FROM interfaces ";
+		sString += "INNER JOIN devInterface ON devInterface.interfaces_int_id=interfaces.intf_id ";
+		sString += "WHERE devInterface.device_dev_id=" + it->at(0) + " AND macAddress IN (SELECT l2_addr FROM neighbor) ";
+		sString += "AND interfaces.l2l3 LIKE 'L2';";
+
+		vector<vector<string>> macIntf = dieDB->query(sString.c_str());
+		for(vector<vector<string>>::iterator it2 = macIntf.begin(); it2 < macIntf.end(); ++it2)
+		{
+			// Device_ID, Interface_ID und MAC Adresse rausfinden von dem Gerät, das eine der MAC Adressen in der CAM oder ARP Table hat
+			sString = "SELECT DISTINCT device_dev_id,interfaces_int_id, interfaces.macAddress FROM devInterface  ";
+			sString += "INNER JOIN interfaces ON interfaces.intf_id = devInterface.interfaces_int_id ";
+			sString += "INNER JOIN nlink ON nlink.interfaces_intf_id = interfaces.intf_id ";
+			sString += "INNER JOIN neighbor ON neighbor.neighbor_id = nlink.neighbor_neighbor_id ";
+			sString += "WHERE l2_addr LIKE '" + it2->at(0) + "' AND devInterface.device_dev_id <>" + it->at(0) + ";";
+			
+			vector<vector<string>> intfID = dieDB->query(sString.c_str());
+			for(vector<vector<string>>::iterator it3 = intfID.begin(); it3 < intfID.end(); ++it3)
+			{
+//				sString = "INSERT INTO neighborship (interfaces_intf_id,interfaces_intf_id1) VALUES (";
+//				sString += 
+				sString = "SELECT DISTINCT intf_id FROM interfaces ";
+				sString += "INNER JOIN devInterface ON interfaces.intf_id = devInterface.interfaces_int_id ";
+				sString += "INNER JOIN nlink ON nlink.interfaces_intf_id = interfaces.intf_id ";
+				sString += "INNER JOIN neighbor ON neighbor.neighbor_id = nlink.neighbor_neighbor_id ";
+				sString += "WHERE neighbor.l2_addr LIKE '" + it3->at(2) + "' AND devInterface.device_dev_id=" + it->at(0) +";";
+				
+				vector<vector<string>> intfID2 = dieDB->query(sString.c_str());
+				for(vector<vector<string>>::iterator it4 = intfID2.begin(); it4 < intfID2.end(); ++it4)
+				{
+					cout << it->at(0) << "-" << it4->at(0) << "<<->>" << it3->at(0) << "-" << it3->at(1) << endl;
+				}
+
+			}
+		}
+
+		
+		
+		
+		
+		
+		
+"385","Te"
+"386","Te"
+"387","Te"
+"438","Ge"
+"446","Fa"
+"480","Ge"
+"482","Ge"
+"483","Ge"
+"484","Ge"
+"485","Ge"
+"486","Ge"
+"487","Ge"
+"507","Channel"
+"508","Channel"
+
+
+--------------------------------------------------------------------
+
+4-123<<->>8-387							OK
+4-192<<->>8-UNKNOWN						OK
+5-255<<->>4-UNKNOWN						OK
+5-256<<->>8-483							OK
+5-257<<->>4-123							NOK -> Solle Unknown anzeigen; Problem: Direkter Link auf Blocking -> Keine Übertragung -> Alles wird über den Umweg Root Bridge gelernt
+6-336<<->>4-77							OK
+7-338<<->>6-334							OK
+8-387<<->>4-123							OK
+8-387<<->>4-UNKNOWN						??
+8-508<<->>4-UNKNOWN						??
+8-508<<->>4-UNKNOWN						??
+
+
+
+
+-------------------------
+Todos für die Logik:
+* Wenn ein Link auf Blocking ist und das Interface bereits auf eine andere Box schaut, dann auf UNKNOWN setzen; Wenn noch kein anderer Link eingetragen ist, dann irgendwie markieren
+x* Wenn von der anderen Richtung geschaut wird, dann keine doppelten Einträge schreiben
+x* Falls es einen UNKNOWN Eintrag gibt und ein zusätzlicher Eintrag dazukommt, mit einem UNKNOWN in die Gegenrichtung, dann kombinieren, wenn es die selbe Intf Type ist
+x* Doppelte Einträge vermeiden
+
+
+
+----------------------------------
+
+SELECT dI_intf_id,dI_dev_id,dI_intf_id1,dI_dev_id1,
+CASE WHEN dI_intf_id=123 THEN 0 END
+FROM neighborship
+
+
+UPDATE OR REPLACE neighborship SET dI_intf_id=0 WHERE dI_intf_id1=0
+
+INSERT INTO neighborship (dI_intf_id, dI_dev_id, dI_intf_id1, dI_dev_id1)
+VALUES (
+SELECT CASE WHEN dI_intf_id=256 AND dI_intf_id1=483 THEN 256 ELSE 483 END FROM neighborship WHERE dI_intf_id=256 AND dI_intf_id1=483, 8, 
+SELECT CASE WHEN dI_intf_id=256 AND dI_intf_id1=483 THEN 483 ELSE 256 END FROM neighborship WHERE dI_intf_id=256 AND dI_intf_id1=483, 5
+)
+
+
+SELECT rowid,dI_dev_id,dI_dev_id1 FROM neighborship WHERE dI_intf_id1=0
+SELECT rowid FROM neighborship WHERE (dI_dev_id=4 OR dI_dev_id=8) AND ((dI_dev_id1=4 OR dI_dev_id1=8) AND dI_intf_id1=0)
+
+Für alle Einträge mit Interface ID 0 überprüfen, ob es einen gleichen Eintrag in die andere Richtung gibt. Wenn dem so ist, dann prüfen, ob die Interface Type gleich ist. Wenn die Type übereinstimmt, dann beide Einträge verschmelzen
+
+
+
+
+
+
+
+
+
+
+
+--------------------------------------------
+SELECT n_id,dI_dev_id,dI_dev_id1 FROM neighborship WHERE dI_intf_id1=0
+SELECT n_id FROM neighborship WHERE (dI_dev_id=4 OR dI_dev_id=8) AND ((dI_dev_id1=4 OR dI_dev_id1=8) AND dI_intf_id1=0)
+
+SELECT n_id FROM neighborship WHERE (dI_dev_id=(SELECT dI_dev_id1 FROM neighborship WHERE n_id=8) AND dI_dev_id1=(SELECT dI_dev_id FROM neighborship WHERE n_id=8) AND dI_intf_id1=0)
+
+
+
+
+
+SELECT n_id FROM neighborship WHERE (dI_dev_id=(SELECT dI_dev_id1 FROM neighborship WHERE n_id=(SELECT n_id FROM neighborship WHERE dI_intf_id1=0)) AND dI_dev_id1=(SELECT dI_dev_id FROM neighborship WHERE n_id==(SELECT n_id FROM neighborship WHERE dI_intf_id1=0)) AND dI_intf_id1=0)
+
+
+
+
+
+SELECT n_id FROM neighborship 
+INNER JOIN interfaces ON devInterface.interfaces_int_id=neighborship.dI_intf_id
+INNER JOIN devInterface ON devInterface.interfaces_int_id=interfaces.intf_id
+WHERE interfaces.intfType IN (SELECT intfType FROM interfaces WHERE intf_id=192) 
+AND neighborship.n_id IN (SELECT n_id FROM neighborship WHERE dI_intf_id1=0)
+
+
+
+
+WHERE (dI_dev_id=(SELECT dI_dev_id1 FROM neighborship WHERE n_id=8) AND dI_dev_id1=(SELECT dI_dev_id FROM neighborship WHERE n_id=8) AND dI_intf_id1=0)
+
+INNER JOIN devInterface ON devInterface.interfaces_int_id=interfaces.intf_id
+INNER JOIN neighborship ON devInterfaces.int_id=neighborship.dI_intf_id
+
+
+UPDATE neighborship SET dI_intf_id1=508 WHERE n_id=2
+DELETE FROM neighborship WHERE n_id=8
+
+
+
+UPDATE OR IGNORE neighborship SET dI_intf_id=0 WHERE n_id IN (
+SELECT DISTINCT n_id FROM neighborship 
+INNER JOIN interfaces ON devInterface.interfaces_int_id=neighborship.dI_intf_id1
+INNER JOIN devInterface ON devInterface.interfaces_int_id=interfaces.intf_id
+INNER JOIN int_vlan ON interfaces.intf_id=int_vlan.interfaces_intf_id
+INNER JOIN stp_status ON stp_status.stp_status_id=int_vlan.stp_status_stp_status_id
+WHERE (dI_intf_id IN (SELECT dI_intf_id1 FROM neighborship) OR dI_intf_id1 IN (SELECT dI_intf_id FROM neighborship)) AND stp_status.stpIntfStatus LIKE 'alternate blocking ')
+
+------------------------------------------------------------------------------------------
+
+
+
+SELECT DISTINCT device_dev_id FROM devInterface
+INNER JOIN interfaces ON interfaces.intf_id=devInterface.interfaces_int_id
+INNER JOIN device ON device.dev_id=devInterface.device_dev_id
+WHERE device.stpBridgeID IN (
+SELECT DISTINCT l2_addr FROM neighbor
+INNER JOIN nlink ON nlink.neighbor_neighbor_id=neighbor.neighbor_id
+INNER JOIN interfaces ON nlink.interfaces_intf_id=interfaces.intf_id
+WHERE interfaces.intf_id=989)
+
+
+
+
+SELECT DISTINCT device_dev_id FROM devInterface
+INNER JOIN interfaces ON interfaces.intf_id=devInterface.interfaces_int_id
+INNER JOIN device ON device.dev_id=devInterface.device_dev_id
+WHERE interfaces.macAddress IN (
+SELECT DISTINCT designatedBridgeID FROM stp_status
+INNER JOIN int_vlan ON stp_status.stp_status_id=int_vlan.stp_status_stp_status_id
+WHERE int_vlan.interfaces_intf_id=995 AND stp_status.designatedBridgeID NOT IN (
+SELECT macAddress FROM interfaces
+INNER JOIN devInterface ON interfaces.intf_id=devInterface.interfaces_int_id
+WHERE devInterface.device_dev_id =28))
+OR device.stpBridgeID IN (SELECT DISTINCT l2_addr FROM neighbor
+INNER JOIN nlink ON nlink.neighbor_neighbor_id=neighbor.neighbor_id
+INNER JOIN interfaces ON nlink.interfaces_intf_id=interfaces.intf_id
+WHERE interfaces.intf_id=995)
+
+
+
+
+SELECT DISTINCT device_dev_id FROM devInterface
+INNER JOIN interfaces ON interfaces.intf_id=devInterface.interfaces_int_id
+INNER JOIN device ON device.dev_id=devInterface.device_dev_id
+WHERE interfaces.macAddress IN (
+SELECT DISTINCT designatedBridgeID FROM stp_status
+INNER JOIN int_vlan ON stp_status.stp_status_id=int_vlan.stp_status_stp_status_id
+WHERE int_vlan.interfaces_intf_id=1056 AND stp_status.designatedBridgeID NOT IN (
+SELECT macAddress FROM interfaces
+INNER JOIN devInterface ON interfaces.intf_id=devInterface.interfaces_int_id
+WHERE devInterface.device_dev_id =31))
+OR device.stpBridgeID IN (SELECT DISTINCT l2_addr FROM neighbor
+INNER JOIN nlink ON nlink.neighbor_neighbor_id=neighbor.neighbor_id
+INNER JOIN interfaces ON nlink.interfaces_intf_id=interfaces.intf_id
+WHERE interfaces.intf_id=1056)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SELECT DISTINCT interfaces_int_id FROM devInterface
+INNER JOIN interfaces ON devInterface.interfaces_int_id=interfaces.intf_id
+INNER JOIN nlink ON nlink.interfaces_intf_id=interfaces.intf_id
+INNER JOIN neighbor ON neighbor.neighbor_id=nlink.neighbor_neighbor_id
+WHERE neighbor.l2_addr IN (
+SELECT macAddress FROM interfaces
+INNER JOIN devInterface ON devInterface.interfaces_int_id=interfaces.intf_id
+WHERE devInterface.device_dev_id=31 AND interfaces.l2l3 LIKE 'L2')
+OR neighbor.l2_addr IN (SELECT stpBridgeID FROM device WHERE device.dev_id=31)
+
+
+
+
+
+GigabitEthernet5/3 is up, line protocol is up (connected)
+  Hardware is Gigabit Ethernet Port, address is 0012.7ff2.c8a2 (bia 0012.7ff2.c8a2)
+  Description: [REPORT-LAN] ***Downlink_SW195D***
+  
+GigabitEthernet4/3 is up, line protocol is up (connected)
+  Hardware is Gigabit Ethernet Port, address is 0012.7ff2.c05c (bia 0012.7ff2.c05c)
+  Description: [REPORT-LAN] ***Downlink_SW191A***
+  
+GigabitEthernet2/2 is up, line protocol is up (connected)
+  Hardware is Gigabit Ethernet Port, address is 0012.7ff2.c535 (bia 0012.7ff2.c535)
+  Description: [REPORT-LAN] ***Ch1_to_DS195A***
+  
+GigabitEthernet1/2 is up, line protocol is up (connected)
+  Hardware is Gigabit Ethernet Port, address is 0013.c3c1.5b41 (bia 0013.c3c1.5b41)
+  Description: [REPORT-LAN] ***Ch1_to_DS195A***
+  
+Port-channel1 is up, line protocol is up (connected)
+  Hardware is EtherChannel, address is 0012.7ff2.c535 (bia 0012.7ff2.c535)
+  Description: ***Ch1_to_DS195A***
+  
+
+  
+SW103A-Gi0/52 <--> DS195A-Gi2/6
+SW195C-Gi0/48 <--> SW195A-Gi1/1
+SW195D-Gi0/48 <--> SW195A-Gi1/2
+SW103A-Gi0/51 <--> SW191A-Gi1/14
+
+
+
+
+DS105A-Po1 <--> DS195A-Po1
+SW103A-Gi0/52 <--> DS195A-Gi2/6
+SW195C-Gi0/48 <--> SW195A-Gi1/1
+SW195D-Gi0/48 <--> SW195A-Gi1/2
+SW191A-Gi1/14 <--> SW103A-Gi0/51
+
+
+SW191A-Gi1/14 <--> DS105A-Gi4/3
+SW191A-Gi1/14 <--> DS195A-UNKNOWN
+
+
+
+-------------------------------------------------------------------------------------------------
+
+
+Alle Interfaces herausfinden, auf dem L2 Interface MAC Adressen von einem bestimmten Gerät gelernt werden (In dem Beispiel von Device 10)
+
+SELECT DISTINCT interfaces_int_id FROM devInterface
+INNER JOIN interfaces ON devInterface.interfaces_int_id=interfaces.intf_id
+INNER JOIN nlink ON nlink.interfaces_intf_id=interfaces.intf_id
+INNER JOIN neighbor ON neighbor.neighbor_id=nlink.neighbor_neighbor_id
+WHERE neighbor.l2_addr IN (
+SELECT macAddress FROM interfaces
+INNER JOIN devInterface ON devInterface.interfaces_int_id=interfaces.intf_id
+WHERE devInterface.device_dev_id=10 AND interfaces.l2l3 LIKE 'L2')
+
+
+VARIANTE OHNE Geräteangabe:
+SELECT DISTINCT interfaces_int_id,device_dev_id FROM devInterface
+INNER JOIN interfaces ON devInterface.interfaces_int_id=interfaces.intf_id
+INNER JOIN nlink ON nlink.interfaces_intf_id=interfaces.intf_id
+INNER JOIN neighbor ON neighbor.neighbor_id=nlink.neighbor_neighbor_id
+WHERE neighbor.l2_addr IN (
+SELECT macAddress FROM interfaces
+INNER JOIN devInterface ON devInterface.interfaces_int_id=interfaces.intf_id
+INNER JOIN device ON device.dev_id=devInterface.device_dev_id
+WHERE interfaces.l2l3 LIKE 'L2' AND device.type=2)
+AND interfaces.l2l3 LIKE 'L2'
+
+
+ANDERE RICHTUNG: Alle Interfaces herausfinden, die L2 MAC Adressen von anderen Geräte lernen
+
+SELECT DISTINCT interfaces_int_id,device_dev_id FROM devInterface
+INNER JOIN interfaces ON devInterface.interfaces_int_id=interfaces.intf_id
+INNER JOIN nlink ON nlink.interfaces_intf_id=interfaces.intf_id
+INNER JOIN neighbor ON neighbor.neighbor_id=nlink.neighbor_neighbor_id
+WHERE interfaces.macAddress IN (
+SELECT l2_addr FROM neighbor
+INNER JOIN nlink ON nlink.neighbor_neighbor_id=neighbor.neighbor_id
+INNER JOIN interfaces ON interfaces.intf_id=nlink.interfaces_intf_id
+INNER JOIN devInterface ON devInterface.interfaces_int_id=interfaces_intf_id
+INNER JOIN device ON devInterface.device_dev_id=device.dev_id
+WHERE interfaces.l2l3 LIKE 'L2' AND interfaces.intf_id=6)
+AND interfaces.l2l3 LIKE 'L2'
+
+
+
+-------------------------------------------------------------------------------------------------------------------------
+
+Alle Interfaces herausfinden, auf dem MAC Adressen von einem bestimmten Gerät auf L2 Interfaces gelernt werden (In dem Beispiel von Device 10)
+
+SELECT DISTINCT interfaces_int_id FROM devInterface
+INNER JOIN interfaces ON devInterface.interfaces_int_id=interfaces.intf_id
+INNER JOIN nlink ON nlink.interfaces_intf_id=interfaces.intf_id
+INNER JOIN neighbor ON neighbor.neighbor_id=nlink.neighbor_neighbor_id
+WHERE neighbor.l2_addr IN (
+SELECT macAddress FROM interfaces
+INNER JOIN devInterface ON devInterface.interfaces_int_id=interfaces.intf_id
+WHERE devInterface.device_dev_id=10)
+AND interfaces.l2l3 LIKE 'L2'
+
+-------------------------------------------------------------------------------------------------------------------------
+
+Alle Interfaces herausfinden, auf dem MAC Adressen von einem Nicht-Switch auf L2 Interfaces gelernt werden, die nicht schon eine Nachbarschaftsbeziehung haben
+
+SELECT DISTINCT interfaces_int_id,device_dev_id FROM devInterface
+INNER JOIN interfaces ON devInterface.interfaces_int_id=interfaces.intf_id
+INNER JOIN nlink ON nlink.interfaces_intf_id=interfaces.intf_id
+INNER JOIN neighbor ON neighbor.neighbor_id=nlink.neighbor_neighbor_id
+WHERE neighbor.l2_addr IN (
+SELECT macAddress FROM interfaces
+INNER JOIN devInterface ON devInterface.interfaces_int_id=interfaces.intf_id
+INNER JOIN device ON device.dev_id=devInterface.device_dev_id
+WHERE device.dev_id=1)
+AND interfaces.l2l3 LIKE 'L2' 
+AND interfaces.intf_id NOT IN (SELECT dI_intf_id1 FROM neighborship) 
+AND interfaces.intf_id NOT IN (SELECT dI_intf_id FROM neighborship)
+
+
+
+SELECT DISTINCT interfaces_int_id,device_dev_id FROM devInterface
+INNER JOIN interfaces ON devInterface.interfaces_int_id=interfaces.intf_id
+INNER JOIN nlink ON nlink.interfaces_intf_id=interfaces.intf_id
+INNER JOIN neighbor ON neighbor.neighbor_id=nlink.neighbor_neighbor_id
+WHERE interfaces.macAddress IN (SELECT l2_addr FROM neighbor
+INNER JOIN nlink ON nlink.neighbor_neighbor_id=neighbor.neighbor_id
+INNER JOIN interfaces ON interfaces.intf_id=nlink.interfaces_intf_id
+INNER JOIN devInterface ON devInterface.interfaces_int_id=interfaces_intf_id
+INNER JOIN device ON devInterface.device_dev_id=device.dev_id
+WHERE interfaces.intf_id=
+
+
+-------------------------------------------------------------------------------------------------------------------------
+
+STP Infos und Nachbaren abfragen
+1) ALLE interface IDs von einer Box abfragen, bei denen die Designated Bridge ID nicht gleich einer eigenen MAC Adresse ist
+
+SELECT DISTINCT intf_id,intfType FROM interfaces 
+INNER JOIN devInterface ON interfaces.intf_id=devInterface.interfaces_int_id
+INNER JOIN int_vlan ON int_vlan.interfaces_intf_id=interfaces.intf_id
+WHERE devInterface.device_dev_id=4 AND stp_status_stp_status_id IN (
+SELECT DISTINCT stp_status_id FROM stp_status
+INNER JOIN interfaces ON devInterface.interfaces_int_id=interfaces.intf_id
+INNER JOIN int_vlan ON int_vlan.interfaces_intf_id=interfaces.intf_id
+INNER JOIN devInterface ON interfaces.intf_id=devInterface.interfaces_int_id
+WHERE devInterface.device_dev_id=4 
+AND stp_status.designatedBridgeID NOT IN (
+SELECT macAddress FROM interfaces
+INNER JOIN devInterface ON devInterface.interfaces_int_id=interfaces.intf_id
+WHERE devInterface.device_dev_id=4))
+
+-> 123,192
+
+...................
+
+2) Device ID der Designated Bridge IDs von 1) rausfinden
+
+SELECT DISTINCT device_dev_id FROM devInterface
+INNER JOIN interfaces ON interfaces.intf_id=devInterface.interfaces_int_id
+WHERE interfaces.macAddress IN (
+SELECT DISTINCT designatedBridgeID FROM stp_status
+INNER JOIN int_vlan ON stp_status.stp_status_id=int_vlan.stp_status_stp_status_id
+WHERE int_vlan.interfaces_intf_id=123 AND stp_status.designatedBridgeID NOT IN (
+SELECT macAddress FROM interfaces
+INNER JOIN devInterface ON interfaces.intf_id=devInterface.interfaces_int_id
+WHERE devInterface.device_dev_id =4))
+
+-> 8
+
+.................
+
+3) Schauen, ob MAC Adressen von der Ausgangsbox irgendwo auf einem L2 Interface auf der Box von 2) gelernt werden
+
+SELECT DISTINCT intf_id,intfType FROM interfaces
+INNER JOIN nlink ON nlink.interfaces_intf_id=interfaces.intf_id
+INNER JOIN devInterface ON devInterface.interfaces_int_id=interfaces.intf_id
+INNER JOIN neighbor ON nlink.neighbor_neighbor_id=neighbor.neighbor_id
+WHERE devInterface.device_dev_id=8 AND neighbor.l2_addr IN (
+SELECT DISTINCT macAddress FROM interfaces
+INNER JOIN devInterface ON devInterface.interfaces_int_id=interfaces.intf_id
+WHERE devInterface.device_dev_id=4) AND neighbor.l3_addr IS NULL
+
+-> 387
+
+
+-----------------------------------------------------------------------------------------------------
+
+SELECT DISTINCT stpBridgeID,dev_id FROM device
+-> 0013.c3c1.5b40, 51
+
+SELECT DISTINCT interfaces_intf_id FROM nlink
+INNER JOIN neighbor ON neighbor.neighbor_id=nlink.neighbor_neighbor_id
+WHERE neighbor.l2_addr LIKE '0013.c3c1.5b40' 
+AND interfaces_intf_id NOT IN (SELECT dI_intf_id FROM neighborship) 
+AND interfaces_intf_id NOT IN (SELECT dI_intf_id1 FROM neighborship) 
+
+SELECT device_dev_id FROM devInterface 
+WHERE interfaces_int_id=1629
+
+SELECT DISTINCT interfaces_intf_id FROM nlink
+INNER JOIN neighbor ON neighbor.neighbor_id=nlink.neighbor_neighbor_id
+WHERE neighbor.l2_addr IN (SELECT stpBridgeID FROM device WHERE dev_id=52)
+AND interfaces_intf_id NOT IN (SELECT dI_intf_id FROM neighborship) 
+AND interfaces_intf_id NOT IN (SELECT dI_intf_id1 FROM neighborship) 
+
+-> 51,1605 <-> 52,1629
+
+
+
+
+
+
+
+
+
+
+
+
+SELECT DISTINCT interfaces_intf_id FROM interfaces
+INNER JOIN nlink ON nlink.interfaces_intf_id=interfaces_intf_id
+INNER JOIN neighbor ON neighbor.neighbor_id=nlink.neighbor_neighbor_id
+WHERE neighbor.l2_addr LIKE '0013.c3c1.5b40'
+
+
+SELECT DISTINCT interfaces_intf_id FROM nlink
+INNER JOIN neighbor ON neighbor.neighbor_id=nlink.neighbor_neighbor_id
+WHERE neighbor.l2_addr LIKE '0013.c3c1.5b40'
+
+
+
+
+
+SW195C-Gi0/48 <--> SW195A-Gi1/1
+SW195D-Gi0/48 <--> SW195A-Gi1/2
+SW103A-Gi0/52 <--> DS195A-Gi2/6
+SW103A-Gi0/51 <--> SW191A-Gi1/14
+DS195A-Po1 <--> DS105A-Po1
+
+
+-------------------------------------------------------------------------------------------------
+
+ALLE Interfaces rausfinden, auf denen die BridgeID von einem bestimmten Host gelernt wird (in dem Fall von 52)
+SELECT DISTINCT intf_id FROM interfaces
+INNER JOIN devInterface ON devInterface.interfaces_int_id=interfaces.intf_id
+INNER JOIN device ON device.dev_id=devInterface.device_dev_id
+WHERE stpBridgeID IN (SELECT l2_addr FROM neighbor
+INNER JOIN nlink ON nlink.neighbor_neighbor_id=neighbor.neighbor_id
+INNER JOIN interfaces ON interfaces.intf_id=nlink.interfaces_intf_id
+INNER JOIN devInterface ON devInterface.interfaces_int_id=interfaces_intf_id
+WHERE devInterface.device_dev_id<>52) 
+AND device.dev_id=52 AND interfaces.l2l3 LIKE 'L2'
+AND interfaces.intfType NOT LIKE 'Vlan'
+AND interfaces.channel_intf_id IS NULL
+
+AND interfaces.intf_id NOT IN (SELECT dI_intf_id FROM neighborship) 
+AND interfaces.intf_id NOT IN (SELECT dI_intf_id1 FROM neighborship) 
+
+
+----------------------------------------------------------------------------------------------------
+
+1) ALLE Interfaces rausfinden, auf denen die Designated Bridge ID nicht gleich einer der eigenen MAC Adressen ist
+SELECT DISTINCT intf_id FROM interfaces 
+INNER JOIN devInterface ON devInterface.interfaces_int_id=interfaces.intf_id
+INNER JOIN stp_status ON int_vlan.stp_status_stp_status_id=stp_status.stp_status_id
+INNER JOIN int_vlan ON interfaces.intf_id=int_vlan.interfaces_intf_id
+WHERE devInterface.device_dev_id=60
+AND l2l3 LIKE 'L2'
+AND intfType NOT LIKE 'Vlan'
+AND stp_status.designatedBridgeID NOT LIKE '0018.731f.2280'
+
+-> 1835, 1836
+
+2) Bridge ID von den Interfaces von 1) auslesen
+SELECT DISTINCT designatedBridgeID FROM stp_status
+INNER JOIN int_vlan ON int_vlan.stp_status_stp_status_id=stp_status.stp_status_id
+WHERE int_vlan.interfaces_intf_id=1835
+AND designatedBridgeID NOT IN (
+SELECT stpBridgeID FROM device WHERE dev_id=60)
+
+-> 0017.94ed.4f80
+
+3) Device ID für die BridgeID von 2) auslesen
+SELECT DISTINCT dev_id FROM device WHERE stpBridgeID LIKE '0017.94ed.4f80'
+
+-> 61
+
+VARIANTE: 2+3 in einem Schritt
+SELECT DISTINCT dev_id FROM device WHERE stpBridgeID IN (
+SELECT DISTINCT designatedBridgeID FROM stp_status
+INNER JOIN int_vlan ON int_vlan.stp_status_stp_status_id=stp_status.stp_status_id
+WHERE int_vlan.interfaces_intf_id=1835
+AND designatedBridgeID NOT IN (
+SELECT stpBridgeID FROM device WHERE dev_id=60))
+
+-> 61
+
+4) InterfaceID auf der Gegenseite rausfinden
+SELECT DISTINCT intf_id FROM interfaces
+INNER JOIN devInterface ON devInterface.interfaces_int_id=interfaces.intf_id
+INNER JOIN nlink ON nlink.interfaces_intf_id=interfaces.intf_id
+INNER JOIN neighbor ON neighbor.neighbor_id=nlink.neighbor_neighbor_id
+WHERE devInterface.device_dev_id=61
+AND neighbor.l2_addr IN (
+SELECT macAddress FROM interfaces
+INNER JOIN devInterface ON devInterface.interfaces_int_id=interfaces.intf_id
+WHERE devInterface.device_dev_id=60)
+OR neighbor.l2_addr LIKE '0018.731f.2280'
+
+5) Wenn 4) nicht erfolgreich, dann STP Infos prüfen
+SELECT DISTINCT intf_id FROM interfaces 
+INNER JOIN devInterface ON devInterface.interfaces_int_id=interfaces.intf_id
+INNER JOIN stp_status ON int_vlan.stp_status_stp_status_id=stp_status.stp_status_id
+INNER JOIN int_vlan ON interfaces.intf_id=int_vlan.interfaces_intf_id
+WHERE devInterface.device_dev_id=61
+AND l2l3 LIKE 'L2'
+AND intfType NOT LIKE 'Vlan'
+AND stp_status.designatedBridgeID LIKE '0018.731f.2280'
+
+-> 1852
+
+
+DELETE FROM neighborship WHERE EXISTS (
+SELECT 1 FROM neighborship N2
+WHERE neighborship.dI_intf_id=N2.dI_intf_id 
+AND neighborship.dI_dev_id=N2.dI_dev_id 
+AND neighborship.dI_intf_id1=N2.dI_intf_id1
+AND neighborship.dI_dev_id1=N2.dI_dev_id1 
+AND neighborship.n_id>N2.n_id)
+
+
+
+
+------------------------------
+
+"154","338","6","77","4"
+"155","341","7","336","6"
+"156","542","10","528","9"
+"157","123","4","391","8"
+"158","192","4","512","8"
+"159","256","5","0","4"
+"160","257","5","487","8"
+"161","258","5","122","4"
+"163","192","4","391","8"
+"164","256","5","0","4"
+"166","444","8","16","1"
+"167","445","8","17","1"
+"168","517","9","2","1"
+"169","521","9","21","2"
+"170","537","10","27","3"
+
+
+
+"139","2025","67","1995","66"
+"140","2109","70","2077","69"
+"141","2139","71","2078","69"
+"142","2024","67","2041","68"
+"143","1976","65","2001","66"
+
+"144","2040","68","1972","65"
+"145","2079","69","1992","66"
+"146","2108","70","2138","71"
+"147","2140","71","0","65"
+
+
+"148","2025","67","1995","66"
+"149","2109","70","2077","69"
+"150","2139","71","2078","69"
+"151","2024","67","2041","68"
+"152","1976","65","2001","66"
+
+"153","2024","67","2061","68"
+
+"154","2040","68","1972","65"
+"155","2079","69","1992","66"
+"156","2108","70","2138","71"
+"157","2140","71","0","65"
+
+
+--------------------------------------------------------------------------------
+
+SELECT DISTINCT intf_id FROM interfaces 
+INNER JOIN devInterface ON devInterface.interfaces_int_id=interfaces.intf_id
+INNER JOIN stp_status ON int_vlan.stp_status_stp_status_id=stp_status.stp_status_id
+INNER JOIN int_vlan ON interfaces.intf_id=int_vlan.interfaces_intf_id
+WHERE devInterface.device_dev_id=4
+AND l2l3 LIKE 'L2'
+AND intfType NOT LIKE 'Vlan'
+AND stp_status.designatedBridgeID NOT IN (
+SELECT stpBridgeID FROM device WHERE dev_id=4);
+
+
+SELECT DISTINCT designatedBridgeID FROM stp_status
+INNER JOIN int_vlan ON int_vlan.stp_status_stp_status_id=stp_status.stp_status_id
+WHERE int_vlan.interfaces_intf_id=192
+AND designatedBridgeID NOT IN (
+SELECT stpBridgeID FROM device WHERE dev_id=4)
+
+
+SELECT DISTINCT intf_id FROM interfaces 
+INNER JOIN devInterface ON devInterface.interfaces_int_id=interfaces.intf_id 
+INNER JOIN nlink ON nlink.interfaces_intf_id=interfaces.intf_id 
+INNER JOIN neighbor ON neighbor.neighbor_id=nlink.neighbor_neighbor_id 
+WHERE devInterface.device_dev_id=8
+AND interfaces.channel_intf_id IS NULL
+AND intfType NOT LIKE 'Vlan'
+AND neighbor.l2_addr IN (
+SELECT macAddress FROM interfaces
+INNER JOIN devInterface ON devInterface.interfaces_int_id=interfaces.intf_id
+WHERE devInterface.device_dev_id=4)
+
+
+SELECT n_id FROM neighborship WHERE (dI_intf_id=123 OR dI_intf_id=391) AND (dI_intf_id1=123 OR dI_intf_id1=391)
+
+
+
+ATFSLDCSW51RB-Gi0/1 <--> ATFSLDCSW41RB-Gi3/6
+ATFSLDCSW52RB-Gi0/1 <--> ATFSLDCSW51RB-Fa0/23
+ATFSLDCSWI2RB-Po1 <--> ATFSLDCSWI1RB-Po1
+ATFSLDCSW41RB-Te9/4 <--> ATFSLDCSW81RB-Te1/3
+ATFSLDCSW41RB-Po10 <--> ATFSLDCSW81RB-Po10
+ATFSLDCSW42RB-Gi7/1 <--> ATFSLDCSW41RB-UNKNOWN
+ATFSLDCSW42RB-Gi8/1 <--> ATFSLDCSW81RB-Gi7/1
+ATFSLDCSW42RB-Te9/1 <--> ATFSLDCSW41RB-Te9/1
+ATFSLDCSW81RB-Gi3/5 <--> ATFSLDCFW02RB-INTRANET
+ATFSLDCSW81RB-Gi3/6 <--> ATFSLDCFW02RB-FAILOVER
+ATFSLDCSWI1RB-Fa0/1 <--> ATFSLDCFW02RB-MGM
+ATFSLDCSWI1RB-Fa0/6 <--> ATFSLDCROI1RB-Gi0/1.4
+ATFSLDCSWI2RB-Fa0/6 <--> ATFSLDCROI2RB-Gi0/1.4
+
+
+
+
+-----------------------------------------------
+
+-> ALLE Interfaces auf denen STP gesprochen wird, aber noch nicht in der Nachbarschaftstabelle enthalten sind:
+
+SELECT DISTINCT interfaces.intf_id,interfaces.intfName FROM interfaces
+INNER JOIN int_vlan ON interfaces.intf_id=int_vlan.interfaces_intf_id
+WHERE interfaces_intf_id NOT IN (
+SELECT dI_intf_id FROM neighborship)
+AND interfaces_intf_id NOT IN (
+SELECT dI_intf_id1 FROM neighborship)
+AND interfaces.channel_intf_id IS NULL
+
+
+-> Hostname für das jeweilige Interface rausfinden (Bsp: 3508)
+
+SELECT hostname FROM device
+INNER JOIN devInterface ON devInterface.device_dev_id=device.dev_id
+WHERE devInterface.interfaces_int_id=3508
+
+
+-> ALLE Interfaces auf denen STP gesprochen wird, noch nicht in der Nachbarschaftstabelle enthalten sind und die Designated Bridge ID != einer known Devices ist
+
+SELECT DISTINCT interfaces_intf_id FROM int_vlan
+INNER JOIN interfaces ON interfaces.intf_id=int_vlan.interfaces_intf_id
+INNER JOIN stp_status ON stp_status.stp_status_id=int_vlan.stp_status_stp_status_id
+WHERE interfaces_intf_id NOT IN (
+SELECT dI_intf_id FROM neighborship)
+AND interfaces_intf_id NOT IN (
+SELECT dI_intf_id1 FROM neighborship)
+AND interfaces.channel_intf_id IS NULL
+AND stp_status.designatedBridgeID NOT IN (
+SELECT stpBridgeID FROM device)
+
+
+-----------------------------------------------------------------
+
+-> STP Transition Count für ein Interface auslesen
+
+SELECT stpTransitionCount FROM stp_status
+INNER JOIN int_vlan ON int_vlan.stp_status_stp_status_id=stp_status.stp_status_id
+INNER JOIN interfaces ON interfaces.intf_id=int_vlan.interfaces_intf_id
+WHERE interfaces.intf_id=3077
+AND stpTransitionCount>5
+
+-----------------------------------------------------------------
+
+Doppelte Einträge finden und markieren:
+
+-> Finden:
+
+SELECT col, COUNT(*)
+FROM
+(
+    SELECT dI_intf_id AS col FROM neighborship
+    UNION ALL
+    SELECT dI_intf_id1 FROM neighborship
+) T1
+GROUP BY col
+HAVING COUNT(*) > 1
+
+----
+
+SELECT col
+FROM
+(
+    SELECT dI_intf_id AS col FROM neighborship
+    UNION ALL
+    SELECT dI_intf_id1 FROM neighborship WHERE dI_intf_id1 > 0
+) T1
+GROUP BY col
+HAVING COUNT(*) > 1
+
+-> Markieren:
+
+UPDATE neighborship SET flag=1 WHERE dI_intf_id1=3616 OR dI_intf_id=3616
+
+------------------------------------------------------------------------------------------------
+CDP:
+
+1) Alle Hosts finden, die noch nicht erfasst wurden
+SELECT DISTINCT nName FROM cdp
+WHERE nName NOT IN (
+SELECT hostname FROM cdp)
+
+
+INSERT INTO device (dev_id,type,hostname,sw_version) VALUES(NULL, 6, 'ATFSLDCOB41RB', '');
+
+INSERT INTO interfaces (intfName, status) VALUES (Gi0/0, 'UP');
+
+INSERT INTO devInterface (interfaces_int_id, device_dev_id, cdp_cdp_id) VALUES (14,14,Gi0/0);
+
+
+
+Alle Interfaces anzeigen, bei denen cdp_cdp_id != NULL und
+die nicht in neighborship vorkommen außer Flag ist gesetzt oder das Nachbarinterface ist 0
+
+
+SELECT interfaces_int_id, cdp_cdp_id,device_dev_id FROM devInterface
+INNER JOIN interfaces ON interfaces.intf_id=devInterface.interfaces_int_id
+WHERE  cdp_cdp_id NOT NULL
+AND interfaces_int_id NOT IN(
+SELECT dI_intf_id FROM neighborship 
+WHERE dI_intf_id1 <>0 
+AND flag IS NULL)
+AND interfaces_int_id NOT IN(
+SELECT dI_intf_id1 FROM neighborship
+WHERE flag IS NULL)
+AND interfaces.channel_intf_id IS NULL
+
+
+SELECT DISTINCT nName,type FROM cdp WHERE nName NOT IN (SELECT hostname FROM cdp)
+
+
+SELECT intf_id FROM interfaces 
+INNER JOIN devInterface ON devInterface.interfaces_int_id=interfaces.intf_id 
+INNER JOIN device ON devInterface.device_dev_id=device.dev_id 
+WHERE intfName LIKE 'Gi0/3'
+AND device.hostname LIKE 'ATFSLDCROI2RB'
+
+--------------------------------
+
+SELECT DISTINCT intf_id,intfType FROM interfaces 
+INNER JOIN devInterface ON interfaces.intf_id=devInterface.interfaces_int_id
+INNER JOIN int_vlan ON int_vlan.interfaces_intf_id=interfaces.intf_id
+WHERE devInterface.device_dev_id=71 
+
+
+AND stp_status_stp_status_id IN (
+SELECT DISTINCT stp_status_id FROM stp_status
+INNER JOIN interfaces ON devInterface.interfaces_int_id=interfaces.intf_id
+INNER JOIN int_vlan ON int_vlan.interfaces_intf_id=interfaces.intf_id
+INNER JOIN devInterface ON interfaces.intf_id=devInterface.interfaces_int_id
+WHERE devInterface.device_dev_id=71
+
+
+AND stp_status.designatedBridgeID NOT IN (
+SELECT macAddress FROM interfaces
+INNER JOIN devInterface ON devInterface.interfaces_int_id=interfaces.intf_id
+WHERE devInterface.device_dev_id=71))
+
+
+
+
+
+
+SELECT DISTINCT interfaces_int_id,device_dev_id FROM devInterface
+INNER JOIN interfaces ON devInterface.interfaces_int_id=interfaces.intf_id
+INNER JOIN nlink ON nlink.interfaces_intf_id=interfaces.intf_id 
+INNER JOIN neighbor ON neighbor.neighbor_id=nlink.neighbor_neighbor_id 
+WHERE neighbor.l2_addr IN (
+SELECT macAddress FROM interfaces
+INNER JOIN devInterface ON devInterface.interfaces_int_id=interfaces.intf_id 
+INNER JOIN device ON device.dev_id=devInterface.device_dev_id
+WHERE device.dev_id=" + it->at(0) + ")
+AND interfaces.l2l3 LIKE 'L2'
+AND interfaces.intf_id NOT IN (SELECT dI_intf_id1 FROM neighborship)
+AND interfaces.intf_id NOT IN (SELECT dI_intf_id FROM neighborship);
+
+
+-------------------------------
+
+2 Fälle: 
+
+1) 
+514		1713	135		1956	136
+515		1715	135		1956	136
+559		1715	135		1958	136
+
+-> 3 Einträge für zwei Nachbarschaftsbeziehungen
+-> Wenn es drei Einträge gibt, dann den löschen, in dem beide doppelten Einträge vorkommen; In dem Beispiel die mittlere Zeile
+
+-----------------------------
+
+1) Prüfen, ob ein Interfaces öfter als einmal vorkommen
+SELECT col
+FROM
+(
+    SELECT dI_intf_id AS col FROM neighborship
+    UNION ALL
+    SELECT dI_intf_id1 FROM neighborship WHERE dI_intf_id1 > 0
+) T1
+GROUP BY col
+HAVING COUNT(*) > 1
+
+2) Zeilen löschen, bei denen eine Kombination aus 1) vorkommt
+DELETE FROM neighborship WHERE n_id IN (
+SELECT n_id FROM neighborship WHERE dI_intf_id=1715 AND dI_intf_id1 IN (
+SELECT col
+FROM
+(
+    SELECT dI_intf_id AS col FROM neighborship
+    UNION ALL
+    SELECT dI_intf_id1 FROM neighborship WHERE dI_intf_id1 > 0
+) T1
+GROUP BY col HAVING COUNT(*) > 1))
+
+
+-------------------------
+
+2)
+511		1600	132		0		131
+541		1460	131		1600	132
+516		1717	135		0		137
+550		1717	135		1990	137
+519		2084	137		0		131
+534		1420	131		2084	137
+522		2097	138		0		137
+565		1991	137		2097	138
+
+-> Wenn es einen vollständigen Eintrag gibt und einen ähnlichen, bei dem auf einer Seite 0 steht, dann den Eintrag mit 0 löschen
+
+
+-----------------------
+
+1) Prüfen, ob ein Interfaces öfter als einmal vorkommen
+SELECT col
+FROM
+(
+    SELECT dI_intf_id AS col FROM neighborship
+    UNION ALL
+    SELECT dI_intf_id1 FROM neighborship WHERE dI_intf_id1 > 0
+) T1
+GROUP BY col
+HAVING COUNT(*) > 1
+
+"1600"
+"1715"
+"1717"
+"1956"
+"2084"
+"2097"
+
+2) Löschen aller Zeilen, wo 1) vorkommt und dI_intf_id1 gleich 0 ist
+DELETE FROM neighborship WHERE dI_intf_id=1600 AND dI_intf_id1=0
+
+
+----------------------------------------------------------------------------------------------------
+
+Alle Einträge markieren, die über CDP gelernt und keine Endgeräte sind
+UPDATE OR REPLACE neighborship SET flag=99 WHERE n_id IN (
+SELECT n_id FROM neighborship
+WHERE dI_dev_id1 IN (
+SELECT dev_id FROM device 
+WHERE dataSource=1 AND type<10))
+
+
+--------------------------------------------------------------------------------------------
+L3 Nachbarschaften
+
+SELECT DISTINCT subnet FROM ipSubnet
+-> 10.111.16.0
+
+SELECT intf_id, intfName, duplex, errLvl, loadLvl FROM interfaces
+INNER JOIN intfSubnet ON intfSubnet.interfaces_intf_id=interfaces.intf_id
+INNER JOIN ipSubnet ON ipSubnet.ipSubnet_id=intfSubnet.ipSubnet_ipSubnet_id
+WHERE ipSubnet.subnet LIKE '10.43.50.0'
+
+SELECT hostname from device
+INNER JOIN devInterface ON devInterface.device_dev_id=device.dev_id
+WHERE devInterface.interfaces_int_id=7367
+
+-----------------------------------------------------------------------------------
+
+Root Bridges auslesen
+
+SELECT DISTINCT dev_id, type FROM device
+INNER JOIN devInterface ON devInterface.device_dev_id=device.dev_id
+INNER JOIN interfaces ON devInterface.interfaces_int_id=interfaces.intf_id
+INNER JOIN int_vlan ON int_vlan.interfaces_intf_id=interfaces.intf_id
+INNER JOIN stp_status ON stp_status.stp_status_id=int_vlan.stp_status_stp_status_id
+WHERE device.stpBridgeID LIKE stp_status.designatedRootID
+
+--------------------------------------------------------------------------------------
+
+Alle Switches ausgeben, die mehr als ein L3 Interface aktiv haben:
+
+SELECT dev_id FROM device
+INNER JOIN devInterface ON devInterface.device_dev_id=device.dev_id
+INNER JOIN interfaces ON devInterface.interfaces_int_id=interfaces.intf_id
+WHERE l2l3 LIKE 'L3' AND device.type=2 
+GROUP BY dev_id
+HAVING (COUNT(dev_id)>1)
+
+--------------------------------------------------------------------------------------
+SELECT col FROM ( 
+SELECT dI_intf_id AS col FROM neighborship 
+UNION ALL SELECT dI_intf_id1 FROM neighborship WHERE dI_intf_id1 > 0 ) T1 
+GROUP BY col HAVING COUNT(*) > 1;
+
+
+SELECT n_id FROM neighborship WHERE dI_intf_id=1351 AND dI_intf_id1 IN ( SELECT col FROM (SELECT dI_intf_id AS col FROM neighborship UNION ALL SELECT dI_intf_id1 FROM neighborship WHERE dI_intf_id1 > 0 ) T1 GROUP BY col HAVING COUNT(*) > 1);
+
+--------------------------------------------------------------------------------------
+Zwei Tabellen vergleichen:
+
+SELECT MIN(TableName) as TableName, ID, COL1, COL2, COL3 ...
+FROM
+(
+  SELECT 'Table A' as TableName, A.ID, A.COL1, A.COL2, A.COL3, ...
+  FROM A
+  UNION ALL
+  SELECT 'Table B' as TableName, B.ID, B.COL1, B.COl2, B.COL3, ...
+  FROM B
+) tmp
+GROUP BY ID, COL1, COL2, COL3 ...
+HAVING COUNT(*) = 1
+ORDER BY ID
+
+--------------------------------------------------------------------------------------
+Höchsten Wert für eine Spalte auslesen -> für letzen Eintrag den Index auslesen; Für Revision Control
+
+SELECT MAX(intf_id) FROM interfaces
+
+--------------------------------------------------------------------------------------
+SELECT DISTINCT last_insert_rowid() FROM interfaces;
+SELECT MAX(intf_id) FROM interfaces
+
+SELECT stpTransitionCount FROM stp_status
+INNER JOIN int_vlan ON int_vlan.stp_status_stp_status_id=stp_status.stp_status_id
+INNER JOIN interfaces ON interfaces.intf_id=int_vlan.interfaces_intf_id
+WHERE interfaces.intf_id=316
+
+
+SELECT DISTINCT stpIntfStatus,stp_status_id FROM stp_status
+INNER JOIN int_vlan ON int_vlan.stp_status_stp_status_id=stp_status.stp_status_id
+INNER JOIN interfaces ON interfaces.intf_id=int_vlan.interfaces_intf_id 
+WHERE interfaces.intf_id =316
+
+
+
+SELECT DISTINCT stpIntfStatus,stp_status_id FROM stp_status
+INNER JOIN int_vlan ON int_vlan.stp_status_stp_status_id=stp_status.stp_status_id
+INNER JOIN interfaces ON interfaces.intf_id=int_vlan.interfaces_intf_id 
+WHERE interfaces.intf_id =278
+
+
+SELECT DISTINCT vlan FROM vlan 
+INNER JOIN int_vlan ON int_vlan.vlan_vlan_id=vlan_vlan_id 
+INNER JOIN stp_status ON stp_status.stp_status_id=int_vlan.stp_status_stp_status_id
+WHERE stp_status_stp_status_id=336 
+AND stpIntfStatus LIKE '%locking%'
+
+----------------------------------------------------------------------------------------
+
+Zweitgrößten Wert ermitteln:
+SELECT MAX( n_id) FROM rControl WHERE n_id< (SELECT MAX( n_id) FROM rControl) 
+
+----------------------------------------------------------------------------------------
+SELECT DISTINCT interfaces_int_id,device_dev_id FROM devInterface 
+INNER JOIN interfaces ON devInterface.interfaces_int_id=interfaces.intf_id
+INNER JOIN nlink ON nlink.interfaces_intf_id=interfaces.intf_id
+INNER JOIN neighbor ON neighbor.neighbor_id=nlink.neighbor_neighbor_id
+WHERE neighbor.l2_addr IN (
+SELECT macAddress FROM interfaces
+INNER JOIN devInterface ON devInterface.interfaces_int_id=interfaces.intf_id 
+INNER JOIN device ON device.dev_id=devInterface.device_dev_id 
+WHERE devInterface.device_dev_id=184 AND interfaces.l2l3 LIKE 'L2' AND device.hwtype=2)
+AND interfaces.l2l3 LIKE 'L2'
+
+
+SELECT DISTINCT intf_id,intfType FROM interfaces 
+WHERE interfaces.macAddress IN (
+SELECT l2_addr FROM neighbor
+INNER JOIN nlink ON nlink.neighbor_neighbor_id=neighbor.neighbor_id
+INNER JOIN interfaces ON interfaces.intf_id=nlink.interfaces_intf_id
+WHERE interfaces.l2l3 LIKE 'L2' AND interfaces.intf_id=3069) 
+AND interfaces.l2l3 LIKE 'L2' 
+AND interfaces.intfType IN (SELECT intfType FROM interfaces WHERE intf_id=3069)
+
+
+
+SELECT MIN(TableName) as TableName, ID, COL1, COL2, COL3 ...
+FROM
+(
+  SELECT 'Table A' as TableName, A.ID, A.COL1, A.COL2, A.COL3, ...
+  FROM A
+  UNION ALL
+  SELECT 'Table B' as TableName, B.ID, B.COL1, B.COl2, B.COL3, ...
+  FROM B
+) tmp
+GROUP BY ID, COL1, COL2, COL3 ...
+HAVING COUNT(*) = 1
+ORDER BY ID
+
+
+
+CREATE TEMP TABLE aktuell (h1 TEXT, h2 TEXT, i1 TEXT, i2 TEXT)
+INSERT INTO aktuell (h1, h2, i1, i2) VALUES ('H1', 'H2', 'I1', 'I2')
+
+CREATE TEMP TABLE vgl (h1 TEXT, h2 TEXT, i1 TEXT, i2 TEXT)
+INSERT INTO vgl (h1, h2, i1, i2) VALUES ('H1', 'H2', 'I1', 'I2')
+
+
+
+--------------------------------------------------------------------------------------------------------
+
+SELECT MIN(aktuell) as aktuell, h1, h2, i1, i2
+FROM
+(
+  SELECT 'Table aktuell' as aktuell, aktuell.h1, aktuell.h2, aktuell.i1, aktuell.i2
+  FROM aktuell
+  UNION ALL
+  SELECT 'Table vgl' as vgl, vgl.h1, vgl.h2, vgl.i1, vgl.i2
+  FROM vgl
+) tmp
+GROUP BY h1, h2, i1, i2
+HAVING COUNT(*) = 1
+ORDER BY h1
+
+--------------------------------------------------------------------------------------------------------
+
+SELECT MIN(aktuell) as aktuell, h1, h2, i1, i2
+FROM
+(
+  SELECT 'Table A' as aktuell, aktuell.h1, aktuell.h2, aktuell.i1, aktuell.i2
+  FROM A
+  UNION ALL
+  SELECT 'Table B' as vgl, vgl.h1, vgl.h2, vgl.i1, vgl.i2
+  FROM B
+) tmp
+GROUP BY h1, h2, i1, i2
+HAVING COUNT(*) = 1
+ORDER BY h1
+
+--------------------------------------------------------------------------------------------------------
+
+SELECT n_id FROM neighborship 
+WHERE flag=1 AND dI_intf_id IN (SELECT intf_id FROM interfaces WHERE vpc_id NOT NULL)
+OR dI_intf_id1 IN (SELECT intf_id FROM interfaces WHERE vpc_id NOT NULL)
+
+-------------------------------------------------------------------------------------------------------
+
+SELECT intf_id from interfaces
+INNER JOIN devInterface ON devInterface.interfaces_int_id=interfaces.intf_id
+INNER JOIN intfSubnet ON intfSubnet.interfaces_intf_id=interfaces.intf_id
+INNER JOIN ipSubnet ON ipSubnet.ipSubnet_id=intfSubnet.ipSubnet_ipSubnet_id
+WHERE devInterface.device_dev_id=458
+AND ipSubnet.subnet LIKE '192.168.254.40' AND ipSubnet.mask LIKE '255.255.255.248'
+
+---------------------------------------------------------------------------------------------------------------
+Spalte in bestehende Tabelle hinzufügen:
+
+CREATE TEMPORARY TABLE cdp_backup(cdp_id INTEGER PRIMARY KEY AUTOINCREMENT, hostname TEXT, nName TEXT, intf TEXT, nIntfIP TEXT, nIntf TEXT, type INT, platform TEXT, altn TEXT);
+INSERT INTO cdp_backup SELECT cdp_id, hostname, nName, intf, nIntfIP, nIntf, type, platform, '' FROM cdp;
+DROP TABLE cdp;
+CREATE TABLE cdp(cdp_id INTEGER PRIMARY KEY AUTOINCREMENT, hostname TEXT, nName TEXT, alternatenName TEXT, intf TEXT, nIntfIP TEXT, nIntf TEXT, type INT, platform TEXT);
+INSERT INTO cdp SELECT cdp_id, hostname, nName, altn, intf, nIntfIP, nIntf, type, platform FROM cdp_backup;
+DROP TABLE cdp_backup;
+
+----------------------------------------------------------------------------------------------------------------
+
+UPDATE OR REPLACE cdp SET nName=alternatenName WHERE nName IN (
+SELECT nName FROM cdp
+WHERE nName IN (
+SELECT nName FROM cdp
+GROUP BY nName
+HAVING (COUNT(nName) > 1))
+GROUP BY alternatenName
+HAVING (COUNT(alternatenName)<2)
+AND nName NOT IN (
+SELECT hostname FROM device) )
+
+
+
+
+SELECT nName FROM cdp
+WHERE nName IN (
+SELECT nName FROM cdp
+GROUP BY nName
+HAVING (COUNT(nName) > 1))
+GROUP BY alternatenName
+HAVING (COUNT(alternatenName)<2)
+AND nName NOT IN (
+SELECT hostname FROM device) 
+
+
+
+
+------------------------------------------------
+
+SELECT * FROM neighbor
+INNER JOIN nlink ON nlink.neighbor_neighbor_id=neighbor.neighbor_id
+INNER JOIN interfaces ON interfaces.intf_id=nlink.interfaces_intf_id
+INNER JOIN device ON devInterface.device_dev_id=device.dev_id
+INNER JOIN devInterface ON devInterface.interfaces_int_id=interfaces.intf_id
+WHERE device.hostname LIKE 'LA-QURUM-1-3560'
+
+------------------------------------------------------
+
+SELECT intf_id, intfname FROM interfaces 
+INNER JOIN nlink ON nlink.interfaces_intf_id=interfaces.intf_id
+INNER JOIN neighbor ON neighbor.neighbor_id=nlink.neighbor_neighbor_id 
+WHERE neighbor.l2_addr LIKE '0050.569d.1287' AND intf_id NOT IN (SELECT int_vlan.interfaces_intf_id FROM int_vlan) AND interfaces.l2l3 LIKE 'L2'
+
+---------------------------------------------------------
+
+
+SELECT stpProtocol FROM device WHERE stpProtocol NOT LIKE '' GROUP BY stpProtocol 
+
+SELECT stpProtocol, COUNT (stpProtocol) FROM device WHERE stpProtocol NOT LIKE '' GROUP BY stpProtocol 
+
+--------------------------------------------
+
+	
+	
+SELECT intf_id,device.dev_id FROM interfaces 
+INNER JOIN nlink ON nlink.interfaces_intf_id=interfaces.intf_id 
+INNER JOIN neighbor ON neighbor.neighbor_id=nlink.neighbor_neighbor_id 
+INNER JOIN devInterface ON devInterface.interfaces_int_id=interfaces.intf_id 
+INNER JOIN device ON device.dev_id=devInterface.device_dev_id 
+WHERE neighbor.l2_addr LIKE '00d0.9307.f9cb' 
+AND intf_id NOT IN 
+(SELECT DISTINCT int_vlan.interfaces_intf_id FROM int_vlan) 
+AND interfaces.l2l3 LIKE 'L2' 
+
+
+
+SELECT intf_id,device.dev_id FROM interfaces INNER JOIN nlink ON nlink.interfaces_intf_id=interfaces.intf_id INNER JOIN neighbor ON neighbor.neighbor_id=nlink.neighbor_neighbor_id INNER JOIN devInterface ON devInterface.interfaces_int_id=interfaces.intf_id INNER JOIN device ON device.dev_id=devInterface.device_dev_id WHERE neighbor.l2_addr LIKE '0021.5efb.2668' AND intf_id NOT IN (SELECT DISTINCT int_vlan.interfaces_intf_id FROM int_vlan) AND interfaces.l2l3 LIKE 'L2' AND intf_id > (SELECT MAX(intf_id) FROM rControl)
+
+-------------------------------------------------------
+
+SELECT DISTINCT dev_id,hostname,stpBridgeID,stpProtocol,snmpLoc,hwInfo.sn,hwInfo.type,hwInfo.bootfile,hwInfo.sw_version FROM device 
+INNER JOIN hwlink ON hwlink.device_dev_id=device.dev_id
+INNER JOIN hwInfo ON hwInfo.hwinf_id=hwlink.hwInfo_hwinf_id
+INNER JOIN devInterface ON devInterface.device_dev_id=device.dev_id
+INNER JOIN interfaces ON interfaces.intf_id=devInterface.interfaces_int_id
+
+WHERE stpProtocol NOT LIKE '' AND hwInfo.module LIKE 'box'
+
+
+SELECT device.hostname,hwInfo.type,interfaces.ipAddress FROM device
+INNER JOIN hwlink ON hwlink.device_dev_id=device.dev_id
+INNER JOIN hwInfo ON hwInfo.hwinf_id=hwlink.hwInfo_hwinf_id
+INNER JOIN devInterface ON devInterface.device_dev_id=device.dev_id
+INNER JOIN interfaces ON interfaces.intf_id=devInterface.interfaces_int_id
+WHERE dataSource=1 AND hostname LIKE 'SEP%' AND interfaces.intfName LIKE 'port 1'
+
+
+Duplikate finden: (cdp gelernt und geparst)
+===========================================
+SELECT hostname,snmpLoc,dataSource,interfaces.ipAddress FROM device 
+INNER JOIN devInterface ON devInterface.device_dev_id=device.dev_id
+INNER JOIN interfaces ON interfaces.intf_id=devInterface.interfaces_int_id
+WHERE interfaces.ipAddress IN (SELECT interfaces.ipAddress FROM device
+INNER JOIN hwlink ON hwlink.device_dev_id=device.dev_id
+INNER JOIN hwInfo ON hwInfo.hwinf_id=hwlink.hwInfo_hwinf_id
+INNER JOIN devInterface ON devInterface.device_dev_id=device.dev_id
+INNER JOIN interfaces ON interfaces.intf_id=devInterface.interfaces_int_id
+WHERE dataSource=1 AND hostname LIKE 'SEP%' AND interfaces.intfName LIKE 'port 1')
+
+
+---------------------------------------------------------------------
+UPDATE neighborship SET flag=0 WHERE flag=1 AND dI_intf_id NOT IN (SELECT col FROM(
+SELECT dI_intf_id AS col FROM neighborship WHERE flag=1 UNION ALL SELECT dI_intf_id1  AS col FROM neighborship WHERE flag=1)
+GROUP BY col HAVING COUNT(*)>1) AND dI_intf_id1 NOT IN (SELECT col FROM(SELECT dI_intf_id AS col FROM neighborship WHERE flag=1
+UNION ALL SELECT dI_intf_id1  AS col FROM neighborship WHERE flag=1) GROUP BY col HAVING COUNT(*)>1)
+
+-------------------------------------------------------------------------------
+1) Alle Boxen und Interfaces mit vPC Peer Link finden
+SELECT intf_id,devInterface.device_dev_id FROM interfaces 
+INNER JOIN devInterface ON devInterface.interfaces_int_id=interfaces.intf_id
+WHERE vpc_id IN (SELECT vpc_id FROM interfaces WHERE intfName LIKE 'vPC Peer-Link')
+
+"21296","Po4096","263","RZ1NC1"
+"21484","Po4096","264","RZ1NC2"
+"21598","Po4096","266","RZ3NC3"
+"21651","Po4096","267","RZ3NC4"
+
+2) Das Gegenüber finden:
+SELECT DISTINCT intf_id,devInterface.device_dev_id FROM neighbor
+INNER JOIN nlink ON nlink.neighbor_neighbor_id=neighbor.neighbor_id
+INNER JOIN interfaces ON interfaces.intf_id=nlink.interfaces_intf_id
+INNER JOIN devInterface ON devInterface.interfaces_int_id=interfaces.intf_id
+WHERE l2_addr IN (SELECT DISTINCT macAddress FROM interfaces
+INNER JOIN devInterface ON devInterface.interfaces_int_id=interfaces.intf_id
+WHERE devInterface.device_dev_id=263)
+AND intf_id IN (SELECT intf_id FROM interfaces WHERE vpc_id IN (SELECT vpc_id FROM interfaces WHERE intfName LIKE 'vPC Peer-Link'))
+
+------------------------------------------------------------------------------------------------------
+
+SELECT DISTINCT intf_id, intfname,intfType FROM interfaces 
+INNER JOIN nlink ON nlink.interfaces_intf_id=interfaces.intf_id
+INNER JOIN neighbor ON neighbor.neighbor_id=nlink.neighbor_neighbor_id 
+INNER JOIN devInterface ON devInterface.interfaces_int_id=interfaces.intf_id
+INNER JOIN device ON device.dev_id=devInterface.device_dev_id 
+WHERE neighbor.l2_addr LIKE '0050.5698.002f' 
+AND l2l3 LIKE 'L2' AND intf_id NOT IN (
+SELECT int_vlan.interfaces_intf_id FROM int_vlan) AND device.hwtype=2
+AND intf_id NOT IN ( 
+SELECT dI_intf_id FROM neighborship WHERE dI_intf_id1 IN (
+SELECT dI_intf_id1 FROM neighborship
+INNER JOIN devInterface ON devInterface.interfaces_int_id=neighborship.dI_intf_id1
+INNER JOIN device ON device.dev_id=devInterface.device_dev_id 
+WHERE device.hwtype=2))
+AND intf_id NOT IN (
+SELECT dI_intf_id1 FROM neighborship WHERE dI_intf_id IN (
+SELECT dI_intf_id FROM neighborship
+INNER JOIN devInterface ON devInterface.interfaces_int_id=neighborship.dI_intf_id
+INNER JOIN device ON device.dev_id=devInterface.device_dev_id 
+WHERE device.hwtype=2))
+
+-----------------------------------------------------------------------------------------------
+-- AP Hostnamenproblem lösen:
+-- Bei Verwendung von WLCs heißen alle APs ähnlich -> AP01.abc; AP01.abe; AP01.abf
+-- Daher werden in der cdp Tabelle beide Namen verwendet -> nName (Name bis Punkt) und alternatenName (kompletter Name)
+-- Jetzt muss überprüft werden, ob es mehrere Einträge für nName gibt, aber alternatenName unterschiedlich ist
+-- In dem Fall wird alternatenName in die Device Tabelle geschrieben
+
+UPDATE OR REPLACE cdp SET nName=alternatenName 
+WHERE nName IN ( 
+SELECT nName FROM cdp WHERE nName IN (
+SELECT nName FROM cdp GROUP BY nName HAVING (COUNT(nName) > 1)
+AND cdp_id > (SELECT MAX(cdp_id) FROM rControl)) 
+GROUP BY alternatenName HAVING (COUNT(alternatenName)<2) 
+AND nName NOT IN (SELECT hostname FROM device))
+AND cdp_id > (SELECT MAX(cdp_id) FROM rControl)
+
+

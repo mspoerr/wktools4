@@ -1,0 +1,3 @@
+BIN2C.COM about.htm htms1 about
+BIN2C.COM wktools.htm htms1 wktools
+BIN2C.COM lic.htm htms1 lic

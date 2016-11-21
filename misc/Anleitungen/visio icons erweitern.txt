@@ -1,0 +1,15 @@
+* Icon in ein leeres Visio Dokument geben 
+* Textbox dazufügen und gruppieren
+* Neues Stencil erstellen und die Gruppe in die Shape Liste ziehen (https://office.microsoft.com/de-at/visio-help/erstellen-eines-shapes-HA101782576.aspx)
+* Als vdx abspeichern; Filename in .xml ändern
+* Mit Notepad++ öffnen und alle "<" gegen "<\r\n" ändern
+* Den gewünschten Master raussuchen und in test.vdx kopieren; ID und Name ändern
+* Den Textbox Shape Teil von einem anderen Master kopieren und beim neuen überschreiben
+* Den Shape im Dokument zusammenkürzen und ein Template machen
+* In test.vdx einfügen
+* test.vdx testen
+* Wenn alles ok, dann den Master in visio.xml einfügen (\res Folder)
+* D:\doku\PROGRA~1\VISUAL~1\wktools4\wktools4\res>bin2c visio.xml VISIO visioVdxStart
+* visio.h nach wktools4 Sourceverzeichnis kopieren
+* visio.h editieren: "static const char"
+* Code anpassen

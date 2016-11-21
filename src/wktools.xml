@@ -1,0 +1,94 @@
+<?xml version="1.0" ?>
+<wktools>
+    <Settings>
+        <!-- Global Settings for wktools -->
+        <!-- ud: 0 - do not look for Updates // 1 -> look for Updates -->
+        <!-- um: 0 - no Message // 1 -> Message Popup when newer Version is available -->
+        <Updater ud="0" um="1" />
+        <!-- Window Sizing Settings -->
+        <sizing xPos="-8" yPos="-8" width="1394" height="912" AusgabeSplitter="437" MainSplitter="501" />
+        <toolSizing wkn="250" wke="252" wkl="250" wkc="" wkdp="250" wkp="" sets="" sched="250" glSets="180" wkm="250" />
+        <MiscSettings Highlight="1" xmlLoc="\\srvcolt01.nts.at\wktools\wktools.xml" extras="UseMapper" />
+        <FontSettings FontFamily="74" FontName="MS Shell Dlg 2" FontSize="8" FontStyle="90" FontWeight="90" FontUnderline="0" />
+        <SQLSettings UseSql="1" sqlSrv="srvcolt01.nts.at" sqlUsr="max" sqlPwd="gruen1" />
+        <DirMapping Win="D:\temp\" Linux="/home/temp/" />
+    </Settings>
+    <wkn>
+        <!-- Settings for ConfigMaker -->
+        <!-- String Settings: df: "Data File" // lf: "Replace LineFeed" // config: "Config File" // log: "Log file" // output: "Output Directory" // fv: "Filename Variable" // sep: "Seperator" -->
+        <!-- INTSettings: format: "non-standard Format" // flex: "Flexible Data File" // tags: "Use Tags" // cycle: "Cycle Count" // useSep: "Use Seperator as placeholder end" // modus: "Modus" // append: "Append output if..." -->
+        <Profile name="DEFAULT">
+            <StringSettings />
+            <INTSettings />
+        </Profile>
+    </wkn>
+    <wke>
+        <!-- Settings for Configure Devices -->
+        <!-- Column Setting for Device Group View -->
+        <DG_COL Col1="50" Col2="100" Col3="100" Col4="100" Col5="100" Col6="340" Col7="69" Col8="54" Col9="100" Col10="130" />
+        <!-- Debug Settings: tx: "Send Data" // rx: "Receive Data" // function: "Function Calls" // bufTest: "BufTest Return Value" // hostname: "Get Hostname" // bufTestDet: "BufTest Detail" // showO: "Show Output" -->
+        <!-- IntSettings: dynConf: "dynamic (ConfigFile Settings)" // defCon: "default" // dynPW: "dynamic (Password Settings)" // clearPW: "visible" // Raute: "Wait for reply" // logsy: "Configure logging sync" // devGroup: "Use Device Groups" // append: "Append" // login: "Command in case of wrong password" -->
+        <!-- ComboSettings: Modus: "Modus" // ModArt: "Type" // showA: "Sow Output" // TSC: "Terminal Server Connection" -->
+        <!-- FileSettings: Hosts: "IP address file" // Config: "Config File" // ConfDir: "dyn Config Folder" // defConFile: "Default Config File" // ext: "File extension" // devGF: "DeviceGroup File" -->
+        <!-- Settings: User: "Username" // lopw: "Login Password" // enpw: "Enable Password" // avz: "Output Directory" // ena: "Exec Mode" // logfile: "Log File" // mHop: "Multihop Command" // port: "Telnet/SSH Port" -->
+        <Profile name="DEFAULT">
+            <Settings Hosts="\\srvcolt01.nts.at\wktools\testkunde\ip.txt" Config="\\srvcolt01.nts.at\wktools\testkunde\conf.txt" User="" lopw="" enpw="" mHop="" port="" showPat="" ena="" hostid="430" logfile="\\srvcolt01.nts.at\wktools\log.txt" avz="\\srvcolt01\wktools\testkunde\" />
+            <IntSettings devGroup="0" cOption="0" TSC="0" showA="0" append="0" login="0" Raute="0" logSy="0" clearPW="0" Modus="4" ModArt="0" tx="0" rx="0" function="0" bufTest="0" hostname="0" bufTestDet="0" showO="0" />
+        </Profile>
+        <Profile name="testkunde">
+            <Settings Hosts="\\srvcolt01.nts.at\wktools\testkunde\ip.txt" Config="\\srvcolt01.nts.at\wktools\testkunde\conf.txt" ConfDir="" defConFile="" ext="" devGF="" User="" lopw="" enpw="" avz="\\srvcolt01\wktools\testkunde\" ena="" logfile="\\srvcolt01.nts.at\wktools\log.txt" mHop="" port="" showPat="" hostid="430" />
+            <IntSettings Modus="4" ModArt="0" showA="0" TSC="0" cOption="0" dynPW="0" clearPW="0" Raute="0" logSy="0" devGroup="0" append="0" login="0" tx="0" rx="0" function="0" bufTest="0" hostname="0" bufTestDet="0" showO="0" />
+        </Profile>
+        <Profile name="testkunde1">
+            <Settings Hosts="" Config="" ConfDir="" defConFile="" ext="" devGF="\\srvcolt01\wktools\testkunde\tempDevGroup.txt" User="" lopw="" enpw="" avz="\\srvcolt01\wktools\testkunde\" ena="" logfile="\\srvcolt01.nts.at\wktools\log.txt" mHop="" port="" showPat="" hostid="nts_vm-nts" />
+            <IntSettings Modus="4" ModArt="0" showA="0" TSC="0" cOption="0" dynPW="0" clearPW="0" Raute="0" logSy="0" devGroup="1" append="0" login="0" tx="0" rx="0" function="0" bufTest="0" hostname="0" bufTestDet="0" showO="0" />
+        </Profile>
+    </wke>
+    <wkl>
+        <!-- Settings for IP List -->
+        <!-- Settings: sVz: "Directory to search" // aVz: "Output Directory" // logfile: "Log File" // intfNr: "Interface Number" // search: "Search Pattern" // Intf: "Interface" -->
+        <Profile name="DEFAULT">
+            <Settings />
+        </Profile>
+    </wkl>
+    <wkc>
+        <!-- Settings for Compare Files -->
+        <!-- StringSettings: File1: "File 1" // File2: "File 2" // aVz: "Output Directory" // aName: "Output Filename"-->
+        <!-- INTSettings: Case: "Case" // Indent: "Indent"-->
+        <Profile name="DEFAULT">
+            <StringSettings />
+            <INTSettings />
+        </Profile>
+    </wkc>
+    <wkdp>
+        <!-- Settings for Device Information Parser -->
+        <!-- IntSettings: SNMPLocCol: "SNMP Location Columns" // Tool: 0: "Inventroy Parser" ; 1: "Interface Parser" // Append: "Append" // Col1 - Col10: "Show the following Columns" ; 0: "don't show" ; 1: "show" // Description: "Don't collect Interface Descriptions" // ChassisOnly: "Only collect Chassis Information" -->
+        <!-- StringSettings: sD: "Search Directory // oD: "Output Directory" // LogFile: "Log File" // oFile: "Output Filename" // Pattern: "Search Pattern" -->
+        <Profile name="DEFAULT">
+            <IntSettings />
+            <StringSettings />
+        </Profile>
+    </wkdp>
+    <wkp>
+        <!-- Settings for PIX Tools -->
+        <!-- StringSettings: IP: "IP Address" // User: "Username" // lopw: "Login Password" // enpw: "Enable Password" // Modus: "Modus" -->
+        <!-- INTSettings: upwClear: "visible" -->
+        <Profile name="DEFAULT">
+            <StringSettings />
+            <INTSettings />
+        </Profile>
+    </wkp>
+    <Scheduler>
+        <!-- Settings for Scheduler -->
+        <!-- ColumnSetting: Col1-Col8: width of the columns in Pixel -->
+        <!-- StringSettings: SchedFile: "Scheduler File"-->
+        <ColumnSettings Col1="50" Col2="100" Col3="100" Col4="100" Col5="153" Col6="100" Col7="100" Col8="100" />
+        <StringSettings SchedFile="" />
+    </Scheduler>
+    <wkm>
+        <Profile name="DEFAULT">
+            <StringSettings sD="" oD="" LogFile="" Pattern="" />
+            <IntSettings ParseNew="0" AnalyzeNew="0" />
+        </Profile>
+    </wkm>
+</wktools>
