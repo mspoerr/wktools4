@@ -321,7 +321,8 @@
 #include "class_verbinder.h"
 #include "base64.h"
 
-# include "sshlib.h"
+//# include "sshlib.h"
+#include "libsshpp.hpp"
 
 
 // Konstruktor:
