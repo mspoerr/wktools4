@@ -5805,6 +5805,11 @@ uint Verbinder::consoleVerbindung(std::string adresse, uint status, uint modus, 
 // sshVerbindung
 //**************
 // ssh Verbindung zum gewünschten Host aufbauen
+/*
+--------------------
+alte version, basierend auf cryptlib
+--------------------
+
 uint Verbinder::sshVerbindung(std::string adresse, uint status, uint modus, dqstring conf, int idx)
 {
 	if (debugFunctionCall)
@@ -5832,7 +5837,7 @@ uint Verbinder::sshVerbindung(std::string adresse, uint status, uint modus, dqst
 		}
 		catch (boost::bad_lexical_cast &)
 		{
-			sshPort = 22;			
+			sshPort = 22;
 		}
 	}
 	initVerbinderVars();
@@ -5889,7 +5894,7 @@ uint Verbinder::sshVerbindung(std::string adresse, uint status, uint modus, dqst
 				retKeyPos++;
 			}
 			// Pos 2
-			retKey = cryptSetAttribute(cryptSession, CRYPT_SESSINFO_SERVER_PORT, sshPort);		
+			retKey = cryptSetAttribute(cryptSession, CRYPT_SESSINFO_SERVER_PORT, sshPort);
 			if (retKey == CRYPT_OK)
 			{
 				retKeyPos++;
@@ -5925,13 +5930,13 @@ uint Verbinder::sshVerbindung(std::string adresse, uint status, uint modus, dqst
 			}
 			// Activate the session - Pos 5
 			retKey = cryptSetAttribute(cryptSession, CRYPT_SESSINFO_ACTIVE, 1);
-			
+
 			if (retKey != CRYPT_OK)
 			{
 				std::string errStr = "";
 				int errorCode, errorStringLength;
 				char *errorString = new char[1000];
-				cryptGetAttribute(cryptSession, CRYPT_ATTRIBUTE_ERRORTYPE,	&errorCode );
+				cryptGetAttribute(cryptSession, CRYPT_ATTRIBUTE_ERRORTYPE, &errorCode);
 				cryptGetAttributeString(cryptSession, CRYPT_ATTRIBUTE_ERRORMESSAGE, errorString, &errorStringLength);
 				try
 				{
@@ -5950,11 +5955,11 @@ uint Verbinder::sshVerbindung(std::string adresse, uint status, uint modus, dqst
 
 				std::string errMessage1 = "2411: SSH error <" + bla11 + "><" + bla10 + "><" + bla12 + ">" + errStr;
 				schreibeLog(errMessage1, FEHLER, "2411");
-				
+
 				cryptDestroySession(cryptSession);
 
 				std::string errMessage = " :Connection error with " + adresse;
-				
+
 				// SSH Fallback wird auskommentiert, da SSHv1 mit der aktuellen Cryptlib Version nicht unterstützt wird
 				//if (!sshFallback)
 				//{
@@ -5966,9 +5971,9 @@ uint Verbinder::sshVerbindung(std::string adresse, uint status, uint modus, dqst
 				//}
 				//else
 				//{
-					errMessage = "2204" + errMessage;
-					schreibeLog(errMessage, SYSTEMFEHLER, "2204");
-					return SOCKETERROR;
+				errMessage = "2204" + errMessage;
+				schreibeLog(errMessage, SYSTEMFEHLER, "2204");
+				return SOCKETERROR;
 				//}
 			}
 			else
@@ -5981,13 +5986,13 @@ uint Verbinder::sshVerbindung(std::string adresse, uint status, uint modus, dqst
 	}
 	else
 	{
-		int retKey = cryptPopData(cryptSession, buf, BUFFER_SIZE-1, &bytes);
+		int retKey = cryptPopData(cryptSession, buf, BUFFER_SIZE - 1, &bytes);
 		weiterEnter = true;
 	}
 
 	int wcounter = 0;
 
-	while(1)
+	while (1)
 	{
 		bool empf = false;			// Wurden Daten empfangen?
 
@@ -6003,7 +6008,7 @@ uint Verbinder::sshVerbindung(std::string adresse, uint status, uint modus, dqst
 		{
 			outBufZaehler = 0;
 
-			int retKey = cryptPopData(cryptSession, buf, BUFFER_SIZE-1, &bytes);
+			int retKey = cryptPopData(cryptSession, buf, BUFFER_SIZE - 1, &bytes);
 			if (retKey != CRYPT_OK)
 			{
 				if (fertig)
@@ -6047,7 +6052,7 @@ uint Verbinder::sshVerbindung(std::string adresse, uint status, uint modus, dqst
 						{
 							std::string bla11 = boost::lexical_cast<std::string>(timeoutCounter);
 							std::string bla12 = "\n2712: <BufTest Timeoutcounter: " + bla11;
-							bla12+= ">\n";
+							bla12 += ">\n";
 							schreibeLog(bla12, DEBUGFEHLER);
 						}
 						timeoutCounter--;
@@ -6076,7 +6081,7 @@ uint Verbinder::sshVerbindung(std::string adresse, uint status, uint modus, dqst
 			if (debugHex)
 			{
 				std::stringstream hValStr;
-				for (int i=0; i < bytes; i++)
+				for (int i = 0; i < bytes; i++)
 				{
 					int hValInt = (char)buf[i];
 					hValStr << "0x" << std::hex << hValInt << " ";
@@ -6124,9 +6129,9 @@ uint Verbinder::sshVerbindung(std::string adresse, uint status, uint modus, dqst
 				}
 
 				// BEL am Ende löschen (0x07)
-				if (eBuf[eBuf.length()-1] == 0x07)
+				if (eBuf[eBuf.length() - 1] == 0x07)
 				{
-					eBuf.erase(eBuf.length()-1);
+					eBuf.erase(eBuf.length() - 1);
 				}
 				if (debugEmpfangen)
 				{
@@ -6148,7 +6153,7 @@ uint Verbinder::sshVerbindung(std::string adresse, uint status, uint modus, dqst
 				{
 					std::string bla11 = boost::lexical_cast<std::string>(bufTest);
 					std::string bla12 = "\n2712: <BufTest = " + bla11;
-					bla12+= ">\n";
+					bla12 += ">\n";
 					schreibeLog(bla12, DEBUGFEHLER);
 				}
 
@@ -6200,7 +6205,7 @@ uint Verbinder::sshVerbindung(std::string adresse, uint status, uint modus, dqst
 			if (debugHex)
 			{
 				std::stringstream hValStr;
-				for (int i=0; i < outBufZaehler; i++)
+				for (int i = 0; i < outBufZaehler; i++)
 				{
 					int hValInt = (char)outBuf[i];
 					hValStr << "0x" << std::hex << hValInt << " ";
@@ -6247,6 +6252,504 @@ uint Verbinder::sshVerbindung(std::string adresse, uint status, uint modus, dqst
 	if ((MODUS == NEU) || (MODUS == ENDE))
 	{
 		cryptDestroySession(cryptSession);
+	}
+	wznip = WZNIP;
+	schreibeLog("\n2612: Next IP\n", INFO, "2612");
+	wznip = 0;
+
+	delete[] buf;
+	return GUT;
+}
+*/
+//-------------------
+//Neue Version, basierend auf libssh
+//-------------------
+
+uint Verbinder::sshVerbindung(std::string adresse, uint status, uint modus, dqstring conf, int idx)
+{
+	if (debugFunctionCall)
+	{
+		schreibeLog("\n2701: <DEBUG Function Call: Verbinder - sshVerbindung>\n", DEBUGFEHLER);
+	}
+
+	MODUS = modus;				// Welcher Modus wird verwendet? -> global NEU oder WEITER
+	STATUS = status;			// Welchen Status hat MODUS? -> NEU oder WEITER
+	ip = adresse;				// Die IP Adresse des zu bearbeitenden Hosts
+	config = conf;				// Die Konfiguration die eingespielt werden soll
+	uint sshPort = 0;			// Portnummer
+	bool weiterEnter = false;	// Wenn STATUS != NEU dann soll ein Enter als erstes geschickt werden.
+	index = idx;				// Index der IP Adresse, der für die Fehlerausgab im Log mitgeschickt wird
+
+	if (vPort == "")
+	{
+		sshPort = 22;
+	}
+	else
+	{
+		try
+		{
+			sshPort = boost::lexical_cast<int>(vPort);
+		}
+		catch (boost::bad_lexical_cast &)
+		{
+			sshPort = 22;
+		}
+	}
+	initVerbinderVars();
+
+
+	// "term len 0" muss gesendet werden. Falls zusätzlich noch "logging sync" konfiguriert wird, wird das hier hinzugefügt
+	if (iosAnfangsSettings == LOGGSYNC)
+	{
+		iosAnfangsSettings = TLULS;
+	}
+	else
+	{
+		iosAnfangsSettings = TERMLEN;
+	}
+
+	int bytes = 0;						// Anzahl der empfangenen Bytes
+	uint bufTest = UNDEFINIERT;			// Anfangswert von bufTest -> wird dazu verwendet, um das Ergebnis der Empfangspufferauswertung abzuspeichern
+	std::string eBuf;					// Empfangsdaten in c++-std::string-Form
+	char *buf = new char[BUFFER_SIZE];	// Empfangsdaten, die dann in einem c++-String abgespeichert werden
+	bool sshFallback = false;			// Fallback auf SSHv1 aktivieren?
+
+
+										// Bei einer neuen Verbindung wird die Crypt Session neu erstellt. 
+										// Danach wird eine Verbindung mit dem Remote Host hergestellt
+	if (STATUS == NEU)
+	{
+		std::string uname;
+		std::string logpw;
+		size_t pos = 0;
+
+		pos = username[0].find_first_of("\r\n");
+		uname = username[0].substr(0, pos);
+		user = uname;
+
+		pos = loginpass[0].find_first_of("\r\n");
+		logpw = loginpass[0].substr(0, pos);
+
+		while (1)
+		{
+			int retKeyPos = 0;
+			// Create the session - Pos 0
+			int retKey;
+
+			session = ssh_new();								//!!TODO!! SSH_FREE()
+			// Add the server name, user name, and password
+			if (session != NULL)	//new session successfuly created
+			{
+				retKeyPos++;
+			}
+			// Pos 1
+			retKey = ssh_options_set(session, SSH_OPTIONS_HOST, adresse.c_str());
+			if (retKey == NULL)
+			{
+				retKeyPos++;
+			}
+			// Pos 2
+			retKey = ssh_options_set(session, SSH_OPTIONS_PORT, &sshPort);
+			if (retKey == NULL)
+			{
+				retKeyPos++;
+			}
+			// Pos 3
+			retKey = ssh_options_set(session, SSH_OPTIONS_USER, uname.c_str());
+			if (retKey == NULL)
+			{
+				retKeyPos++;
+			}
+			// Pos 4
+			if (sshFallback)
+			{
+				sshVersion = 1;
+				retKey = ssh_options_set(session, SSH_OPTIONS_SSH1, &sshVersion);
+			}
+			else
+			{
+				sshVersion = 1;
+				retKey = ssh_options_set(session, SSH_OPTIONS_SSH2, &sshVersion);
+			}
+
+			if (retKey == NULL)
+			{
+				retKeyPos++;
+			}
+			// Activate the session - Pos 5
+			std::string errStr = ""; 
+			retKey = ssh_connect(session);
+			if (retKey != SSH_OK)
+				errStr += ssh_get_error(session);
+			//retKeyPos++;
+
+			retKey = ssh_userauth_password(session, NULL, logpw.c_str());
+			if (retKey != SSH_OK)
+			{
+				ssh_disconnect(session);
+				errStr += " | ";
+				errStr += ssh_get_error(session);
+			}
+			//retKeyPos++;
+
+			channel = ssh_channel_new(session);
+			if (channel != NULL)
+			{
+				//kontroliertes beenden bei NULL?
+				retKeyPos++;
+			}
+
+			retKey = ssh_channel_open_session(channel);
+			if (retKey != SSH_OK)
+			{
+				ssh_channel_free(channel);
+				ssh_disconnect(session);
+				errStr += " | ";
+				errStr = ssh_get_error(session);
+			}
+			//retKeyPos++;
+
+			retKey = ssh_channel_request_pty(channel);
+			if (retKey != SSH_OK)
+			{
+				ssh_channel_free(channel);
+				ssh_disconnect(session);
+				errStr += " | ";
+				errStr = ssh_get_error(session);
+			}
+
+			retKey = ssh_channel_request_shell(channel);
+			if (retKey != SSH_OK)
+			{
+				ssh_channel_free(channel);
+				ssh_disconnect(session);
+				errStr += " | ";
+				errStr += ssh_get_error(session);
+			}
+
+			if (!errStr.empty())
+			{
+				std::string bla10 = boost::lexical_cast<std::string>(retKey);
+				std::string bla11 = boost::lexical_cast<std::string>(retKeyPos);
+				std::string bla12 = boost::lexical_cast<std::string>(sshVersion);
+
+				std::string errMessage1 = "2411: SSH error <" + bla11 + "><" + bla10 + "><" + bla12 + ">" + errStr;
+				schreibeLog(errMessage1, FEHLER, "2411");
+
+				ssh_free(session);
+
+				std::string errMessage = " :Connection error with " + adresse;
+
+				if (!sshFallback)
+				{
+					errMessage = "\n2406" + errMessage;
+					errMessage += " - Fallback to SSHv1";
+					sshFallback = true;
+					schreibeLog(errMessage, INFO, "2406");
+					continue;
+				}
+				else
+				{
+					errMessage = "2204" + errMessage;
+					schreibeLog(errMessage, SYSTEMFEHLER, "2204");
+					return SOCKETERROR;
+				}
+			}
+			else
+			{
+				erfolgreich = true;
+			}
+			vne = false;
+			break;
+		}
+	}
+	else
+	{
+		int retKey = ssh_channel_read(channel, buf, BUFFER_SIZE - 1, false);
+		//errorcheck of retKey?
+		weiterEnter = true;
+	}
+
+	int wcounter = 0;
+
+  //while(ssh_channel_is_open(channel) && !ssh_channel_is_eof(channel))
+	while (1)
+	{
+		bool empf = false;			// Wurden Daten empfangen?
+
+		if (vne || weiterEnter)
+		{
+			strcpy(outBuf, "\n");
+			outBufZaehler = 1;
+			bufTest = ENTER;
+			vne = false;
+			weiterEnter = false;
+		}
+		else
+		{
+			outBufZaehler = 0;
+
+			int retKey = ssh_channel_read(channel, buf, BUFFER_SIZE - 1, &bytes);
+			if (retKey <= 0)
+			{
+				if (fertig)
+				{
+					break;
+				}
+				else if (zuletztGesendet.find("exit") != zuletztGesendet.npos)
+				{
+					break;
+				}
+				else
+				{
+					if (retKey == SSH_ERROR)
+					{
+						ssh_channel_free(channel);
+						ssh_disconnect(session);
+						std::string errStr = ssh_get_error(session);
+
+						schreibeLog("2204: " + errStr, SYSTEMFEHLER, "2204");
+						return ERROR;
+					}
+					else
+					{
+						std::string errMessage = "2205: No connection with " + adresse;
+						schreibeLog(errMessage, SYSTEMFEHLER, "2205");
+						return NOCONN;
+						break;
+					}
+				}
+			}
+
+			buf[bytes] = 0x00;
+
+			if (!bytes)
+			{
+				// Falls 30 Sekunden (300x100ms) nichts empfangen wurde, dann soll die Verbindung abgebrochen werden
+				if (wcounter > 100)
+				{
+					if (!timeoutCounter)
+					{
+						std::string errMessage = "2212: Timeout - no data received within the last 30 seconds from " + adresse;
+						schreibeLog(errMessage, SYSTEMFEHLER, "2212");
+						empf = false;
+						cancelVerbindung = true;
+						break;
+						//return NOCONN;
+					}
+					else
+					{
+						empf = false;
+						bytes = 2;
+						if (debugBufTester)
+						{
+							std::string bla11 = boost::lexical_cast<std::string>(timeoutCounter);
+							std::string bla12 = "\n2712: <BufTest Timeoutcounter: " + bla11;
+							bla12 += ">\n";
+							schreibeLog(bla12, DEBUGFEHLER);
+						}
+						timeoutCounter--;
+					}
+				}
+
+#ifdef _WINDOWS_
+				Sleep(100);
+#else
+				usleep(100000);
+#endif			
+				if (!bytes)
+				{
+					wcounter++;
+					continue;
+				}
+			}
+			else
+			{
+				empf = true;
+				timeoutCounter = 2;
+			}
+			wcounter = 0;
+
+			// HEX Ausgabe vom buf
+			if (debugHex)
+			{
+				std::stringstream hValStr;
+				for (int i = 0; i < bytes; i++)
+				{
+					int hValInt = (char)buf[i];
+					hValStr << "0x" << std::hex << hValInt << " ";
+				}
+				schreibeLog("\n2718: <buf><HEX><" + hValStr.str() + ">", DEBUGFEHLER);
+			}
+
+			if (!empf)
+			{
+				strcpy(outBuf, "\n");
+				outBufZaehler = 1;
+				bufTest = ENTER;
+				if (debugBufTester)
+				{
+					std::string bla12 = "\n2712: <BufTest SSHVerbinder empf=false - ENTER>\n";
+					schreibeLog(bla12, DEBUGFEHLER);
+				}
+
+			}
+			else
+			{
+				if (NICHTSaendertBufTest && (bytes > 15))
+				{
+					// Der loginBufTester muss aber informiert werden, dass es sich jetzt um kein neues Gerät handelt.
+					bufTester = &Verbinder::loginBufTester;	// Den bufTester auf login stellen
+					strcpy(outBuf, "");
+					bufTestAenderung = true;
+					NICHTSaendertBufTest = false;
+					keepWLC = false;
+					if (debugBufTester)
+					{
+						schreibeLog("\n2702: <DEBUG BufTester: NICHTSaendertBufTest FALSE>\n", DEBUGFEHLER);
+						schreibeLog("\n2702: <bufTestChange sshVerbindung>", DEBUGFEHLER);
+					}
+
+				}
+
+				// Auswerten der Daten
+				eBuf = buf;
+				if (nullEaterEnable)
+				{
+					// Bei CatOS können "NULL" Zeichen mitten in den Daten vorkommen. Um spätere Probleme zu beseitigen,
+					// werden diese herausgefiltert
+					eBuf = nullEater(eBuf);
+				}
+
+				// BEL am Ende löschen (0x07)
+				if (eBuf[eBuf.length() - 1] == 0x07)
+				{
+					eBuf.erase(eBuf.length() - 1);
+				}
+				if (debugEmpfangen)
+				{
+					std::string bla10 = boost::lexical_cast<std::string>(eBuf.length());
+					std::string bla12 = "2713: <Received Data Bytes: " + bla10;
+					bla12 += " / Received = <";
+					bla12 += eBuf;
+					bla12 += ">";
+					schreibeLog(bla12, DEBUGFEHLER);
+				}
+
+				eBuf = steuerzeichenEater(eBuf);
+
+				// Die Empfangsdaten in den Antwort String schreiben
+				antwort += eBuf;
+
+				bufTest = (*this.*bufTester)(eBuf, bufTest);
+				if (debugBufTester)
+				{
+					std::string bla11 = boost::lexical_cast<std::string>(bufTest);
+					std::string bla12 = "\n2712: <BufTest = " + bla11;
+					bla12 += ">\n";
+					schreibeLog(bla12, DEBUGFEHLER);
+				}
+
+				bufTest = outBufZusammensteller(bufTest, eBuf);
+				// Im debug Modus werden alle Daten am Bildschirm ausgegeben
+				if (bufTest == FEHLERMELDUNGALT)
+				{
+					// schreibeLog(eBuf, DEBUGFEHLER);
+				}
+				else
+				{
+					schreibeLog(eBuf, INFO);
+				}
+
+				zuletztEmpfangen = eBuf;
+
+				// Falls ein Fehler aufgetreten ist...
+				if ((bufTest == UNDEFINIERT) || (bufTest == WZNIP))
+				{
+					vne = true;
+					std::string error = "2303: " + fehler + " => Next IP Address!";
+					schreibeLog(error, SYSTEMFEHLER, "2303");
+					break;
+				}
+
+
+				// Überprüfen, ob die Verbindung abgebrochen werden soll
+				if (cancelVerbindung)
+				{
+					break;
+				}
+
+				// Wenn Pakete im Ausgangspuffer sind, werden diese jetzt gesendet, 
+				// sonst wird auf weitere Daten vom Gegenüber gewartet.
+
+			}
+		}
+
+		int sentBytes = 0;
+
+		if (outBufZaehler)
+		{
+			// Bei SSH gibt es ein Problem wenn \r\n gesendet wird 
+			// -> es darf nur \r gesendet werden.
+			// Darum wird der outbufZaehler um eins reduziert.
+			// outBufZaehler--;
+			int retKey = ssh_channel_write(channel, outBuf, outBufZaehler);
+			// HEX Ausgabe vom outbuf
+			if (debugHex)
+			{
+				std::stringstream hValStr;
+				for (int i = 0; i < outBufZaehler; i++)
+				{
+					int hValInt = (char)outBuf[i];
+					hValStr << "0x" << std::hex << hValInt << " ";
+				}
+				schreibeLog("\n2718: <outBuf><HEX><" + hValStr.str() + ">", DEBUGFEHLER);
+			}
+
+			if (retKey == SSH_ERROR)
+			{
+				std::string errMessage = "2205: ";
+				errMessage += ssh_get_error(session);
+				schreibeLog(errMessage, SYSTEMFEHLER, "2205");
+				ssh_channel_close(channel);
+				ssh_channel_free(channel);
+				ssh_free(session);
+				break;
+			}
+			ssh_blocking_flush(session, -1);
+			// Abspeichern der gesendeten Daten in zuletzGesendet, um im Fehlerfall noch einaml auf diese zurückgreifen zu können.
+			zuletztGesendet = outBuf;
+
+			if (debugSenden)
+			{
+				std::string sBytes = boost::lexical_cast<std::string>(sentBytes);
+				std::string bla10 = boost::lexical_cast<std::string>(outBufZaehler);
+				std::string bla12 = "2714: <Sent Bytes: " + sBytes + "><Sent Data Bytes: " + bla10;
+				bla12 += " / Send = <";
+				bla12 += outBuf;
+				bla12 += ">";
+				schreibeLog(bla12, DEBUGFEHLER);
+			}
+
+
+			if (sentBytes != outBufZaehler)
+			{
+				schreibeLog("2304: Could not send all data!", SYSTEMFEHLER, "2304");
+			}
+		}
+
+		if (bufTest == ENDE && warteRaute)
+		{
+			break;
+		}
+	}
+
+	// Falls STEL verwendet wird, oder bei MTEL die letzte IP Adresse abgearbeitet wurde...
+	if ((MODUS == NEU) || (MODUS == ENDE))
+	{
+		ssh_free(session);
+		ssh_channel_close(channel);
+		ssh_channel_free(channel);
 	}
 	wznip = WZNIP;
 	schreibeLog("\n2612: Next IP\n", INFO, "2612");

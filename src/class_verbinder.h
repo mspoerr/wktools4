@@ -10,7 +10,7 @@
 
 //#include <boost/asio/ssl.hpp>
 
-#include <cryptlib.h>
+//#include <cryptlib.h>
 
 #include "stdwx.h"
 #include "class_wkLog.h"
@@ -39,7 +39,8 @@ private:
 
 	static const uint BUFFER_SIZE;		// Buffergroeße für Sende/Empfangsbuffer
 
-	CRYPT_SESSION cryptSession;			// SSH Session
+	ssh_session session;					// SSH Session
+	ssh_channel channel;					// SSH Channel
 	std::string hostname;					// Hostname des gerade zu bearbeitenden Gerätes
 	std::string hostnameAlt;				// Hostname des vorigen Gerätes
 	std::string hostnameShowOutput;			// Hostname der für den show Output verwendet werden soll
