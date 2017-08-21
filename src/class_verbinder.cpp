@@ -321,7 +321,7 @@
 #include "class_verbinder.h"
 #include "base64.h"
 
-//# include "sshlib.h"
+# include "sshlib.h"
 #include "libsshpp.hpp"
 
 
@@ -4599,6 +4599,8 @@ bool Verbinder::consoleInit()
 	return false;
 }
 
+/*
+nicht mehr notwendig bei der verwendung von libssh
 
 // sshInit:
 //*********
@@ -4615,7 +4617,7 @@ bool Verbinder::sshInit()
 
 	return false;
 }
-
+*/
 
 // httpInit:
 //**********
@@ -6489,7 +6491,7 @@ uint Verbinder::sshVerbindung(std::string adresse, uint status, uint modus, dqst
 		{
 			outBufZaehler = 0;
 
-			int retKey = ssh_channel_read(channel, buf, BUFFER_SIZE - 1, &bytes);
+			int retKey = ssh_channel_read(channel, buf, BUFFER_SIZE - 1, bytes);
 			if (retKey <= 0)
 			{
 				if (fertig)
