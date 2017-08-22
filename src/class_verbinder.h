@@ -1,6 +1,8 @@
 #ifndef __VERBINDER__
 #define __VERBINDER__
 
+#define LIBSSH_STATIC 1
+
 #include <iostream>
 #include <string>
 #include <deque>
@@ -11,6 +13,7 @@
 //#include <boost/asio/ssl.hpp>
 
 #include <cryptlib.h>
+#include <libsshpp.hpp>
 
 #include "stdwx.h"
 #include "class_wkLog.h"

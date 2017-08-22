@@ -321,8 +321,8 @@
 #include "class_verbinder.h"
 #include "base64.h"
 
-# include "sshlib.h"
-#include "libsshpp.hpp"
+//# include "sshlib.h"
+//#include "libsshpp.hpp"
 
 
 // Konstruktor:
@@ -4601,7 +4601,7 @@ bool Verbinder::consoleInit()
 
 /*
 nicht mehr notwendig bei der verwendung von libssh
-
+*/
 // sshInit:
 //*********
 // zum Initialisieren aller nötigen SSH Parameter
@@ -4613,11 +4613,11 @@ bool Verbinder::sshInit()
 		schreibeLog("\n2701: <DEBUG Function Call: Verbinder - sshInit>\n", DEBUGFEHLER);
 	}
 
-	cryptInit();
+	//cryptInit();
 
 	return false;
 }
-*/
+
 
 // httpInit:
 //**********
