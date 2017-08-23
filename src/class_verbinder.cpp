@@ -6467,8 +6467,10 @@ uint Verbinder::sshVerbindung(std::string adresse, uint status, uint modus, dqst
 	}
 	else
 	{
-		int retKey = ssh_channel_read(channel, buf, BUFFER_SIZE - 1, false);
-		//errorcheck of retKey?
+		int retKey = -1;
+		while(retKey != SSH_OK)
+			retKey = ssh_channel_read_nonblocking(channel, buf, BUFFER_SIZE - 1, false);
+		
 		weiterEnter = true;
 	}
 
@@ -6491,8 +6493,8 @@ uint Verbinder::sshVerbindung(std::string adresse, uint status, uint modus, dqst
 		{
 			outBufZaehler = 0;
 
-			int retKey = ssh_channel_read(channel, buf, BUFFER_SIZE - 1, bytes);
-			if (retKey <= 0)
+			bytes = ssh_channel_read(channel, buf, BUFFER_SIZE - 1, false);
+			if (bytes <= 0)
 			{
 				if (fertig)
 				{
@@ -6504,7 +6506,7 @@ uint Verbinder::sshVerbindung(std::string adresse, uint status, uint modus, dqst
 				}
 				else
 				{
-					if (retKey == SSH_ERROR)
+					if (bytes == SSH_ERROR)
 					{
 						ssh_channel_free(channel);
 						ssh_disconnect(session);
@@ -6695,7 +6697,7 @@ uint Verbinder::sshVerbindung(std::string adresse, uint status, uint modus, dqst
 			// -> es darf nur \r gesendet werden.
 			// Darum wird der outbufZaehler um eins reduziert.
 			// outBufZaehler--;
-			int retKey = ssh_channel_write(channel, outBuf, outBufZaehler);
+			sentBytes = ssh_channel_write(channel, outBuf, outBufZaehler);
 			// HEX Ausgabe vom outbuf
 			if (debugHex)
 			{
@@ -6708,7 +6710,7 @@ uint Verbinder::sshVerbindung(std::string adresse, uint status, uint modus, dqst
 				schreibeLog("\n2718: <outBuf><HEX><" + hValStr.str() + ">", DEBUGFEHLER);
 			}
 
-			if (retKey == SSH_ERROR)
+			if (sentBytes == SSH_ERROR)
 			{
 				std::string errMessage = "2205: ";
 				errMessage += ssh_get_error(session);
@@ -6749,9 +6751,11 @@ uint Verbinder::sshVerbindung(std::string adresse, uint status, uint modus, dqst
 	// Falls STEL verwendet wird, oder bei MTEL die letzte IP Adresse abgearbeitet wurde...
 	if ((MODUS == NEU) || (MODUS == ENDE))
 	{
-		ssh_free(session);
-		ssh_channel_close(channel);
+		if(!ssh_channel_is_closed(channel))
+			ssh_channel_close(channel);
+
 		ssh_channel_free(channel);
+		ssh_free(session);
 	}
 	wznip = WZNIP;
 	schreibeLog("\n2612: Next IP\n", INFO, "2612");
