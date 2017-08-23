@@ -1,6 +1,8 @@
 #ifndef __VERBINDER__
 #define __VERBINDER__
 
+#define LIBSSH_STATIC 1
+
 #include <iostream>
 #include <string>
 #include <deque>
@@ -11,6 +13,7 @@
 //#include <boost/asio/ssl.hpp>
 
 #include <cryptlib.h>
+#include <libsshpp.hpp>
 
 #include "stdwx.h"
 #include "class_wkLog.h"
@@ -39,7 +42,9 @@ private:
 
 	static const uint BUFFER_SIZE;		// Buffergroeße für Sende/Empfangsbuffer
 
-	CRYPT_SESSION cryptSession;			// SSH Session
+	CRYPT_SESSION cryptSession;				// cryptlib SSH Session
+	ssh_session session;					// libssh SSH Session
+	ssh_channel channel;					// SSH Channel
 	std::string hostname;					// Hostname des gerade zu bearbeitenden Gerätes
 	std::string hostnameAlt;				// Hostname des vorigen Gerätes
 	std::string hostnameShowOutput;			// Hostname der für den show Output verwendet werden soll
