@@ -67,12 +67,6 @@
     <Filter Include="Header Files\Config Tools\wkn">
       <UniqueIdentifier>{569f02c6-6ec4-44d4-84c9-f02e3e2a8ca5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\3rd Party\libssh2 wrapper">
-      <UniqueIdentifier>{40fffc6a-d1c9-4dfb-9aed-f299b44bb842}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\3rd Party\libssh2 wrapper">
-      <UniqueIdentifier>{2500dbb8-117c-4b21-baf9-1afa6fd6058e}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="tinystr.cpp">
@@ -221,36 +215,6 @@
     </ClCompile>
     <ClCompile Include="class_wkmEnd2End.cpp">
       <Filter>Source Files\Config Tools\Mapper</Filter>
-    </ClCompile>
-    <ClCompile Include="ssh\utils\asyncloop.cpp">
-      <Filter>Source Files\3rd Party\libssh2 wrapper</Filter>
-    </ClCompile>
-    <ClCompile Include="ssh\ssh\channelhandle.cpp">
-      <Filter>Source Files\3rd Party\libssh2 wrapper</Filter>
-    </ClCompile>
-    <ClCompile Include="ssh\ssh\remotechannelhandle.cpp">
-      <Filter>Source Files\3rd Party\libssh2 wrapper</Filter>
-    </ClCompile>
-    <ClCompile Include="ssh\ssh\remotesessionhandle.cpp">
-      <Filter>Source Files\3rd Party\libssh2 wrapper</Filter>
-    </ClCompile>
-    <ClCompile Include="ssh\ssh\sessionauthenticator.cpp">
-      <Filter>Source Files\3rd Party\libssh2 wrapper</Filter>
-    </ClCompile>
-    <ClCompile Include="ssh\ssh\sessionconnection.cpp">
-      <Filter>Source Files\3rd Party\libssh2 wrapper</Filter>
-    </ClCompile>
-    <ClCompile Include="ssh\ssh\sessionhandle.cpp">
-      <Filter>Source Files\3rd Party\libssh2 wrapper</Filter>
-    </ClCompile>
-    <ClCompile Include="ssh\ssh\sshcommand.cpp">
-      <Filter>Source Files\3rd Party\libssh2 wrapper</Filter>
-    </ClCompile>
-    <ClCompile Include="ssh\ssh\sshsession.cpp">
-      <Filter>Source Files\3rd Party\libssh2 wrapper</Filter>
-    </ClCompile>
-    <ClCompile Include="sshlib.cpp">
-      <Filter>Source Files\Config Tools\wke</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -424,51 +388,6 @@
     </ClInclude>
     <ClInclude Include="tasks_handler.h">
       <Filter>Header Files\Scheduler</Filter>
-    </ClInclude>
-    <ClInclude Include="ssh\base\exception.h">
-      <Filter>Header Files\3rd Party\libssh2 wrapper</Filter>
-    </ClInclude>
-    <ClInclude Include="ssh\ssh\channelhandle.h">
-      <Filter>Header Files\3rd Party\libssh2 wrapper</Filter>
-    </ClInclude>
-    <ClInclude Include="ssh\ssh\misc.h">
-      <Filter>Header Files\3rd Party\libssh2 wrapper</Filter>
-    </ClInclude>
-    <ClInclude Include="ssh\ssh\remotechannelhandle.h">
-      <Filter>Header Files\3rd Party\libssh2 wrapper</Filter>
-    </ClInclude>
-    <ClInclude Include="ssh\ssh\remotesessionhandle.h">
-      <Filter>Header Files\3rd Party\libssh2 wrapper</Filter>
-    </ClInclude>
-    <ClInclude Include="ssh\ssh\sessionauthenticator.h">
-      <Filter>Header Files\3rd Party\libssh2 wrapper</Filter>
-    </ClInclude>
-    <ClInclude Include="ssh\ssh\sessionconnection.h">
-      <Filter>Header Files\3rd Party\libssh2 wrapper</Filter>
-    </ClInclude>
-    <ClInclude Include="ssh\ssh\sessionhandle.h">
-      <Filter>Header Files\3rd Party\libssh2 wrapper</Filter>
-    </ClInclude>
-    <ClInclude Include="ssh\ssh\sshcommand.h">
-      <Filter>Header Files\3rd Party\libssh2 wrapper</Filter>
-    </ClInclude>
-    <ClInclude Include="ssh\ssh\sshexception.h">
-      <Filter>Header Files\3rd Party\libssh2 wrapper</Filter>
-    </ClInclude>
-    <ClInclude Include="ssh\ssh\sshsession.h">
-      <Filter>Header Files\3rd Party\libssh2 wrapper</Filter>
-    </ClInclude>
-    <ClInclude Include="ssh\utils\asyncloop.h">
-      <Filter>Header Files\3rd Party\libssh2 wrapper</Filter>
-    </ClInclude>
-    <ClInclude Include="ssh\utils\exception.h">
-      <Filter>Header Files\3rd Party\libssh2 wrapper</Filter>
-    </ClInclude>
-    <ClInclude Include="ssh\utils\misc.h">
-      <Filter>Header Files\3rd Party\libssh2 wrapper</Filter>
-    </ClInclude>
-    <ClInclude Include="sshlib.h">
-      <Filter>Header Files\Config Tools\wke</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

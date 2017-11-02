@@ -1499,6 +1499,8 @@ xxxxx RELEASE 4.9.0.0 ENDE (Mapper Enhancements)
 x* wke: !RGXCLEARMEM command zum Zurücksetzen vom rgxMem Speicher
 x* wke: !RGXCLEARMEM comamnd dokumentieren
 xxxxx RELEASE 4.9.0.2 ENDE (Mapper Enhancements)
+x* wke: Neue SSH Lib -> libssh
+x!* cl32.dll aktualisieren
 
 
 OFFEN:
@@ -1507,11 +1509,9 @@ OFFEN:
 * wke: !ENDIF und !ENDELSE einführen, damit !IFRETURN und !ELSERETURN mehrere Commands beinhalten kann
 x- Schauen, dass die "!" Commands nicht ausgegeben werden
 - Dokumentieren
-* wke: Neue SSH Lib -> libssh2
 
 * Probleme in 4.9.0.2:
 !- Crash bei L3 Neighborship
-!- cl32.dll aktualisieren
 
 Release 4.9.3.0
 * Mapper: dot1x Report: Noch eine Spalte mit Last-Input hinzufügen

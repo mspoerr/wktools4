@@ -93,7 +93,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>C:\Program Files %28x86%29\libssh\bin;C:\Program Files %28x86%29\libssh\lib;C:\Program Files %28x86%29\libssh\include\libssh;..\..\lib\OpenSSL-Win32;..\..\lib\OpenSSL-Win32\lib\VC\static;..\..\lib\OpenSSL-Win32\lib;..\..\lib\boost_1_59_0;..\..\lib\wxWidgets-2.8.12\include;..\..\lib\OGDF\OGDF\include;..\..\lib\lua-5.2.1\src;..\..\lib\luabind;..\..\lib\sqlite3\sqlite3;..\..\lib\wxpropertygrid\components\propgrid\include;..\..\lib\libssh2-1.7.0.tar\include;..\..\lib\cryptlib343</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\lib\libssh\include\libssh;..\..\lib\OpenSSL-Win32;..\..\lib\OpenSSL-Win32\lib\VC\static;..\..\lib\OpenSSL-Win32\lib;..\..\lib\boost_1_59_0;..\..\lib\wxWidgets-2.8.12\include;..\..\lib\OGDF\OGDF\include;..\..\lib\lua-5.2.1\src;..\..\lib\luabind;..\..\lib\sqlite3\sqlite3;..\..\lib\wxpropertygrid\components\propgrid\include;..\..\lib\cryptlib343</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>OGDF_DEBUG;WIN32;_DEBUG;__WXDEBUG__;WXDEBUG=1;__WIN32__;__WXMSW__;WINVER=0x0400;STRICT;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_WIN32_IE=0x0600;USE_COIN;COIN_OSI_CLP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -117,10 +117,10 @@
       <Culture>0x0409</Culture>
     </ResourceCompile>
     <Link>
-      <AdditionalDependencies>ssh.lib;luabind.debug.lib;lualib.lib;sqlite3.lib;cl32.lib;wxbase28d.lib;winmm.lib;comctl32.lib;rpcrt4.lib;oleacc.lib;wxmsw28d_core.lib;wxmsw28d_adv.lib;wxbase28d_net.lib;wxzlibd.lib;wxpngd.lib;wxcode_msw28d_propgrid.lib;wxmsw28d_html.lib;wsock32.lib;mysqlcppconn.lib;ogdf.lib;coin.lib;Psapi.lib;libssh2d.lib;libeay32.lib;ssleay32.lib;libeay32MTd.lib;ssleay32MTd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>ssh.lib;luabind.debug.lib;lualib.lib;sqlite3.lib;cl32.lib;wxbase28d.lib;winmm.lib;comctl32.lib;rpcrt4.lib;oleacc.lib;wxmsw28d_core.lib;wxmsw28d_adv.lib;wxbase28d_net.lib;wxzlibd.lib;wxpngd.lib;wxcode_msw28d_propgrid.lib;wxmsw28d_html.lib;wsock32.lib;mysqlcppconn.lib;ogdf.lib;coin.lib;Psapi.lib;libeay32.lib;ssleay32.lib;libeay32MTd.lib;ssleay32MTd.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)wktools4.exe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>C:\Program Files %28x86%29\libssh\bin;C:\Program Files %28x86%29\libssh\lib;..\..\lib\OpenSSL-Win32;..\..\lib\OpenSSL-Win32\lib\VC\static;..\..\lib\libssh2-1.7.0.tar\win32\Debug_lib;..\..\lib\OpenSSL-Win32\lib;..\..\lib\OGDF\OGDF\Win32\Debug;..\..\lib\boost_1_59_0\lib32-msvc-14.0;..\..\lib\luabind\Build\msvc-2010\bin\x86\Debug;..\..\lib\lua-5.2.1\lualib\Debug;..\..\lib\sqlite3\Debug;..\..\lib\cryptlib343\binaries32_vs10;..\..\lib\wxWidgets-2.8.12\lib\vc_lib;..\..\lib\wxpropertygrid\components\propgrid\lib\vc_lib;$(WXWIN)\lib;$(WXWIN)\lib\vc_lib;$(WXWIN)\contrib\lib;%(AdditionalLibraryDirectories);..\..\lib\mysql\lib\opt</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\lib\libssh\lib;..\..\lib\OpenSSL-Win32;..\..\lib\OpenSSL-Win32\lib\VC\static;..\..\lib\libssh2-1.7.0.tar\win32\Debug_lib;..\..\lib\OpenSSL-Win32\lib;..\..\lib\OGDF\OGDF\Win32\Debug;..\..\lib\boost_1_59_0\lib32-msvc-14.0;..\..\lib\luabind\Build\msvc-2010\bin\x86\Debug;..\..\lib\lua-5.2.1\lualib\Debug;..\..\lib\sqlite3\Debug;..\..\lib\cryptlib343\binaries32_vs10;..\..\lib\wxWidgets-2.8.12\lib\vc_lib;..\..\lib\wxpropertygrid\components\propgrid\lib\vc_lib;$(WXWIN)\lib;$(WXWIN)\lib\vc_lib;$(WXWIN)\contrib\lib;%(AdditionalLibraryDirectories);..\..\lib\mysql\lib\opt</AdditionalLibraryDirectories>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <IgnoreSpecificDefaultLibraries>MSVCRTD.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -182,7 +182,7 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>Default</InlineFunctionExpansion>
-      <AdditionalIncludeDirectories>..\..\lib\boost_1_59_0;..\..\lib\wxWidgets-2.8.12\include;..\..\lib\OGDF\OGDF\include;..\..\lib\lua-5.2.1\src;..\..\lib\luabind;..\..\lib\sqlite3\sqlite3;..\..\lib\wxpropertygrid\components\propgrid\include;..\..\lib\cryptlib343;..\..\lib\libssh2-1.7.0.tar\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\lib\boost_1_59_0;..\..\lib\wxWidgets-2.8.12\include;..\..\lib\OGDF\OGDF\include;..\..\lib\lua-5.2.1\src;..\..\lib\luabind;..\..\lib\sqlite3\sqlite3;..\..\lib\wxpropertygrid\components\propgrid\include;..\..\lib\cryptlib343;..\..\lib\libssh\include\libssh</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;__WIN32__;__WXMSW__;_WINDOWS;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_WIN32_IE=0x0600;USE_COIN;COIN_OSI_CLP;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <MinimalRebuild>false</MinimalRebuild>
@@ -207,10 +207,10 @@
     </ResourceCompile>
     <Link>
       <AdditionalOptions>/LTCG %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalDependencies>luabind.release.lib;lualib.lib;cl32.lib;sqlite3.lib;wxbase28.lib;winmm.lib;comctl32.lib;rpcrt4.lib;oleacc.lib;wxmsw28_core.lib;wxmsw28_adv.lib;wxbase28_net.lib;wsock32.lib;wxzlib.lib;wxpng.lib;wxcode_msw28_propgrid.lib;wxmsw28_html.lib;mysqlcppconn.lib;ogdf.lib;coin.lib;Psapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>ssh.lib;luabind.release.lib;lualib.lib;cl32.lib;sqlite3.lib;wxbase28.lib;winmm.lib;comctl32.lib;rpcrt4.lib;oleacc.lib;wxmsw28_core.lib;wxmsw28_adv.lib;wxbase28_net.lib;wsock32.lib;wxzlib.lib;wxpng.lib;wxcode_msw28_propgrid.lib;wxmsw28_html.lib;mysqlcppconn.lib;ogdf.lib;coin.lib;Psapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)wktools4.exe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>..\..\lib\OGDF\OGDF\Win32\Release;..\..\lib\boost_1_59_0\lib32-msvc-14.0;..\..\lib\luabind\Build\msvc-2010\bin\x86\Release;..\..\lib\lua-5.2.1\lualib\Release;..\..\lib\sqlite3\Release;..\..\lib\cryptlib343\binaries32_vs10;..\..\lib\wxWidgets-2.8.12\lib\vc_lib;..\..\lib\wxpropertygrid\components\propgrid\lib\vc_lib;$(WXWIN)\lib;$(WXWIN)\lib\vc_lib;$(WXWIN)\contrib\lib;%(AdditionalLibraryDirectories);..\..\lib\mysql\lib\opt</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\lib\libssh\lib;..\..\lib\OGDF\OGDF\Win32\Release;..\..\lib\boost_1_59_0\lib32-msvc-14.0;..\..\lib\luabind\Build\msvc-2010\bin\x86\Release;..\..\lib\lua-5.2.1\lualib\Release;..\..\lib\sqlite3\Release;..\..\lib\cryptlib343\binaries32_vs10;..\..\lib\wxWidgets-2.8.12\lib\vc_lib;..\..\lib\wxpropertygrid\components\propgrid\lib\vc_lib;$(WXWIN)\lib;$(WXWIN)\lib\vc_lib;$(WXWIN)\contrib\lib;%(AdditionalLibraryDirectories);..\..\lib\mysql\lib\opt</AdditionalLibraryDirectories>
       <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
       <IgnoreSpecificDefaultLibraries>MSVCRT.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <GenerateDebugInformation>false</GenerateDebugInformation>
@@ -270,16 +270,6 @@
     <ClCompile Include="class_wkmCombiner2.cpp" />
     <ClCompile Include="class_wkmEnd2End.cpp" />
     <ClCompile Include="class_wkmParserDB.cpp" />
-    <ClCompile Include="sshlib.cpp" />
-    <ClCompile Include="ssh\ssh\channelhandle.cpp" />
-    <ClCompile Include="ssh\ssh\remotechannelhandle.cpp" />
-    <ClCompile Include="ssh\ssh\remotesessionhandle.cpp" />
-    <ClCompile Include="ssh\ssh\sessionauthenticator.cpp" />
-    <ClCompile Include="ssh\ssh\sessionconnection.cpp" />
-    <ClCompile Include="ssh\ssh\sessionhandle.cpp" />
-    <ClCompile Include="ssh\ssh\sshcommand.cpp" />
-    <ClCompile Include="ssh\ssh\sshsession.cpp" />
-    <ClCompile Include="ssh\utils\asyncloop.cpp" />
     <ClCompile Include="tinystr.cpp" />
     <ClCompile Include="tinyxml.cpp" />
     <ClCompile Include="tinyxmlerror.cpp" />
@@ -331,21 +321,6 @@
     <ClInclude Include="class_wkmEnd2End.h" />
     <ClInclude Include="class_wkmParserDB.h" />
     <ClInclude Include="class_wkmCombiner2.h" />
-    <ClInclude Include="sshlib.h" />
-    <ClInclude Include="ssh\base\exception.h" />
-    <ClInclude Include="ssh\ssh\channelhandle.h" />
-    <ClInclude Include="ssh\ssh\misc.h" />
-    <ClInclude Include="ssh\ssh\remotechannelhandle.h" />
-    <ClInclude Include="ssh\ssh\remotesessionhandle.h" />
-    <ClInclude Include="ssh\ssh\sessionauthenticator.h" />
-    <ClInclude Include="ssh\ssh\sessionconnection.h" />
-    <ClInclude Include="ssh\ssh\sessionhandle.h" />
-    <ClInclude Include="ssh\ssh\sshcommand.h" />
-    <ClInclude Include="ssh\ssh\sshexception.h" />
-    <ClInclude Include="ssh\ssh\sshsession.h" />
-    <ClInclude Include="ssh\utils\asyncloop.h" />
-    <ClInclude Include="ssh\utils\exception.h" />
-    <ClInclude Include="ssh\utils\misc.h" />
     <ClInclude Include="tasks_handler.h" />
     <ClInclude Include="tinystr.h" />
     <ClInclude Include="tinyxml.h" />

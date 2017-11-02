@@ -303,6 +303,8 @@
 // 06.09.2016 - mspoerr
 //		- !ENDIF und !ENDELSE eingeführt
 //		- !IFRETURN und !ENDRETURN angepasst
+// 23.08.2017 - dranalter
+//		- SSH Neu mit libssh statt cryptlib
 
 #include "stdwx.h"
 
